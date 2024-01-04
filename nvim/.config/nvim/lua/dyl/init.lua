@@ -1,0 +1,11 @@
+require("dyl.remap")
+require("dyl.set")
+
+require("dyl.colours")
+require("dyl.fugitive")
+require("dyl.harpoon")
+require("dyl.lsp")
+require("dyl.telescope")
+require("dyl.treesitter")
+require("dyl.undotree")
+require("dyl.packer")
