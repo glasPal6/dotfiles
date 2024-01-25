@@ -5,6 +5,12 @@ configuration {
   drun-display-format: "{name}";
 }
 
+@import "colors.rasi"
+
+* {
+  font: "MesloLGS NF 10";
+}
+
 window {
   transparency: "real";
   width: 700px;
@@ -124,8 +130,3 @@ element-text {
   horizontal-align: 0;
 }
 
-@import "colors.rasi"
-
-* {
-  font: "MesloLGS NF 10";
-}

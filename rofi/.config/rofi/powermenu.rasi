@@ -2,6 +2,12 @@ configuration {
   show-icons: false;
 }
 
+@import "colors.rasi"
+
+* {
+  font: "MesloLGS NF 10";
+}
+
 window {
   transparency: "real";
   location: center;
@@ -150,10 +156,4 @@ element selected.normal {
   background-color: var(selected);
   text-color: var(background);
 }      
-
-@import "colors.rasi"
-
-* {
-  font: "MesloLGS NF 10";
-}
 
