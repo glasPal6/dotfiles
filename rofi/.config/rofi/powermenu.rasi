@@ -1,155 +1,132 @@
+/*****----- Configuration -----*****/
 configuration {
-  show-icons: false;
+    show-icons:                 false;
 }
 
+/*****----- Global Properties -----*****/
 @import "styling.rasi"
 
+/*
+USE_BUTTONS=YES
+*/
+
+/*****----- Main Window -----*****/
 window {
-  transparency: "real";
-  location: center;
-  anchor: center;
-  fullscreen: false;
-  width: 605px;
-  x-offset: 0px;
-  y-offset: 0px;
-  enabled: true;
-  margin: 0px;
-  padding: 0px;
-  border: 0px solid;
-  border-radius: 4px;
-  border-color: @selected;
-  cursor: "default";
-  background-color: @background;
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       800px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               15px;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            @background;
 }
 
+/*****----- Main Box -----*****/
 mainbox {
-  enabled: true;
-  spacing: 10px;
-  margin: 0px;
-  padding: 20px;
-  border: 0px solid;
-  border-radius: 0px;
-  border-color: @selected;
-  background-color: transparent;
-  children:
-    [ "inputbar",
-    "message",
-    "listview"];
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    [ "imagebox", "listview" ];
 }
 
+/*****----- Imagebox -----*****/
+imagebox {
+    spacing:                     30px;
+    padding:                     30px;
+    background-color:            @background;
+    /* background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/a.jpg", width); */
+    children:                    [ "inputbar", "dummy", "message" ];
+}
+
+/*****----- User -----*****/
+userimage {
+    margin:                      0px 0px;
+    border:                      10px;
+    border-radius:               10px;
+    border-color:                @background-alt;
+    background-color:            @background;
+    /* background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/a.jpg", width); */
+}
+
+/*****----- Inputbar -----*****/
 inputbar {
-  enabled: true;
-  spacing: 10px;
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
-  border-radius: 0px;
-  border-color: @selected;
-  background-color: transparent;
-  text-color: @foreground;
-  children: [ "textbox-prompt-colon", dummy, "prompt"];
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @urgent;
+    text-color:                  @foreground;
+    children:                    [ "dummy", "prompt", "dummy"];
 }
 
 dummy {
-  background-color: transparent;
-}
-
-textbox-prompt-colon {
-  enabled: true;
-  expand: false;
-  str: "Powermenu";
-  padding: 10px 14px;
-  border-radius: 4px;
-  background-color: @urgent;
-  text-color: @background;
+    background-color:            transparent;
 }
 
 prompt {
-  enabled: true;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: @active;
-  text-color: @background;
+    background-color:            inherit;
+    text-color:                  inherit;
 }
 
+/*****----- Message -----*****/
 message {
-  enabled: true;
-  margin: 0px;
-  padding: 10px;
-  border: 0px solid;
-  border-radius: 4px;
-  border-color: @selected;
-  background-color: @background-alt;
-  text-color: @foreground;
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     15px;
+    border-radius:               100%;
+    background-color:            @active;
+    text-color:                  @background;
 }
-
 textbox {
-  background-color: inherit;
-  text-color: inherit;
-  vertical-align: 0.5;
-  horizontal-align: 0.5;
-  placeholder-color: @foreground;
-  blink: true;
-  markup: true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
 
-error-message {
-  padding: 10px;
-  border: 0px solid;
-  border-radius: 0px;
-  border-color: @selected;
-  background-color: @background;
-  text-color: @foreground;
-}
-
+/*****----- Listview -----*****/
 listview {
-  enabled: true;
-  columns: 5;
-  lines: 1;
-  cycle: true;
-  dynamic: true;
-  scrollbar: false;
-  layout: vertical;
-  reverse: false;
-  fixed-height: true;
-  fixed-columns: true;
-
-  spacing: 10px;
-  margin: 0px;
-  padding: 0px;
-  border: 0px solid;
-  border-radius: 0px;
-  border-color: @selected;
-  background-color: transparent;
-  text-color: @foreground;
-  cursor: "default";
+    enabled:                     true;
+    columns:                     2;
+    lines:                       3;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     30px;
+    margin:                      30px;
+    background-color:            transparent;
+    cursor:                      "default";
 }
 
+/*****----- Elements -----*****/
 element {
-  enabled: true;
-  spacing: 0px;
-  margin: 0px;
-  padding: 10px;
-  border: 0px solid;
-  border-radius: 4px;
-  border-color: @selected;
-  background-color: @background-alt;
-  text-color: @foreground;
-  cursor: pointer;
+    enabled:                     true;
+    padding:                     40px 10px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    cursor:                      pointer;
 }
-
 element-text {
-  background-color: transparent;
-  text-color: inherit;
-  cursor: inherit;
-  vertical-align: 0.5;
-  horizontal-align: 0.5;
+    font:                        "feather bold 32";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
-
 element selected.normal {
-  border: 0px 2px 0px 2px;
-  border-radius: 4px;
-  background-color: var(selected);
-  text-color: var(background);
-}      
-
+    background-color:            var(selected);
+    text-color:                  var(background);
+}
