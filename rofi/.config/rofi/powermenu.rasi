@@ -2,11 +2,7 @@ configuration {
   show-icons: false;
 }
 
-@import "colors.rasi"
-
-* {
-  font: "MesloLGS NF 10";
-}
+@import "styling.rasi"
 
 window {
   transparency: "real";

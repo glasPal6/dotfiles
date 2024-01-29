@@ -1,8 +1,4 @@
-@import "colors.rasi"
-
-* {
-  font: "MesloLGS NF 10";
-}
+@import "styling.rasi"
 
 window {
   width: 250px;
