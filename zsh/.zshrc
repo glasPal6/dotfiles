@@ -97,16 +97,13 @@ alias tree='tree -a -I .git'
 
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
+alias ll='ls -al'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 # Backup command for system
 alias backup-system='echo sudo rsync -aAXHv --filter=\"merge .backup.filter\" / /path/to/dest' 
-
-# Quick vscode command to open current directory
-alias codep='code .'
-alias codex='code . ; exit'
 
 # Command to run a command in performance mode
 alias performance-off='sudo auto-cpufreq --force=reset'
