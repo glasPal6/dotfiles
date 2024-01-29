@@ -7,6 +7,6 @@ return {
         "MunifTanjim/nui.nvim",
     },
     config = function()
-        vim.keymap.set("n", "<leader>pm", ":Neotree filesystem reveal float<CR>")
+        vim.keymap.set("n", "<leader>pm", ":Neotree filesystem reveal float <CR>")
     end
 }
