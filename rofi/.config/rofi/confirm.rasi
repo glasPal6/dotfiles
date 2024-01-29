@@ -1,3 +1,5 @@
+@import "styling.rasi"
+
 window {
   width: 250px;
   transparency: "real";
@@ -97,11 +99,5 @@ element selected.normal {
   border-radius: 4px;
   background-color: var(selected);
   text-color: var(background);
-}
-
-@import "colors.rasi"
-
-* {
-  font: "MesloLGS NF 10";
 }
 

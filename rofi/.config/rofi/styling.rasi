@@ -1,0 +1,9 @@
+* {
+    font:                        "MesloLGS NF 10";
+    background:                  #030B16;
+    background-alt:              #0A1B37;
+    foreground:                  #FFFFFF;
+    selected:                    #CB43A6;
+    active:                      #095873;
+    urgent:                      #2FC6D8;
+}

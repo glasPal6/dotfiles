@@ -4,18 +4,19 @@ show_launcher() {
 	rofi -show drun -normal-window -theme "./launcher.rasi"
 }
 
-shutdown='⏻ Shutdown'
-reboot=' Reboot'
-lock='󰌾 Lock'
-suspend='󰏥 Suspend'
-logout=' Logout'
-yes='󰗠 Yes'
-no='󰅙 No'
+hibernate=''
+shutdown='⏻'
+reboot=''
+lock='󰌾'
+suspend='󰏥'
+logout=''
+yes='󰗠'
+no='󰅙'
 
 show_powermenu() {
 	uptime="$(uptime -p | sed -e 's/up //g')"
 	host=$(hostnamectl hostname)
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi -normal-window -dmenu -p "$host" -mesg "Uptime: $uptime" -theme powermenu.rasi
+	echo -e "$lock\n$suspend\n$logout\n$reboot\n$hibernate\n$shutdown" | rofi -normal-window -dmenu -p "$host" -mesg "Uptime: $uptime" -theme powermenu.rasi
 }
 
 confirm_exit() {
@@ -31,6 +32,8 @@ run_cmd() {
 			systemctl reboot
 		elif [[ $1 == '--suspend' ]]; then
 			systemctl suspend
+        elif [[ $1 == '--hibernate' ]]; then
+			systemctl hibernate
 		elif [[ $1 == '--logout' ]]; then
 			if [[ $DESKTOP_SESSION == "sway" ]]; then
 				swaymsg exit
@@ -67,6 +70,9 @@ case "$1" in
 	"$suspend")
 		run_cmd --suspend
 		;;
+    "$hibernate")
+        run_cmd --hibernate
+        ;;
 	"$logout")
 		run_cmd --logout
 		;;
