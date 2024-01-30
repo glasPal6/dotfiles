@@ -11,6 +11,17 @@ return {
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
 			-- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 			-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+			require("telescope").setup({
+				defaults = {
+					-- layout_strategy = "vertical",
+					layout_config = {
+						prompt_position = "top",
+					},
+					prompt_prefix = " ",
+					sorting_strategy = "ascending",
+					dynamic_preview_title = true,
+				},
+			})
 		end,
 	},
 	{
@@ -34,12 +45,15 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			vim.keymap.set("n", "<space>pm", ":Telescope file_browser<CR>")
+			vim.keymap.set("n", "<leader>pm", ":Telescope file_browser<CR>")
 			require("telescope").setup({
 				extensions = {
 					file_browser = {
 						-- theme = "ivy",
 						hijack_netrw = true,
+						initial_browser = "tree",
+						auto_depth = true,
+						depth = 1,
 					},
 				},
 			})
