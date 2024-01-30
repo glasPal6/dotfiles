@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "clangd", "cmake" },
+				ensure_installed = { "lua_ls", "clangd", "cmake", "pyright" },
 			})
 		end,
 	},
@@ -20,13 +20,20 @@ return {
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
+                filetypes = {"lua"}
             })
 			lspconfig.clangd.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
+                filetypes = {"c", "cpp", "rust"}
             })
 			lspconfig.cmake.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
+                filetypes = {"c", "cpp", "rust"}
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                filetypes = {"python"}
             })
 
 			vim.api.nvim_create_autocmd("LspAttach", {
