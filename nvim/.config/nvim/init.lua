@@ -1,4 +1,3 @@
-
 require("set_remap")
 
 -- Lazy NVim Package Manager
