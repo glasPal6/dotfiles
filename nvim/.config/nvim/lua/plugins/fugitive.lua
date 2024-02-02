@@ -1,9 +1,9 @@
 return {
     "tpope/vim-fugitive",
     config = function()
-        vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
+        vim.keymap.set("n", "<leader>gs", ":vert Git<CR>");
         vim.keymap.set("n", "<leader>gb", ":Git blame<CR>");
-        vim.keymap.set("n", "<leader>gd", ":Git diff<CR>");
+        vim.keymap.set("n", "<leader>gd", ":Gvdiffsplit<CR>");
 
         local autocmd = vim.api.nvim_create_autocmd
         autocmd("BufWinEnter", {
