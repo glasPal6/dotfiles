@@ -130,3 +130,5 @@ alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 # PATH variable
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
+
+
