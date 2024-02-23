@@ -25,9 +25,11 @@ vim.opt.isfname:append("@-@")
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
--- Vim remaps
-vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv")
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevel = 99
+vim.opt.foldenable = false
+vim.opt.foldnestmax = 1
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -53,3 +55,4 @@ vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+

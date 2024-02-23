@@ -47,7 +47,7 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 # This doesn't do anything apart from cloning the repository and keeping it
 # up-to-date. Cloned files can be used after `z4h init`. This is just an
 # example. If you don't plan to use Oh My Zsh, delete this line.
-# z4h install ohmyzsh/ohmyzsh || return
+z4h install ohmyzsh/ohmyzsh || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh
@@ -67,8 +67,8 @@ z4h source ~/.env.zsh
 # Use additional Git repositories pulled in with `z4h install`.
 #
 # This is just an example that you should delete. It does nothing useful.
-# z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
-# z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
+z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
+z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 
 # Define key bindings.
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace     Ctrl+H
@@ -97,13 +97,32 @@ alias tree='tree -a -I .git'
 
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
-alias ll='ls -al'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+# Aliasese
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+#alias dir='dir --color=auto'
+#alias vdir='vdir --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias lg='ll | grep' 
+
 # Backup command for system
 alias backup-system='echo sudo rsync -aAXHv --filter=\"merge .backup.filter\" / /path/to/dest' 
+
+# Quick vscode command to open current directory
+alias codep='code .'
+alias codex='code . ; exit'
 
 # Command to run a command in performance mode
 alias performance-off='sudo auto-cpufreq --force=reset'
@@ -127,8 +146,25 @@ alias postgrad-exit='nmcli radio wifi on'
 alias postgrad-cluster_login='ssh -X u19090634@137.215.159.216'
 alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 
-# PATH variable
+export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
+export ADB=/usr/bin/adb 
+export MODULAR_HOME="/home/dylan/.modular"
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
 
+export EDITOR="nvim"
+export VISUAL="nvim"
 
+export MMWAVE_SDK_TOOLS_INSTALL_PATH=/home/dylan/Documents/University/Masters_things/Radar_Dev/TI_Programs/mmWaveSDK/mmWaveSDK_Install_2
+export MMWAVE_SDK_DEVICE=iwr14xx
+export DOWNLOAD_FROM_CCS=yes
+export MMWAVE_SDK_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mmwave_sdk_02_01_00_04/packages
+export R4F_CODEGEN_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/ti-cgt-arm_16.9.6.LTS
+export XDC_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/xdctools_3_50_04_43_core
+export BIOS_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/bios_6_53_02_00/packages
+export XWR14XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr12xx_xwr14xx_radarss_rprc.bin
+export C674_CODEGEN_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/ti-cgt-c6000_8.1.3
+export C64Px_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c64Px_3_4_0_0
+export C674x_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c674x_3_4_0_0
+export C674x_MATHLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mathlib_c674x_3_1_2_1
+export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr16xx_radarss_rprc.bin
