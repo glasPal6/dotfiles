@@ -102,6 +102,17 @@ alias ls="${aliases[ls]:-ls} -A"
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
+# Show tmux sessions on startup
+function _tmux()
+{
+    if [[ $# == 0 ]] && command tmux ls >& /dev/null; then
+        command tmux attach \; choose-tree -s
+    else
+        command tmux "$@"
+    fi
+}
+alias tmux=_tmux
+
 # Aliasese
 alias ls='ls --color=auto'
 alias ll='ls -alF'

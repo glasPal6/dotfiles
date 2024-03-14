@@ -12,7 +12,7 @@ return {
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.isort,
 				-- C/Cpp
-				null_ls.builtins.formatting.clangd,
+				null_ls.builtins.formatting.clang_format,
 			},
 			-- on_attach = function(client, bufnr)
 			-- 	if client.supports_method("textDocument/formatting") then
@@ -21,7 +21,7 @@ return {
 			-- 			group = augroup,
 			-- 			buffer = bufnr,
 			-- 			callback = function()
-			-- 				vim.lsp.buf.format({})
+			--                 vim.lsp.buf.format({ async = false })
 			-- 			end,
 			-- 		})
 			-- 	end

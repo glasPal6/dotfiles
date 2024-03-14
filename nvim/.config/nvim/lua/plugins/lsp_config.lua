@@ -2,27 +2,32 @@ return {
     {
         "williamboman/mason.nvim",
         config = function()
-            require("mason").setup({
-                ensure_installed = {
-                    -- Lua
-                    "lua_ls",
-                    "stylua",
-                    -- C/Cpp
-                    "clangd",
-                    "cmake",
-                    -- Python
-                    "pyright",
-                    "black",
-                    "isort",
-                    "debugpy",
-                },
-            })
+            require("mason").setup()
         end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    -- Lua
+                    "lua_ls",
+                    -- "stylua",
+
+                    -- C/Cpp
+                    "clangd",
+                    "cmake",
+
+                    -- Python
+                    "pyright",
+                    -- "black",
+                    -- "isort",
+                    -- "debugpy",
+
+                    -- Zig
+                    "zls",
+                },
+            })
         end,
     },
     {
@@ -46,6 +51,10 @@ return {
             lspconfig.pyright.setup({
                 capabilities = capabilities,
                 filetypes = { "python" },
+            })
+            lspconfig.zls.setup({
+                capabilities = capabilities,
+                filetypes = { "zig" },
             })
 
             vim.api.nvim_create_autocmd("LspAttach", {

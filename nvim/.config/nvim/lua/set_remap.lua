@@ -31,6 +31,8 @@ vim.opt.foldenable = false
 vim.opt.foldnestmax = 1
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
+---------------------------------------------------------------
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
@@ -65,4 +67,11 @@ vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>ln", ":lnext<CR>")
 vim.keymap.set("n", "<leader>lp", ":lprevious<CR>")
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>")
+
+---------------------------------------------------------------
+
+-- vim.api.nvim_create_autocmd("BufLeave", {
+--     pattern = "*",
+--     command = "update"
+-- })
 

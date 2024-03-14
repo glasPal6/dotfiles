@@ -69,6 +69,7 @@ return {
 				},
 			}
 			dap.configurations.c = dap.configurations.cpp
+			dap.configurations.zig = dap.configurations.cpp
 		end,
 	},
 }
