@@ -2,7 +2,7 @@ return {
     "Exafunction/codeium.vim",
     config = function()
         -- Change '<C-g>' here to any keycode you like.
-        vim.keymap.set("i", "<A-y>", function()
+        vim.keymap.set("i", "<A-a>", function()
             return vim.fn["codeium#Accept"]()
         end, { expr = true, silent = true })
 
@@ -19,5 +19,6 @@ return {
         end, { expr = true, silent = true })
 
         vim.keymap.set("n", "<AS-c>", vim.cmd.CodeiumToggle, { expr = true, silent = true })
+        vim.g.codeium_disable_bindings = 1
     end,
 }

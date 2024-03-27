@@ -9,11 +9,9 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
-			-- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-			-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+			vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
 			require("telescope").setup({
 				defaults = {
-					-- layout_strategy = "vertical",
 					layout_config = {
 						prompt_position = "top",
 					},

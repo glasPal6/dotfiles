@@ -5,7 +5,9 @@ return {
             vim.keymap.set("n", "<leader>gs", ":vert Git<CR>");
             vim.keymap.set("n", "<leader>gb", ":Git blame<CR>");
             vim.keymap.set("n", "<leader>gd", ":Gvdiffsplit<CR>");
-            vim.keymap.set("n", "<leader>gld", ":vsplit<CR>:GlLog<CR>");
+            -- vim.keymap.set("n", "<leader>gl", ":vert Git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches");
+            vim.keymap.set("n", "<leader>gt", ":vert Git log --graph --decorate --abbrev-commit --oneline <CR>");
+            -- vim.keymap.set("n", "<leader>gld", ":vsplit<CR>:GlLog<CR>");
             vim.keymap.set("n", "<leader>gll", ":vsplit<CR>:0Gllog<CR>");
 
             local autocmd = vim.api.nvim_create_autocmd
@@ -31,14 +33,14 @@ return {
             })
         end
     },
-    {
-        "ThePrimeagen/git-worktree.nvim",
-        config = function ()
-			require("git-worktree").setup()
-            require("telescope").load_extension("git_worktree")
-
-            vim.keymap.set("n", "<leader>gww", ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
-            vim.keymap.set("n", "<leader>gwc", ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
-        end
-    }
+--     {
+--         "ThePrimeagen/git-worktree.nvim",
+--         config = function ()
+-- 			require("git-worktree").setup()
+--             require("telescope").load_extension("git_worktree")
+-- 
+--             vim.keymap.set("n", "<leader>gww", ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+--             vim.keymap.set("n", "<leader>gwc", ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
+--         end
+--     }
 }

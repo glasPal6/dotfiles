@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+gitworktreeadd() {
+    echo "-------------------------Creating worktree $1-------------------------"
+    git worktree add $1
+    cd $1
+    hasRemote=$(cd .. && git ls-remote --heads origin refs/heads/$1)
+    if [ ! -z "$hasRemote" ]; then
+        echo "-------------------------Setting branch $1 as upstream-------------------------"
+        git branch --set-upstream-to=origin/$1
+    fi
+}
+
+gitworktreeadd "$1"
