@@ -6,9 +6,13 @@ gitworktreeadd() {
     cd $1
     hasRemote=$(cd .. && git ls-remote --heads origin refs/heads/$1)
     if [ ! -z "$hasRemote" ]; then
-        echo "-------------------------Setting branch $1 as upstream-------------------------"
+        echo "-------------------------Fetching branch $1's upstream-------------------------"
         git branch --set-upstream-to=origin/$1
+    fi
+    if [ "$2" == "-y" ]; then
+        echo "-------------------------Setting up upstream branch for $1-------------------------"
+        git push --set-upstream origin $1
     fi
 }
 
-gitworktreeadd "$1"
+gitworktreeadd "$1" "$2"
