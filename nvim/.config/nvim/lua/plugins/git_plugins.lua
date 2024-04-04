@@ -8,7 +8,7 @@ return {
             -- vim.keymap.set("n", "<leader>gl", ":vert Git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches");
             vim.keymap.set("n", "<leader>gt", ":vert Git log --graph --decorate --abbrev-commit --oneline <CR>");
             -- vim.keymap.set("n", "<leader>gld", ":vsplit<CR>:GlLog<CR>");
-            vim.keymap.set("n", "<leader>gll", ":vsplit<CR>:0Gllog<CR>");
+            vim.keymap.set("n", "<leader>gl", ":vsplit<CR>:0Gllog<CR>");
 
             local autocmd = vim.api.nvim_create_autocmd
             autocmd("BufWinEnter", {
