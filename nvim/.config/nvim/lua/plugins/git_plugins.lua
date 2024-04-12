@@ -29,6 +29,8 @@ return {
                     vim.keymap.set("n", "<leader>P", function()
                         vim.cmd.Git('pull')
                     end, opts)
+
+                    -- this is a test
                 end,
             })
         end
