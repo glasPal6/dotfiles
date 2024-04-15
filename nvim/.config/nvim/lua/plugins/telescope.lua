@@ -7,7 +7,7 @@ return {
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
+            -- vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
 			require("telescope").setup({
@@ -56,6 +56,29 @@ return {
 				},
 			})
 			require("telescope").load_extension("file_browser")
+		end,
+	},
+	{
+		"stevearc/aerial.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			vim.keymap.set("n", "<leader>pf", ":Telescope aerial<CR>")
+            require("aerial").setup()
+			require("telescope").setup({
+				extensions = {
+					aerial = {
+						-- Display symbols as <root>.<parent>.<symbol>
+						show_nesting = {
+							["_"] = false, -- This key will be the default
+							json = true, -- You can set the option for specific filetypes
+							yaml = true,
+						},
+					},
+				},
+			})
 		end,
 	},
 }
