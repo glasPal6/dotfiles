@@ -11,5 +11,7 @@ return {
 			},
 			mappings = {},
 		})
+        vim.keymap.set("n", "<leader>m", vim.cmd.MarksListAll)
+        vim.keymap.set("n", "<leader>b", vim.cmd.BookmarksListAll)
 	end,
 }
