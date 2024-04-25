@@ -67,7 +67,9 @@ vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>ln", ":lnext<CR>")
 vim.keymap.set("n", "<leader>lp", ":lprevious<CR>")
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>")
-
+vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
+vim.keymap.set("n", "<leader>cp", ":cprevious<CR>")
+vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
 ---------------------------------------------------------------
 
 -- vim.api.nvim_create_autocmd("BufLeave", {
