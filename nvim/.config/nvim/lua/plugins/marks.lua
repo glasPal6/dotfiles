@@ -13,5 +13,9 @@ return {
         })
         vim.keymap.set("n", "<leader>m", vim.cmd.MarksListAll)
         vim.keymap.set("n", "<leader>b", vim.cmd.BookmarksListAll)
+
+        for i=0,9 do
+            vim.keymap.set("n", "<leader>b" .. tostring(i), ":BookmarksList " .. tostring(i) .. "<CR>")
+        end
     end,
 }

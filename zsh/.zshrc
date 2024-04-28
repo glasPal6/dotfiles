@@ -150,6 +150,10 @@ alias yt-dlp-audio='yt-dlp -f 'ba' -x --audio-format mp3 --yes-playlist --write-
 	# Updates any snap packages
 alias quick-update='sudo apt-get update ; sudo apt-get upgrade ; sudo apt-get autoremove ; sudo snap refresh'
 
+
+# Pio project
+alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
+
 # Login command for the ISG postgrad labs
 	# Needs a network card to work on the network
 	# /mnt is a temporary mount space
