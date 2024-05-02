@@ -56,6 +56,11 @@ return {
                 capabilities = capabilities,
                 filetypes = { "zig" },
             })
+            -- lsp for mojo
+            lspconfig.mojo.setup({
+                capabilities = capabilities,
+                filetypes = { "mojo" },
+            })
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),

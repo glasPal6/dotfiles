@@ -165,6 +165,7 @@ alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
 export ADB=/usr/bin/adb 
 export MODULAR_HOME="/home/dylan/.modular"
+export MOJO_PYTHON_LIBRARY=$(modular config mojo.python_lib)
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
 
