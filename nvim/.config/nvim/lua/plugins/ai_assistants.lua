@@ -22,10 +22,11 @@ return {
 	-- 		vim.keymap.set("n", "<AS-c>", vim.cmd.CodeiumToggle, { expr = true, silent = true })
 	-- 	end,
 	-- },
-    {
-        "github/copilot.vim",
-        config = function ()
-            vim.keymap.set("n", "<leader>cc", ":Copilot<CR>", { silent = true })
-        end,
-    }
+	{
+		"github/copilot.vim",
+		config = function()
+            vim.g.copilot_enabled = false
+			vim.keymap.set("n", "<leader>cp", vim.cmd.Copilot, { silent = true })
+		end,
+	},
 }
