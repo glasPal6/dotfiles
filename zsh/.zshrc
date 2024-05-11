@@ -162,6 +162,9 @@ alias postgrad-exit='nmcli radio wifi on'
 alias postgrad-cluster_login='ssh -X u19090634@137.215.159.216'
 alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
 export ADB=/usr/bin/adb 
 export MODULAR_HOME="/home/dylan/.modular"
@@ -169,8 +172,12 @@ export MOJO_PYTHON_LIBRARY=$(modular config mojo.python_lib)
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
 
-export EDITOR="nvim"
-export VISUAL="nvim"
+export MODULAR_HOME="/home/dylan/.modular"
+export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
+export MODULAR_HOME="/home/dylan/.modular"
+export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
+export MODULAR_HOME="/home/dylan/.modular"
+export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
 
 export MMWAVE_SDK_TOOLS_INSTALL_PATH=/home/dylan/Documents/University/Masters_things/Radar_Dev/TI_Programs/mmWaveSDK/mmWaveSDK_Install_2
 export MMWAVE_SDK_DEVICE=iwr14xx
