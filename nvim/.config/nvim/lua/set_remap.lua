@@ -55,7 +55,7 @@ vim.keymap.set("n", "<C-Right>", "<C-w><Right>")
 vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
@@ -63,13 +63,14 @@ vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>ln", ":lnext<CR>")
 vim.keymap.set("n", "<leader>lp", ":lprevious<CR>")
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>")
+
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
 vim.keymap.set("n", "<leader>cp", ":cprevious<CR>")
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
+
+vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
+vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 ---------------------------------------------------------------
 
--- vim.api.nvim_create_autocmd("BufLeave", {
---     pattern = "*",
---     command = "update"
--- })
 
