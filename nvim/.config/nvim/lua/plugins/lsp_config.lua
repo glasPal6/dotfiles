@@ -11,21 +11,21 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     -- Lua
-                    "lua_ls",
+                    -- "lua_ls",
                     -- "stylua",
 
                     -- C/Cpp
-                    "clangd",
-                    "cmake",
+                    -- "clangd",
+                    -- "cmake",
 
                     -- Python
-                    "pyright",
+                    -- "pyright",
                     -- "black",
                     -- "isort",
                     -- "debugpy",
 
                     -- Zig
-                    "zls",
+                    -- "zls",
                 },
             })
         end,

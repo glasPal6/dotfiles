@@ -8,8 +8,8 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "filename" },
-                -- lualine_x = { "encoding", "fileformat", "filetype" },
+                lualine_c = { "filename", "grapple" },
+
                 lualine_x = { function ()
                     return vim.fn['codeium#GetStatusString']()
                 end},
