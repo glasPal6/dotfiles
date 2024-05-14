@@ -71,6 +71,7 @@ vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
+vim.keymap.set("n", "<leader>tt", ":tabnew<CR>:Telescope file_browser<CR>")
 ---------------------------------------------------------------
 
 
