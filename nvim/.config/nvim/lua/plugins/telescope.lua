@@ -7,10 +7,10 @@ return {
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
-            -- vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>pm", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
-            vim.keymap.set("n", "<leader>M", builtin.marks, {})
+            -- vim.keymap.set("n", "<leader>M", builtin.marks, {})
 			require("telescope").setup({
 				defaults = {
 					layout_config = {
@@ -36,29 +36,29 @@ return {
 			require("telescope").load_extension("ui-select")
 		end,
 	},
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			vim.keymap.set("n", "<leader>pm", ":Telescope file_browser<CR>")
-			require("telescope").setup({
-				extensions = {
-					file_browser = {
-						-- theme = "ivy",
-						hijack_netrw = true,
-						initial_browser = "tree",
-						auto_depth = true,
-						depth = 1,
-					},
-				},
-			})
-			require("telescope").load_extension("file_browser")
-		end,
-	},
+	-- {
+	-- 	"nvim-telescope/telescope-file-browser.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	config = function()
+	-- 		vim.keymap.set("n", "<leader>pm", ":Telescope file_browser<CR>")
+	-- 		require("telescope").setup({
+	-- 			extensions = {
+	-- 				file_browser = {
+	-- 					-- theme = "ivy",
+	-- 					hijack_netrw = true,
+	-- 					initial_browser = "tree",
+	-- 					auto_depth = true,
+	-- 					depth = 1,
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		require("telescope").load_extension("file_browser")
+	-- 	end,
+	-- },
 	{
 		"stevearc/aerial.nvim",
 		dependencies = {
