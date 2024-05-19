@@ -26,8 +26,13 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+# Snippet variables
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_DEFAULT_SESSION_NAME="Base_Session"
+
 # Add in snippets
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::tmux
 
 # Load completions
 autoload -Uz compinit && compinit
