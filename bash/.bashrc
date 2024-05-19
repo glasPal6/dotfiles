@@ -130,3 +130,5 @@ export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
 
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
