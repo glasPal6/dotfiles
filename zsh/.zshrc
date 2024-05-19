@@ -17,17 +17,17 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Add in prompt
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Add in zsh plugins
+# Add in zsh plugins - order matters
+zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 
 # Snippet variables
-ZSH_TMUX_AUTOSTART=true
+#ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_DEFAULT_SESSION_NAME="Base_Session"
 
 # Add in snippets
@@ -39,8 +39,10 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
+# Source the prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
 
 # Keybindings
 bindkey '^p' history-search-backward
@@ -64,6 +66,7 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+#zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -alF --color $realpath'
 
 # Aliases
