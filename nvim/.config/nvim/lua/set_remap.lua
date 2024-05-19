@@ -47,8 +47,9 @@ vim.keymap.set("n", ":", "q:i")
 -- vim.keymap.set("n", "/", "q/i")
 -- vim.keymap.set("n", "?", "q?i")
 
-vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope file_browser<CR>")
-vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope file_browser<CR>")
+vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files hidden=true<CR>")
+vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files hidden=true<CR>")
+
 vim.keymap.set("n", "<C-Up>", "<C-w><Up>")
 vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
 vim.keymap.set("n", "<C-Right>", "<C-w><Right>")

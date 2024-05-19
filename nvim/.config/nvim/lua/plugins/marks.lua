@@ -31,15 +31,15 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         cmd = "Grapple",
         keys = {
-            { "<leader>m",  "<cmd>Grapple toggle<cr>",          desc = "Grapple toggle tag" },
-            { "<leader>M",  "<cmd>Grapple toggle_tags<cr>",     desc = "Grapple open tags window" },
-            { "<leader>N", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
-            { "<leader>P", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },
+            { "<leader>m",  "<cmd>Grapple toggle<cr>",          desc = "Grapple toggle tag", silent = true },
+            { "<leader>M",  "<cmd>Grapple toggle_tags<cr>",     desc = "Grapple open tags window", silent = true },
+            { "<leader>N", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag", silent = true },
+            { "<leader>P", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag", silent = true },
 
-            { "<C-a>",      "<cmd>Grapple select index=1<cr>",  desc = "Select first tag" },
-            { "<C-e>",      "<cmd>Grapple select index=2<cr>",  desc = "Select second tag" },
-            { "<C-i>",      "<cmd>Grapple select index=3<cr>",  desc = "Select third tag" },
-            { "<C-h>",      "<cmd>Grapple select index=4<cr>",  desc = "Select fourth tag" },
+            { "<C-a>",      "<cmd>Grapple select index=1<cr>",  desc = "Select first tag", silent = true },
+            { "<C-e>",      "<cmd>Grapple select index=2<cr>",  desc = "Select second tag", silent = true },
+            { "<C-i>",      "<cmd>Grapple select index=3<cr>",  desc = "Select third tag", silent = true },
+            { "<C-h>",      "<cmd>Grapple select index=4<cr>",  desc = "Select fourth tag", silent = true },
         },
         config = function()
             require("grapple").setup({
