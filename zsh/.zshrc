@@ -18,7 +18,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in prompt
-# zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins - order matters
 zinit light Aloxaf/fzf-tab
@@ -41,8 +41,8 @@ zinit cdreplay -q
 
 # Source the prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval "$(starship init zsh)"
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# eval "$(starship init zsh)"
 
 # Keybindings
 bindkey '^p' history-search-backward
@@ -103,6 +103,8 @@ alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 # Exports
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
 export ADB=/usr/bin/adb 
