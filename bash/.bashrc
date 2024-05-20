@@ -128,6 +128,7 @@ export ADB=/usr/bin/adb
 export MODULAR_HOME="/home/dylan/.modular"
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
+export PATH="/home/dylan/.fzf/bin:$PATH"
 
 
 
