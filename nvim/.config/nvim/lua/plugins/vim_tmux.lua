@@ -15,5 +15,8 @@ return {
             { "<C-Right>",  "<cmd>TmuxNavigateRight<cr>" },
             { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
         },
+        config = function()
+            vim.g.tmux_navigator_save_on_switch = 1
+        end
     },
 }
