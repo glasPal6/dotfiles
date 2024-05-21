@@ -1,3 +1,9 @@
+# Start tmux
+# if [ -z "$TMUX" ]
+# then
+#     tmux attach -t Base-Session || tmux new -s Base-Session
+# fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -28,7 +34,7 @@ zinit light zsh-users/zsh-autosuggestions
 
 # Snippet variables
 ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
+#ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
 
 # Add in snippets
 zinit snippet OMZP::command-not-found
@@ -42,12 +48,14 @@ zinit cdreplay -q
 # Source the prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# eval "$(starship init zsh)"
 
 # Keybindings
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+
+# Shell integrations
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # History
 HISTSIZE=5000
@@ -94,11 +102,6 @@ alias postgrad-login='nmcli radio wifi off; sudo mount -t cifs -o user=u19090634
 alias postgrad-exit='nmcli radio wifi on'
 alias postgrad-cluster_login='ssh -X u19090634@137.215.159.216'
 alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
-
-# Shell integrations
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# source <(fzf --zsh)
-# eval "$(fzf --zsh)"
 
 # Exports
 export EDITOR="nvim"
