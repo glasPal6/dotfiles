@@ -4,6 +4,20 @@ local config = wezterm.config_builder()
 
 local smart_splits = require("smart_splits")
 
+-- Maximize on startup
+--wezterm.on('gui-startup', function(cmd)
+--  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+--  window:gui_window():maximize()
+--end)
+
+-- Unix domains
+config.unix_domains = {
+  {
+    name = 'unix',
+  },
+}
+config.default_gui_startup_args = { 'connect', 'unix' }
+
 -- Leader is the same as my old tmux prefix
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
