@@ -19,6 +19,7 @@ config.unix_domains = {
 config.default_gui_startup_args = { 'connect', 'unix' }
 
 -- Leader is the same as my old tmux prefix
+config.disable_default_key_bindings = true
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	-- Terminal
@@ -95,6 +96,16 @@ config.keys = {
 			end),
 		}),
 	},
+    {
+        mods = "LEADER",
+        key = "n",
+        action = wezterm.action.ActivateTabRelative(1),
+    },
+    {
+        mods = "LEADER",
+        key = "p",
+        action = wezterm.action.ActivateTabRelative(-1),
+    },
 
 	-- Workspace navigator
 	{
@@ -151,7 +162,7 @@ config.colors = {
         background = "#2E3440",
         active_tab = {
             bg_color = "#3B4252",
-            fg_color = "#ECEFF4",
+            fg_color = "#8FBCBB",
             intensity = "Bold",
         },
         inactive_tab = {
