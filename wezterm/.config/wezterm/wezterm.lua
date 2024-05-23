@@ -27,7 +27,7 @@ config.unix_domains = {
         name = "unix",
     },
 }
--- config.default_gui_startup_args = { "connect", "unix" }
+config.default_gui_startup_args = { "connect", "unix" }
 config.default_workspace = "Base"
 
 return config
