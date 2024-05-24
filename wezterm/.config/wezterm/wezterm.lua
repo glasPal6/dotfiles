@@ -24,12 +24,20 @@ end
 -- Unix domains
 config.unix_domains = {
     {
-        name = "unix",
+        name = "Base_domain",
         -- local_echo_threshold_ms = 50000,
     },
+    -- {
+    --     name = "Projects",
+    --     -- local_echo_threshold_ms = 50000,
+    -- },
+    -- {
+    --     name = "Univeristy",
+    --     -- local_echo_threshold_ms = 50000,
+    -- },
 }
-config.default_gui_startup_args = { "connect", "unix" }
+--config.default_gui_startup_args = { "connect", "Base_domain", }
 config.default_workspace = "Base"
-config.enable_wayland = false
+config.enable_wayland = true
 
 return config

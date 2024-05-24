@@ -34,7 +34,7 @@ zinit light zsh-users/zsh-autosuggestions
 
 # Snippet variables
 # ZSH_TMUX_AUTOSTART=true
-# ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
 
 # Add in snippets

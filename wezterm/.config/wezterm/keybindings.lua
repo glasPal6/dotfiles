@@ -6,6 +6,10 @@ return {
         mods = "", key = "F11",
         action = wezterm.action.ToggleFullScreen,
     },
+    {
+        mods = "LEADER|CTRL", key = "Q",
+        action = wezterm.action.QuitApplication,
+    },
 
     -- splitting
     {
