@@ -25,9 +25,11 @@ end
 config.unix_domains = {
     {
         name = "unix",
+        -- local_echo_threshold_ms = 50000,
     },
 }
 config.default_gui_startup_args = { "connect", "unix" }
 config.default_workspace = "Base"
+config.enable_wayland = false
 
 return config

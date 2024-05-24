@@ -72,6 +72,15 @@ return function(config)
         local date = wezterm.strftime("%Y-%m-%d")
         local time = wezterm.strftime("%H:%M:%S")
 
+        -- Domain
+        local session_name = "Base"
+        for i, v in ipairs(config.unix_domains) do
+            if v.name ~= nil and v.name ~= "" then
+                session_name = v.name
+                break
+            end
+        end
+
         -- Left status (left of the tab line)
         window:set_left_status(wezterm.format({
             { Foreground = { Color = tab_colors.nord1 } },
@@ -88,7 +97,8 @@ return function(config)
             { Text = "" },
             { Foreground = { Color = tab_colors.nord5 } },
             { Background = { Color = tab_colors.nord3 } },
-            { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. cwd .. " " },
+            -- { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. cwd .. " " },
+            { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. session_name .. " " },
             { Foreground = { Color = tab_colors.nord1 } },
             { Background = { Color = tab_colors.nord3 } },
             { Text = "" },

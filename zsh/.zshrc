@@ -33,8 +33,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 # Snippet variables
-ZSH_TMUX_AUTOSTART=false
-#ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
+# ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
 
 # Add in snippets
 zinit snippet OMZP::command-not-found
@@ -74,7 +75,7 @@ zstyle ':completion:*' menu no
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # zstyle ':fzf-tab:complete:cd:*' popup-min-size 150 12
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -alF --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -alF --color $realpath'
 
 # Aliases
 alias ls="${aliases[ls]:-ls} -A"
