@@ -22,7 +22,8 @@ vim.opt.scrolloff = 15
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
+-- vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.foldmethod = "expr"
@@ -43,9 +44,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", ":", "q:i")
--- vim.keymap.set("n", "/", "q/i")
--- vim.keymap.set("n", "?", "q?i")
+vim.keymap.set("n", "q:", "q:i")
+vim.keymap.set("n", "q/", "q/i")
+vim.keymap.set("n", "q?", "q?i")
 
 vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files hidden=true<CR>")
 vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files hidden=true<CR>")
@@ -73,6 +74,8 @@ vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 vim.keymap.set("n", "<leader>tt", ":tabnew<CR>:Telescope file_browser<CR>")
+
+vim.keymap.set("n", "<CR>", ":nohlsearch<CR>", { silent = true })
 ---------------------------------------------------------------
 
 

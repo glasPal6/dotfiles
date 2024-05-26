@@ -7,7 +7,8 @@ return {
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>pm", ":Telescope find_files hidden=true<CR>", {})
+            -- vim.keymap.set("n", "<leader>pm", ":Telescope find_files hidden=true<CR>", {})
+            vim.keymap.set("n", "<leader>pm", ":Telescope find_files<CR>", {})
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
             -- vim.keymap.set("n", "<leader>M", builtin.marks, {})
