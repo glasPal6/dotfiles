@@ -1,13 +1,19 @@
 return function(wezterm)
     wezterm.on("gui-startup", function(cmd)
+        local tab, build_pane, window = wezterm.mux.spawn_window({
+            workspace = "Base",
+            cwd = wezterm.home_dir,
+            args = args,
+        })
+
         local args = {}
         if cmd then
             args = cmd.args
         end
 
         -- Maximize on startup
-        local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-        window:gui_window():maximize()
+        -- local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+        -- window:gui_window():maximize()
 
         local tab, build_pane, window = wezterm.mux.spawn_window({
             workspace = "Projects",

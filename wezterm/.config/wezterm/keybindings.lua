@@ -114,7 +114,7 @@ return {
     -- General settings
     {
         mods = "LEADER", key = "l",
-        -- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|ALL" }),
+        -- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY" }),
         action = wezterm.action.ShowLauncher,
     },
     {
