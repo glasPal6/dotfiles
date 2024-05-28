@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 return function(config)
-    config.enable_wayland = true
+    config.enable_wayland = false
     config.font = wezterm.font("MesloLGS NF")
     config.font_size = 9
     config.color_scheme = "nord"

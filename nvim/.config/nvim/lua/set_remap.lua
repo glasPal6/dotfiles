@@ -44,12 +44,11 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "q:", "q:i")
-vim.keymap.set("n", "q/", "q/i")
-vim.keymap.set("n", "q?", "q?i")
 
-vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files hidden=true<CR>")
-vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files hidden=true<CR>")
+-- vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files hidden=true<CR>")
+-- vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files hidden=true<CR>")
+vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files<CR>")
+vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files<CR>")
 
 vim.keymap.set("n", "<C-Up>", "<C-w><Up>")
 vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
