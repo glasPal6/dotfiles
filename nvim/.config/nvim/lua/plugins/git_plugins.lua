@@ -49,6 +49,7 @@ return {
 				},
 			})
 			vim.keymap.set("n", "<leader>gs", ":Neogit<CR>")
+			vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>")
 		end,
 	},
 	{
