@@ -32,14 +32,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
-# Snippet variables
-# ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_DEFAULT_SESSION_NAME="Base-Session"
-
 # Add in snippets
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::tmux
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -79,7 +73,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --git --color=alway
 
 # Aliases
 alias ls="eza"
-alias ls='eza --color'
+alias ls='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first'
 alias ll='eza -al --git --color=always --group-directories-first'
 
 alias grep='grep --color=auto'
@@ -137,9 +131,13 @@ export C674x_MATHLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mathlib_c674x
 export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr16xx_radarss_rprc.bin
 
 # Shell integrations
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1
+    --color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1
+    --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
+    --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export _ZO_EXCLUDE_DIRS="*src:*build"
-
 eval "$(zoxide init --cmd zd zsh)"
 
