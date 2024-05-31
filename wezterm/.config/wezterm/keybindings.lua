@@ -66,6 +66,11 @@ local configKeys = {
         action = wezterm.action.SpawnTab("CurrentPaneDomain"),
     },
     {
+        mods = "LEADER",
+        key = "m",
+        action = wezterm.action.SpawnCommandInNewTab{ args = { 'btop' }},
+    },
+    {
         mods = "LEADER|CTRL",
         key = "T",
         action = wezterm.action.PromptInputLine({
