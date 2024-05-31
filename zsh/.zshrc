@@ -74,13 +74,13 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # zstyle ':fzf-tab:complete:cd:*' popup-min-size 150 12
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -alF --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -alF --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -al --git --color=always --group-directories-first $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --git --color=always --group-directories-first $realpath'
 
 # Aliases
-alias ls="${aliases[ls]:-ls} -A"
-alias ls='ls --color'
-alias ll='ls -alF'
+alias ls="eza"
+alias ls='eza --color'
+alias ll='eza -al --git --color=always --group-directories-first'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -138,5 +138,8 @@ export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/
 
 # Shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export _ZO_EXCLUDE_DIRS="*src:*build"
+
 eval "$(zoxide init --cmd zd zsh)"
 
