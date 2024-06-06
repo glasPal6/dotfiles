@@ -11,6 +11,7 @@ return {
             vim.keymap.set("n", "<leader>pm", ":Telescope find_files<CR>", {})
 			vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
+			vim.keymap.set("n", "<leader>pt", builtin.treesitter, {})
             -- vim.keymap.set("n", "<leader>M", builtin.marks, {})
 			require("telescope").setup({
 				defaults = {
@@ -20,6 +21,7 @@ return {
 					prompt_prefix = " ",
 					sorting_strategy = "ascending",
 					dynamic_preview_title = true,
+                    color_devicons = true,
 				},
 			})
 		end,

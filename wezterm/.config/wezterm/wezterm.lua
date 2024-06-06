@@ -4,18 +4,20 @@ local config = wezterm.config_builder()
 
 -- Unix domains
 config.unix_domains = {
+    -- {
+    --     name = "Base_domain",
+    --     -- local_echo_threshold_ms = 50000,
+    -- },
     {
-        name = "Base_domain",
+        name = "Projects",
+        -- connect_automatically = true,
         -- local_echo_threshold_ms = 50000,
     },
-    -- {
-    --     name = "Projects",
-    --     -- local_echo_threshold_ms = 50000,
-    -- },
-    -- {
-    --     name = "Univeristy",
-    --     -- local_echo_threshold_ms = 50000,
-    -- },
+    {
+        name = "Univeristy",
+        -- connect_automatically = true,
+        -- local_echo_threshold_ms = 50000,
+    },
 }
 -- config.default_gui_startup_args = { "connect", "Base_domain", }
 config.default_workspace = "Base"

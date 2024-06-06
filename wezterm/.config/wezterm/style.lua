@@ -74,12 +74,9 @@ return function(config)
         local time = wezterm.strftime("%H:%M:%S")
 
         -- Domain
-        local session_name = "Base"
-        for i, v in ipairs(config.unix_domains) do
-            if v.name ~= nil and v.name ~= "" then
-                session_name = v.name
-                break
-            end
+        local domain_name = pane.domain_name
+        if not domain_name then
+            domain_name = "Local"
         end
 
         -- Left status (left of the tab line)
@@ -99,7 +96,7 @@ return function(config)
             { Foreground = { Color = tab_colors.nord5 } },
             { Background = { Color = tab_colors.nord3 } },
             -- { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. cwd .. " " },
-            { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. session_name .. " " },
+            { Text = "  " .. wezterm.nerdfonts.md_folder .. "  " .. domain_name .. " " },
             { Foreground = { Color = tab_colors.nord1 } },
             { Background = { Color = tab_colors.nord3 } },
             { Text = "" },

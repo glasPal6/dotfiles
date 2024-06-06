@@ -66,11 +66,6 @@ local configKeys = {
         action = wezterm.action.SpawnTab("CurrentPaneDomain"),
     },
     {
-        mods = "LEADER",
-        key = "m",
-        action = wezterm.action.SpawnCommandInNewTab{ args = { 'btop' }},
-    },
-    {
         mods = "LEADER|CTRL",
         key = "T",
         action = wezterm.action.PromptInputLine({
@@ -95,6 +90,22 @@ local configKeys = {
         mods = "LEADER",
         key = "p",
         action = wezterm.action.ActivateTabRelative(-1),
+    },
+
+    {
+        mods = "LEADER",
+        key = "m",
+        action = wezterm.action.SpawnCommandInNewTab{ args = { 'btop' }},
+    },
+    {
+        mods = "LEADER",
+        key = "g",
+        action = wezterm.action.SpawnCommandInNewTab{ args = { 'lazygit' }},
+    },
+    {
+        mods = "LEADER",
+        key = "c",
+        action = wezterm.action.SpawnCommandInNewTab{ args = { 'lazydocker' }},
     },
 
     -- Workspace navigator
