@@ -10,7 +10,6 @@ awful.spawn.with_shell(gears.filesystem.get_configuration_dir() .. "monitor_disp
 -- awful.spawn.with_shell("superproductivity")
 
 -- Required for the style
-awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("compton")
 -- awful.spawn.with_shell("picom")
 

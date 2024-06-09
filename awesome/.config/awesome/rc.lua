@@ -10,15 +10,17 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local menubar = require("menubar")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+-- Delcaritize object management
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Load Debian menu entries
+-- local dpi = beautiful.xresources.apply_dpi
+
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
@@ -55,7 +57,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
@@ -278,30 +280,27 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-    awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
-    awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
+    awful.key({ modkey }, "Page_Up", awful.tag.viewprev, { description = "view previous", group = "tag" }),
+    awful.key({ modkey }, "Page_Down", awful.tag.viewnext, { description = "view next", group = "tag" }),
     awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-    awful.key({ modkey }, "j", function()
+    awful.key({ modkey }, "Left", function()
         awful.client.focus.byidx(1)
     end, { description = "focus next by index", group = "client" }),
-    awful.key({ modkey }, "k", function()
+    awful.key({ modkey }, "Right", function()
         awful.client.focus.byidx(-1)
     end, { description = "focus previous by index", group = "client" }),
-    awful.key({ modkey }, "w", function()
-        mymainmenu:show()
-    end, { description = "show main menu", group = "awesome" }),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift" }, "j", function()
+    awful.key({ modkey, "Shift" }, "Left", function()
         awful.client.swap.byidx(1)
     end, { description = "swap with next client by index", group = "client" }),
-    awful.key({ modkey, "Shift" }, "k", function()
+    awful.key({ modkey, "Shift" }, "Right", function()
         awful.client.swap.byidx(-1)
     end, { description = "swap with previous client by index", group = "client" }),
-    awful.key({ modkey, "Control" }, "j", function()
+    awful.key({ modkey, "Control" }, "Left", function()
         awful.screen.focus_relative(1)
     end, { description = "focus the next screen", group = "screen" }),
-    awful.key({ modkey, "Control" }, "k", function()
+    awful.key({ modkey, "Control" }, "Right", function()
         awful.screen.focus_relative(-1)
     end, { description = "focus the previous screen", group = "screen" }),
     awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
@@ -318,22 +317,22 @@ globalkeys = gears.table.join(
     end, { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-    awful.key({ modkey }, "l", function()
+    awful.key({ modkey }, "Up", function()
         awful.tag.incmwfact(0.05)
     end, { description = "increase master width factor", group = "layout" }),
-    awful.key({ modkey }, "h", function()
+    awful.key({ modkey }, "Down", function()
         awful.tag.incmwfact(-0.05)
     end, { description = "decrease master width factor", group = "layout" }),
-    awful.key({ modkey, "Shift" }, "h", function()
+    awful.key({ modkey, "Shift" }, "Down", function()
         awful.tag.incnmaster(1, nil, true)
     end, { description = "increase the number of master clients", group = "layout" }),
-    awful.key({ modkey, "Shift" }, "l", function()
+    awful.key({ modkey, "Shift" }, "Up", function()
         awful.tag.incnmaster(-1, nil, true)
     end, { description = "decrease the number of master clients", group = "layout" }),
-    awful.key({ modkey, "Control" }, "h", function()
+    awful.key({ modkey, "Control" }, "Down", function()
         awful.tag.incncol(1, nil, true)
     end, { description = "increase the number of columns", group = "layout" }),
-    awful.key({ modkey, "Control" }, "l", function()
+    awful.key({ modkey, "Control" }, "Up", function()
         awful.tag.incncol(-1, nil, true)
     end, { description = "decrease the number of columns", group = "layout" }),
     awful.key({ modkey }, "space", function()
@@ -367,7 +366,22 @@ globalkeys = gears.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function()
         menubar.show()
-    end, { description = "show the menubar", group = "launcher" })
+    end, { description = "show the menubar", group = "launcher" }),
+
+    -- Volume Keys
+   awful.key({}, "XF86AudioLowerVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%-", false) end),
+   awful.key({}, "XF86AudioRaiseVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%+", false) end),
+   awful.key({}, "XF86AudioMute", function ()
+     awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end),
+   -- Media Keys
+   awful.key({}, "XF86AudioPlay", function()
+     awful.util.spawn("playerctl play-pause", false) end),
+   awful.key({}, "XF86AudioNext", function()
+     awful.util.spawn("playerctl next", false) end),
+   awful.key({}, "XF86AudioPrev", function()
+     awful.util.spawn("playerctl previous", false) end)
 )
 
 clientkeys = gears.table.join(
@@ -378,12 +392,6 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "c", function(c)
         c:kill()
     end, { description = "close", group = "client" }),
-    awful.key(
-        { modkey, "Control" },
-        "space",
-        awful.client.floating.toggle,
-        { description = "toggle floating", group = "client" }
-    ),
     awful.key({ modkey, "Control" }, "Return", function(c)
         c:swap(awful.client.getmaster())
     end, { description = "move to master", group = "client" }),
@@ -560,9 +568,6 @@ client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
 end)
 -- }}}
-
--- Add window gaps
-beautiful.useless_gap = 3
 
 -- Autostart applications
 require("autostart")
