@@ -16,7 +16,7 @@
     nord14: #a3be8c;
     nord15: #b48ead;
 
-    font:           "MesloLGS NF 10";
+    font:           "MesloLGS NF 8";
     background:     var(nord1);
     background-alt: var(nord2);
     foreground:     var(nord4);

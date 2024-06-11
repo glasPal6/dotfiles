@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 show_launcher() {
-	rofi -show drun -normal-window -theme "./launcher.rasi"
+	rofi -show drun -theme "./launcher.rasi"
 }
 
 hibernate=''
@@ -16,11 +16,11 @@ no='󰅙'
 show_powermenu() {
 	uptime="$(uptime -p | sed -e 's/up //g')"
 	host=$(hostnamectl hostname)
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$hibernate\n$shutdown" | rofi -normal-window -dmenu -p "$host" -mesg "Uptime: $uptime" -theme powermenu.rasi
+	echo -e "$lock\n$suspend\n$logout\n$reboot\n$hibernate\n$shutdown" | rofi -dmenu -p "$host" -mesg "Uptime: $uptime" -theme powermenu.rasi
 }
 
 confirm_exit() {
-	echo -e "$yes\n$no" | rofi -normal-window -dmenu -p "Confirmation" -mesg "Are you sure?" -theme confirm.rasi
+	echo -e "$yes\n$no" | rofi -dmenu -p "Confirmation" -mesg "Are you sure?" -theme confirm.rasi
 }
 
 run_cmd() {

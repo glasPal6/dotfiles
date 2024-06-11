@@ -5,6 +5,7 @@ return function(config)
     config.font = wezterm.font("MesloLGS NF")
     config.font_size = 9
     config.color_scheme = "nord"
+    config.tab_bar_at_bottom = false
 
     config.use_fancy_tab_bar = false
     config.colors = {

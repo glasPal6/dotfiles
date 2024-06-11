@@ -8,6 +8,7 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+local battery_widget = require("widgets.battery")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -65,6 +66,7 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 file_manager = "nautilus"
 app_launcher = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh launcher"
+powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powermenu"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -258,9 +260,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         {       -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
             mytextclock,
+            battery_widget{},
             s.mylayoutbox,
         },
     })
@@ -283,24 +284,24 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "Page_Up", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ modkey }, "Page_Down", awful.tag.viewnext, { description = "view next", group = "tag" }),
     awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-    awful.key({ modkey }, "Left", function()
+    awful.key({ modkey }, "Right", function()
         awful.client.focus.byidx(1)
     end, { description = "focus next by index", group = "client" }),
-    awful.key({ modkey }, "Right", function()
+    awful.key({ modkey }, "Left", function()
         awful.client.focus.byidx(-1)
     end, { description = "focus previous by index", group = "client" }),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift" }, "Left", function()
+    awful.key({ modkey, "Shift" }, "Right", function()
         awful.client.swap.byidx(1)
     end, { description = "swap with next client by index", group = "client" }),
-    awful.key({ modkey, "Shift" }, "Right", function()
+    awful.key({ modkey, "Shift" }, "Left", function()
         awful.client.swap.byidx(-1)
     end, { description = "swap with previous client by index", group = "client" }),
-    awful.key({ modkey, "Control" }, "Left", function()
+    awful.key({ modkey, "Control" }, "Right", function()
         awful.screen.focus_relative(1)
     end, { description = "focus the next screen", group = "screen" }),
-    awful.key({ modkey, "Control" }, "Right", function()
+    awful.key({ modkey, "Control" }, "Left", function()
         awful.screen.focus_relative(-1)
     end, { description = "focus the previous screen", group = "screen" }),
     awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
@@ -315,8 +316,17 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "Return", function()
         awful.spawn(terminal)
     end, { description = "open a terminal", group = "launcher" }),
+    awful.key({ modkey }, "b", function()
+        awful.spawn("brave-browser")
+    end, { description = "open brave", group = "launcher" }),
+    awful.key({ modkey }, "f", function()
+        awful.spawn(file_manager)
+    end, { description = "open file_manager", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-    awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+    awful.key({ modkey, "Control", "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+    awful.key({ modkey, "Shift" }, "q", function()
+        awful.spawn(powermenu)
+    end, { description = "show the powermenu", group = "awesome" }),
     awful.key({ modkey }, "Up", function()
         awful.tag.incmwfact(0.05)
     end, { description = "increase master width factor", group = "layout" }),
@@ -364,8 +374,11 @@ globalkeys = gears.table.join(
         })
     end, { description = "lua execute prompt", group = "awesome" }),
     -- Menubar
-    awful.key({ modkey }, "p", function()
-        menubar.show()
+    -- awful.key({ modkey }, "p", function()
+    --     menubar.show()
+    -- end, { description = "show the menubar", group = "launcher" }),
+    awful.key({ modkey }, "p", function ()
+        awful.spawn(app_launcher)
     end, { description = "show the menubar", group = "launcher" }),
 
     -- Volume Keys
