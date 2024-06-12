@@ -41,12 +41,12 @@ return {
 		},
 		config = function()
 			require("neogit").setup({
-				mappings = {
-					popup = {
-						["p"] = "PushPopup",
-						["P"] = "PullPopup",
-					},
-				},
+				-- mappings = {
+				-- 	popup = {
+				-- 		["p"] = "PushPopup",
+				-- 		["P"] = "PullPopup",
+				-- 	},
+				-- },
 			})
 			vim.keymap.set("n", "<leader>gs", ":Neogit<CR>")
 			vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>")
