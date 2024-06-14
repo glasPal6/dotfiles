@@ -8,7 +8,8 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local battery_widget = require("widgets.battery")
+local battery_widget = require("widgets.battery.battery")
+local network_widget = require("widgets.network.init")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -262,6 +263,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mytextclock,
             battery_widget{},
+            network_widget.wireless({
+                interface = "wlp1s0",
+            }),
+            network_widget.internet({
+                interface = "eno1",
+            }),
+            network_widget.internet({}),
             s.mylayoutbox,
         },
     })
