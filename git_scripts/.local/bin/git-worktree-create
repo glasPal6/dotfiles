@@ -1,18 +1,52 @@
 #!/usr/bin/env bash
 
+help() {
+    echo "Usage: git-worktree-create <name> -b <branch> [-y]"
+    echo 
+    echo "  name: name of the worktree."
+    echo "  -b: name of the branch to branch from."
+    echo "  -y: create the remote branch and push it to the remote."
+    echo
+}
+
+branchName="main"
+upstream=false
+worktreeName=$1
+if [ "$worktreeName" == "-h" ]; then
+    help
+    exit 0
+fi
+shift
+
 gitworktreeadd() {
-    echo "-------------------------Creating worktree $1-------------------------"
-    git worktree add $1
-    cd $1
-    hasRemote=$(cd .. && git ls-remote --heads origin refs/heads/$1)
+    echo "-------------------------Creating worktree $worktreeName-------------------------"
+    git branch $worktreeName $branchName
+    git worktree add $worktreeName
+    cd $worktreeName
+    hasRemote=$(cd .. && git ls-remote --heads origin refs/heads/$worktreeName)
     if [ ! -z "$hasRemote" ]; then
-        echo "-------------------------Fetching branch $1's upstream-------------------------"
-        git branch --set-upstream-to=origin/$1
+        echo "-------------------------Fetching branch $worktreeName's upstream-------------------------"
+        git branch --set-upstream-to=origin/$worktreeName
     fi
-    if [ "$2" == "-y" ]; then
-        echo "-------------------------Setting up upstream branch for $1-------------------------"
-        git push --set-upstream origin $1
+    if [ -z "$hasRemote" ] && [ $upstream ]; then
+        echo "-------------------------Setting up upstream branch for $worktreeName-------------------------"
+        git push --set-upstream origin $worktreeName
     fi
 }
 
-gitworktreeadd "$1" "$2"
+while getopts :b:y opt; do
+    case $opt in
+        b)
+            branchName=$OPTARG
+            ;;
+        y)
+            upstream=true
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 0
+            ;;
+    esac
+done
+
+gitworktreeadd 
