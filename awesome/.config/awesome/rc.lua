@@ -61,7 +61,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "wezterm"
+terminal = "wezterm start --always-new-process"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 file_manager = "nautilus"
@@ -270,9 +270,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({}, 3, function()
-        mymainmenu:toggle()
-    end),
+    -- awful.button({}, 3, function()
+    --     mymainmenu:toggle()
+    -- end),
     awful.button({}, 4, awful.tag.viewnext),
     awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -461,6 +461,7 @@ for i = 1, 9 do
                 local tag = client.focus.screen.tags[i]
                 if tag then
                     client.focus:move_to_tag(tag)
+                    tag:view_only()
                 end
             end
         end, { description = "move focused client to tag #" .. i, group = "tag" }),
@@ -516,7 +517,6 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "DTA", -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
                 "pinentry",
             },
