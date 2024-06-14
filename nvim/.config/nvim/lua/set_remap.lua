@@ -22,8 +22,7 @@ vim.opt.scrolloff = 15
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.hlsearch = true
--- vim.opt.hlsearch = false
+vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.foldmethod = "expr"
@@ -45,10 +44,6 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 
--- vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files hidden=true<CR>")
--- vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files hidden=true<CR>")
--- vim.keymap.set("n", "<leader>nv", ":vsplit<CR>:Telescope find_files<CR>")
--- vim.keymap.set("n", "<leader>ns", ":split<CR>:Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>nv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>ns", ":split<CR>")
 
@@ -57,8 +52,8 @@ vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
 vim.keymap.set("n", "<C-Right>", "<C-w><Right>")
 vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>sp", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>sl", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
 vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
@@ -74,9 +69,7 @@ vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
-vim.keymap.set("n", "<leader>tt", ":tabnew<CR>:Telescope file_browser<CR>")
 
-vim.keymap.set("n", "<CR>", ":nohlsearch<CR>", { silent = true })
 ---------------------------------------------------------------
 
 
