@@ -265,8 +265,11 @@ awful.screen.connect_for_each_screen(function(s)
         {       -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mytextclock,
+            wibox.widget.textbox("|"),
             cpu_widget({}),
+            wibox.widget.textbox("|"),
             ram_widget({}),
+            wibox.widget.textbox("|"),
             network_widget.wireless({
                 interface = "wlp1s0",
             }),
@@ -274,7 +277,9 @@ awful.screen.connect_for_each_screen(function(s)
                 interface = "eno1",
             }),
             network_widget.internet({}),
+            wibox.widget.textbox("|"),
             volume_widget({}),
+            wibox.widget.textbox("|"),
             battery_widget{},
             s.mylayoutbox,
         },
