@@ -35,18 +35,15 @@ run_cmd() {
         elif [[ $1 == '--hibernate' ]]; then
 			systemctl hibernate
 		elif [[ $1 == '--logout' ]]; then
-			if [[ $DESKTOP_SESSION == "sway" ]]; then
-				swaymsg exit
-			elif [[ $DESKTOP_SESSION == "i3" ]]; then
-				i3-msg exit
-			fi
+            echo 'awesome.quit()' | awesome-client
 		elif [[ $1 == '--lock' ]]; then
-			if [[ $DESKTOP_SESSION == "sway" ]]; then
-				swaylock
-			elif [[ $DESKTOP_SESSION == "i3" ]]; then
-				i3lock
-			fi
-
+            betterlockscreen -l -- --inside-color=2e3440FF \   
+            --insidever-color=b48eadFF \
+            --insidewrong-color=282828FF \
+            --ring-color=3b4252FF \
+            --ringver-color=a3be3cFF \
+            --ringwrong-color=FB4934FF \
+            --separator-color=282828FF
 		fi
 	else
 		exit 0
