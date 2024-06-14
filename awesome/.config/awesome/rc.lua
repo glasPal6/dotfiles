@@ -12,6 +12,7 @@ local battery_widget = require("widgets.battery.battery")
 local network_widget = require("widgets.network.init")
 local cpu_widget = require("widgets.cpu-widget.cpu-widget")
 local ram_widget = require("widgets.ram-widget.ram-widget")
+local volume_widget = require("widgets.volume-widget.volume")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -273,6 +274,7 @@ awful.screen.connect_for_each_screen(function(s)
                 interface = "eno1",
             }),
             network_widget.internet({}),
+            volume_widget({}),
             battery_widget{},
             s.mylayoutbox,
         },
