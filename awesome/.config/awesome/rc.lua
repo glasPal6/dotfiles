@@ -10,6 +10,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 local battery_widget = require("widgets.battery.battery")
 local network_widget = require("widgets.network.init")
+local cpu_widget = require("widgets.cpu-widget.cpu-widget")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -262,7 +263,7 @@ awful.screen.connect_for_each_screen(function(s)
         {       -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mytextclock,
-            battery_widget{},
+            cpu_widget({}),
             network_widget.wireless({
                 interface = "wlp1s0",
             }),
@@ -270,6 +271,7 @@ awful.screen.connect_for_each_screen(function(s)
                 interface = "eno1",
             }),
             network_widget.internet({}),
+            battery_widget{},
             s.mylayoutbox,
         },
     })
