@@ -266,9 +266,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mytextclock,
             wibox.widget.textbox("|"),
-            cpu_widget({}),
+            cpu_widget({
+                timeout = 10,
+            }),
             wibox.widget.textbox("|"),
-            ram_widget({}),
+            ram_widget({
+                timeout = 10,
+            }),
             wibox.widget.textbox("|"),
             network_widget.wireless({
                 interface = "wlp1s0",
