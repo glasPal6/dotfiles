@@ -37,7 +37,7 @@ run_cmd() {
 		elif [[ $1 == '--logout' ]]; then
             echo 'awesome.quit()' | awesome-client
 		elif [[ $1 == '--lock' ]]; then
-            betterlockscreen -l -- --inside-color=2e3440FF \   
+            betterlockscreen -l --off 240 --display 1 -- --inside-color=2e3440FF \   
             --insidever-color=b48eadFF \
             --insidewrong-color=282828FF \
             --ring-color=3b4252FF \
