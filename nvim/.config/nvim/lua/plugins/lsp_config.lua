@@ -33,6 +33,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
+            vim.lsp.inlay_hint.enable()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             local lspconfig = require("lspconfig")
