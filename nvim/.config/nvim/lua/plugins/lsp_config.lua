@@ -34,6 +34,9 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             vim.lsp.inlay_hint.enable()
+            vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+
+            -- LSP setup
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             local lspconfig = require("lspconfig")
@@ -57,10 +60,13 @@ return {
                 capabilities = capabilities,
                 filetypes = { "zig" },
             })
-            -- lsp for mojo
             lspconfig.mojo.setup({
                 capabilities = capabilities,
                 filetypes = { "mojo" },
+            })
+            lspconfig.asm_lsp.setup({
+                capabilities = capabilities,
+                filetypes = { "asm" },
             })
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -82,10 +88,10 @@ return {
                     vim.keymap.set("n", "<leader>vd", function()
                         vim.diagnostc.open_float()
                     end, opts)
-                    vim.keymap.set("n", "[d", function()
+                    vim.keymap.set("n", "]d", function()
                         vim.diagnostic.goto_next()
                     end, opts)
-                    vim.keymap.set("n", "]d", function()
+                    vim.keymap.set("n", "[d", function()
                         vim.diagnostic.goto_prev()
                     end, opts)
                     vim.keymap.set("n", "<leader>ca", function()
@@ -100,6 +106,16 @@ return {
                     vim.keymap.set("i", "<C-h>", function()
                         vim.lsp.buf.signature_help()
                     end, opts)
+
+                    vim.api.nvim_create_autocmd('BufWritePre', {
+                        group = "UserLspConfig",
+                        buffer = ev.buf,
+                        callback = function()
+                            vim.lsp.buf.format {
+                                async = false,
+                            }
+                        end,
+                    })
                 end,
             })
         end,

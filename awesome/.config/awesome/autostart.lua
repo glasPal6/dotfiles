@@ -3,8 +3,8 @@ local awful = require("awful")
 
 -- Autostart applications
 -- Nice apps to start
-awful.spawn.once("brave-browser")
 awful.spawn.once("superproductivity")
+awful.spawn.once("brave-browser")
 -- awful.spawn(terminal, { screen = 2, tag = "2" })
 
 -- Compositor 
