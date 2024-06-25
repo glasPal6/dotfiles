@@ -262,29 +262,29 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
-        {       -- Right widgets
+        {             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mytextclock,
             wibox.widget.textbox("|"),
             cpu_widget({
-                timeout = 10,
+                timeout = 5,
             }),
             wibox.widget.textbox("|"),
             ram_widget({
-                timeout = 10,
+                timeout = 5,
             }),
             wibox.widget.textbox("|"),
             network_widget.wireless({
                 interface = "wlp1s0",
             }),
-            network_widget.internet({
+            network_widget.indicator({
                 interface = "eno1",
             }),
             network_widget.internet({}),
             wibox.widget.textbox("|"),
             volume_widget({}),
             wibox.widget.textbox("|"),
-            battery_widget{},
+            battery_widget {},
             s.mylayoutbox,
         },
     })
@@ -293,9 +293,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    -- awful.button({}, 3, function()
-    --     mymainmenu:toggle()
-    -- end),
+-- awful.button({}, 3, function()
+--     mymainmenu:toggle()
+-- end),
     awful.button({}, 4, awful.tag.viewnext),
     awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -400,24 +400,30 @@ globalkeys = gears.table.join(
     -- awful.key({ modkey }, "p", function()
     --     menubar.show()
     -- end, { description = "show the menubar", group = "launcher" }),
-    awful.key({ modkey }, "p", function ()
+    awful.key({ modkey }, "p", function()
         awful.spawn(app_launcher)
     end, { description = "show the menubar", group = "launcher" }),
 
     -- Volume Keys
-   awful.key({}, "XF86AudioLowerVolume", function ()
-     awful.util.spawn("amixer -q -D pulse sset Master 5%-", false) end),
-   awful.key({}, "XF86AudioRaiseVolume", function ()
-     awful.util.spawn("amixer -q -D pulse sset Master 5%+", false) end),
-   awful.key({}, "XF86AudioMute", function ()
-     awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end),
-   -- Media Keys
-   awful.key({}, "XF86AudioPlay", function()
-     awful.util.spawn("playerctl play-pause", false) end),
-   awful.key({}, "XF86AudioNext", function()
-     awful.util.spawn("playerctl next", false) end),
-   awful.key({}, "XF86AudioPrev", function()
-     awful.util.spawn("playerctl previous", false) end)
+    awful.key({}, "XF86AudioLowerVolume", function()
+        awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
+    end),
+    awful.key({}, "XF86AudioRaiseVolume", function()
+        awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
+    end),
+    awful.key({}, "XF86AudioMute", function()
+        awful.util.spawn("amixer -D pulse set Master 1+ toggle", false)
+    end),
+    -- Media Keys
+    awful.key({}, "XF86AudioPlay", function()
+        awful.util.spawn("playerctl play-pause", false)
+    end),
+    awful.key({}, "XF86AudioNext", function()
+        awful.util.spawn("playerctl next", false)
+    end),
+    awful.key({}, "XF86AudioPrev", function()
+        awful.util.spawn("playerctl previous", false)
+    end)
 )
 
 clientkeys = gears.table.join(
@@ -446,6 +452,10 @@ clientkeys = gears.table.join(
         c.maximized = not c.maximized
         c:raise()
     end, { description = "(un)maximize", group = "client" }),
+    awful.key({ modkey }, "a", function(c)
+        c.floating = not c.floating
+        c:raise()
+    end, { description = "toggle floating", group = "client" }),
     awful.key({ modkey, "Control" }, "m", function(c)
         c.maximized_vertical = not c.maximized_vertical
         c:raise()
@@ -548,7 +558,7 @@ awful.rules.rules = {
                 "Blueman-manager",
                 "Gpick",
                 "Kruler",
-                "MessageWin", -- kalarm.
+                "MessageWin",  -- kalarm.
                 "Sxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
@@ -562,9 +572,9 @@ awful.rules.rules = {
                 "Event Tester", -- xev.
             },
             role = {
-                "AlarmWindow", -- Thunderbird's calendar.
+                "AlarmWindow",   -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
             },
         },
         properties = { floating = true },
@@ -607,4 +617,3 @@ end)
 
 -- Autostart applications
 require("autostart")
-

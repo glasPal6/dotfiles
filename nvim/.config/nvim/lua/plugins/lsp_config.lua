@@ -33,7 +33,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            vim.lsp.inlay_hint.enable()
+            -- vim.lsp.inlay_hint.enable()
             vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 
             -- LSP setup
@@ -48,9 +48,9 @@ return {
                 capabilities = capabilities,
                 filetypes = { "c", "cpp", "rust" },
             })
-            lspconfig.cmake.setup({
+            lspconfig.neocmake.setup({
                 capabilities = capabilities,
-                filetypes = { "c", "cpp", "rust" },
+                filetypes = { "cmake" },
             })
             lspconfig.pyright.setup({
                 capabilities = capabilities,

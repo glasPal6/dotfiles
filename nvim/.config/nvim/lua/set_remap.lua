@@ -28,7 +28,7 @@ vim.opt.incsearch = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = false
-vim.opt.foldnestmax = 1
+-- vim.opt.foldnestmax = 1
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 ---------------------------------------------------------------
@@ -38,9 +38,9 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 
@@ -70,6 +70,7 @@ vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 
+-- vim.keymap.set("n", "<leader>hd", ":%!xxd<CR>")
+vim.keymap.set("n", "<leader>hd", ":%!hexdump -C<CR>")
+
 ---------------------------------------------------------------
-
-
