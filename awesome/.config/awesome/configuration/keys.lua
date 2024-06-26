@@ -36,7 +36,7 @@ awful.keyboard.append_global_keybindings({
     -- WM
     awful.key({ mod, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "wm" }),
     awful.key({ mod, "Control", "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "wm" }),
-    awful.key({ mod }, "F1", hotkeys_popup.show_help, { description = "show Help", group = "WM" }),
+    awful.key({ mod }, "F1", hotkeys_popup.show_help, { description = "show Help", group = "wm" }),
 
     -- Client
     awful.key({ mod }, "Up", function()
@@ -69,6 +69,13 @@ awful.keyboard.append_global_keybindings({
         helpers.client.resize_client(client.focus, "right")
     end, { description = "resize to the right", group = "client" }),
 
+    awful.key({ mod, shift }, "Right", function()
+        awful.screen.focus_relative(1)
+    end, { description = "focus the next screen", group = "screen" }),
+    awful.key({ mod, shift }, "Left", function()
+        awful.screen.focus_relative(-1)
+    end, { description = "focus the previous screen", group = "screen" }),
+
     -- Bling
     --- Add client to tabbed layout
     awful.key({ alt }, "a", function()
@@ -100,17 +107,17 @@ awful.keyboard.append_global_keybindings({
 
     --- Volume control
     awful.key({}, "XF86AudioRaiseVolume", function()
-        awful.spawn("amixer sset Master 5%+", false)
+        awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
         awesome.emit_signal("widget::volume")
         awesome.emit_signal("module::volume_osd:show", true)
     end, { description = "increase volume", group = "hotkeys" }),
     awful.key({}, "XF86AudioLowerVolume", function()
-        awful.spawn("amixer sset Master 5%-", false)
+        awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
         awesome.emit_signal("widget::volume")
         awesome.emit_signal("module::volume_osd:show", true)
     end, { description = "decrease volume", group = "hotkeys" }),
     awful.key({}, "XF86AudioMute", function()
-        awful.spawn("amixer sset Master toggle", false)
+        awful.util.spawn("amixer -D pulse set Master 1+ toggle", false)
     end, { description = "mute volume", group = "hotkeys" }),
 
     --- Music
@@ -199,9 +206,9 @@ client.connect_signal("request::default_keybindings", function()
         end),
 
         --- Sticky
-        awful.key({ mod, shift }, "p", function(c)
-            c.sticky = not c.sticky
-        end),
+        -- awful.key({ mod, shift }, "p", function(c)
+        --     c.sticky = not c.sticky
+        -- end),
 
         --- Close window
         awful.key({ mod }, "q", function()
@@ -218,11 +225,25 @@ client.connect_signal("request::default_keybindings", function()
             awesome.emit_signal("window_switcher::turn_on")
         end),
 
+        -- screens
+        awful.key({ mod }, "o", function(c)
+            c:move_to_screen()
+        end, { description = "move to screen", group = "client" }),
+
+
     })
 end)
 
 -- Layout
 awful.keyboard.append_global_keybindings({
+    -- Cycle layout
+    awful.key({ mod }, "space", function()
+        awful.layout.inc(1)
+    end, { description = "select next", group = "layout" }),
+    awful.key({ mod, "Shift" }, "space", function()
+        awful.layout.inc(-1)
+    end, { description = "select previous", group = "layout" }),
+
     --- Set tilling layout
     awful.key({ mod }, "s", function()
         awful.layout.set(awful.layout.suit.tile)
@@ -253,8 +274,8 @@ awful.keyboard.append_global_keybindings({
 
 -- Workspaces
 awful.keyboard.append_global_keybindings({
-    awful.key({ mod, alt }, "PageDown", awful.tag.viewprev, { description = "view previous", group = "tags" }),
-    awful.key({ mod, alt }, "PageUp", awful.tag.viewnext, { description = "view next", group = "tags" }),
+    awful.key({ mod }, "Page_Up", awful.tag.viewprev, { description = "view previous", group = "tags" }),
+    awful.key({ mod }, "Page_Down", awful.tag.viewnext, { description = "view next", group = "tags" }),
     awful.key({
         modifiers = { mod },
         keygroup = "numrow",
@@ -291,10 +312,26 @@ awful.keyboard.append_global_keybindings({
                 local tag = client.focus.screen.tags[index]
                 if tag then
                     client.focus:move_to_tag(tag)
+                    tag:view_only()
                 end
             end
         end,
     }),
+    -- awful.key({
+    --     modifiers = { mod, shift },
+    --     key = "Page_Up",
+    --     description = "move focused client to Down a tag",
+    --     group = "tags",
+    --     on_press = function(index)
+    --         if client.focus then
+    --             local tag = client.focus.screen.tags[index]
+    --             if tag then
+    --                 client.focus:move_to_tag(tag)
+    --                 tag:view_only()
+    --             end
+    --         end
+    --     end,
+    -- }),
 })
 
 -- Mouse Bindings

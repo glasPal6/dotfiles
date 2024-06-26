@@ -11,16 +11,35 @@ configuration {
 }
 
 * {
-    BG:                             #10121399;
-    BGA:                            #101213;
-    FG:                             #edeff0ff;
-    UGT:                            #df5b61ff;
+    nord0: #2e3440;
+    nord1: #3b4252;
+    nord2: #434c5e;
+    nord3: #4c566a;
+    nord4: #d8dee9;
+    nord5: #e5e9f0;
+    nord6: #eceff4;
+    nord7: #8fbcbb;
+    nord8: #88c0d0;
+    nord9: #81a1c1;
+    nord10: #5E81AC;
+    nord11: #bf616a;
+    nord12: #d08770;
+    nord13: #ebcb8b;
+    nord14: #a3be8c;
+    nord15: #b48ead;
+
+    background:     var(nord1);
+    background-alt: var(nord2);
+    foreground:     var(nord4);
+    selected:       var(nord10);
+    active:         var(nord11);
+    urgent:         var(nord9);
 }
 
 window {
     transparency:                   "real";
-    background-color:               @BG;
-    text-color:                     @FG;
+    background-color:               @background;
+    text-color:                     @foreground;
     border-radius:                  8px;
     width:                          700px;
     x-offset:                       0;
@@ -29,23 +48,23 @@ window {
 
 prompt {
     enabled: 						true;
-	background-color: 				@BG;
-	text-color: 					@FG;
+	background-color: 				@background;
+	text-color: 					@foreground;
 }
 
 textbox-prompt-colon {
 	expand: 						false;
 	str: 							"";
-    background-color:               @BGA;
-    text-color:                     @FG;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
     padding:                        10px 0px 0px 12px;
 	font:							"Material Icons Round 16";
 }
 
 entry {
-    background-color:               @BGA;
-    text-color:                     @FG;
-    placeholder-color:              @FG;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    placeholder-color:              @foreground;
     expand:                         true;
     horizontal-align:               0;
     placeholder:                    "Type here to search";
@@ -57,16 +76,16 @@ entry {
 inputbar {
 	children: 						[ textbox-prompt-colon, entry ];
     spacing:                        0px;
-    background-color:               @BGA;
-    text-color:                     @FG;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
     expand:                         false;
     border-radius:                  8px;
     position:                       center;
 }
 
 case-indicator {
-    background-color:               @BG;
-    text-color:                     @FG;
+    background-color:               @background;
+    text-color:                     @foreground;
     spacing:                        0;
 }
 
@@ -82,7 +101,7 @@ listview {
 }
 
 mainbox {
-    background-color:               @BG;
+    background-color:               @background;
     children:                       [ inputbar, listview ];
     spacing:                       	40px;
     padding:                        30px;
@@ -90,7 +109,7 @@ mainbox {
 
 element {
     background-color:               #00000000;
-    text-color:                     @FG;
+    text-color:                     @foreground;
     orientation:                    vertical;
     border-radius:                  8px;
     padding:                        20px;
@@ -114,29 +133,29 @@ element-text {
 
 element normal.urgent,
 element alternate.urgent {
-    background-color:               @UGT;
-    text-color:                     @FG;
+    background-color:               @urgent;
+    text-color:                     @foreground;
     border-radius:                  8px;
 }
 
 element normal.active,
 element alternate.active {
-    background-color:               @BGA;
-    text-color:                     @FG;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
 }
 
 element selected {
-    background-color:               @BGA;
-    text-color:                     @FG;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
     border-radius:                  8px;
 }
 
 element selected.urgent {
-    background-color:               @UGT;
-    text-color:                     @FG;
+    background-color:               @urgent;
+    text-color:                     @foreground;
 }
 
 element selected.active {
-    background-color:               @BGA;
-    color:                          @FG;
+    background-color:               @background-alt;
+    color:                          @foreground;
 }

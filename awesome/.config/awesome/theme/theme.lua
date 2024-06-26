@@ -1,50 +1,66 @@
-local gears                                           = require("gears")
-local gfs                                             = require("gears.filesystem")
-local themes_path                                     = gfs.get_themes_dir()
-local theme                                           = dofile(themes_path .. "default/theme.lua")
-local theme_assets                                    = require("beautiful.theme_assets")
-local xresources                                      = require("beautiful.xresources")
-local dpi                                             = xresources.apply_dpi
-local helpers                                         = require("helpers")
-local icons                                           = require("icons")
+local gears        = require("gears")
+local gfs          = require("gears.filesystem")
+local themes_path  = gfs.get_themes_dir()
+local theme        = dofile(themes_path .. "default/theme.lua")
+local theme_assets = require("beautiful.theme_assets")
+local xresources   = require("beautiful.xresources")
+local dpi          = xresources.apply_dpi
+local helpers      = require("helpers")
+local icons        = require("icons")
 
 --- Ui Fonts
-theme.font_name                                       = "MesloLGS NF "
-theme.font                                            = theme.font_name .. "8"
+theme.font_name    = "MesloLGS NF "
+theme.font         = theme.font_name .. "8"
 
 --- Icon Fonts
-theme.icon_font                                       = "Material Icons "
+theme.icon_font    = "Material Icons "
 
 -- Colours
-theme.nord0                                           = "#2e3440"
-theme.nord1                                           = "#3b4252"
-theme.nord2                                           = "#434c5e"
-theme.nord3                                           = "#4c566a"
-theme.nord4                                           = "#d8dee9"
-theme.nord5                                           = "#e5e9f0"
-theme.nord6                                           = "#eceff4"
-theme.nord7                                           = "#8fbcbb"
-theme.nord8                                           = "#88c0d0"
-theme.nord9                                           = "#81a1c1"
-theme.nord10                                          = "#5E81AC"
-theme.nord11                                          = "#bf616a"
-theme.nord12                                          = "#d08770"
-theme.nord13                                          = "#ebcb8b"
-theme.nord14                                          = "#a3be8c"
-theme.nord15                                          = "#b48ead"
+theme.nord0        = "#2e3440"
+theme.nord1        = "#3b4252"
+theme.nord2        = "#434c5e"
+theme.nord3        = "#4c566a"
+theme.nord4        = "#d8dee9"
+theme.nord5        = "#e5e9f0"
+theme.nord6        = "#eceff4"
+theme.nord7        = "#8fbcbb"
+theme.nord8        = "#88c0d0"
+theme.nord9        = "#81a1c1"
+theme.nord10       = "#5E81AC"
+theme.nord11       = "#bf616a"
+theme.nord12       = "#d08770"
+theme.nord13       = "#ebcb8b"
+theme.nord14       = "#a3be8c"
+theme.nord15       = "#b48ead"
 
-theme.transparent                                     = "#00000000"
+theme.transparent  = "#00000000"
 
-theme.bg_normal                                       = theme.nord1
-theme.bg_focus                                        = theme.nord2
-theme.bg_urgent                                       = theme.nord3
-theme.bg_systray                                      = theme.bg_normal
-theme.bg_minimize                                     = theme.bg_normal
+theme.bg_normal    = theme.nord1
+theme.bg_focus     = theme.nord2
+theme.bg_urgent    = theme.nord3
+theme.bg_systray   = theme.bg_normal
+theme.bg_minimize  = theme.bg_normal
 
-theme.fg_normal                                       = theme.nord4
-theme.fg_focus                                        = theme.nord5
-theme.fg_urgent                                       = theme.nord6
-theme.fg_minimize                                     = theme.nord7
+theme.fg_normal    = theme.nord4
+theme.fg_focus     = theme.nord5
+theme.fg_urgent    = theme.nord6
+theme.fg_minimize  = theme.nord7
+
+function theme.random_accent_color()
+    local accents = {
+        theme.nord9,
+        -- theme.nord10,
+        -- theme.nord11,
+        -- theme.nord12,
+        -- theme.nord13,
+        -- theme.nord14,
+    }
+
+    local i = math.random(1, #accents)
+    return accents[i]
+end
+
+theme.accent                                          = theme.nord4
 
 --- UI events
 theme.leave_event                                     = theme.transparent
@@ -59,6 +75,8 @@ theme.widget_bg                                       = theme.nord1
 theme.titlebar_enabled                                = false
 theme.titlebar_bg                                     = theme.nord1
 theme.titlebar_fg                                     = theme.nord4
+theme.titlebar_bg_focus                               = theme.nord2
+theme.titlebar_bg_normal                              = theme.nord1
 
 local icon_dir                                        = gfs.get_configuration_dir() .. "/icons/titlebar/"
 
@@ -89,6 +107,7 @@ theme.titlebar_maximized_button_focus_inactive_hover  = icon_dir .. "maximized_f
 --- Wibar
 theme.wibar_bg                                        = theme.nord1
 theme.wibar_height                                    = dpi(25)
+-- theme.wibar_height                                    = dpi(40)
 
 --- Music
 theme.music_bg                                        = theme.nord1
@@ -122,10 +141,10 @@ theme.layout_machi                                    = icons.machi
 theme.icon_theme                                      = "WhiteSur-dark"
 
 --- Borders
-theme.border_width                                    = 0
+theme.border_width                                    = 2
 theme.oof_border_width                                = 0
-theme.border_color_marked                             = theme.titlebar_bg
-theme.border_color_active                             = theme.titlebar_bg
+theme.border_color_marked                             = theme.nord7
+theme.border_color_active                             = theme.nord7
 theme.border_color_normal                             = theme.titlebar_bg
 theme.border_color_new                                = theme.titlebar_bg
 theme.border_color_urgent                             = theme.titlebar_bg
