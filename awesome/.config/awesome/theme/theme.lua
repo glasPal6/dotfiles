@@ -1,66 +1,52 @@
-local gears        = require("gears")
-local gfs          = require("gears.filesystem")
-local themes_path  = gfs.get_themes_dir()
-local theme        = dofile(themes_path .. "default/theme.lua")
-local theme_assets = require("beautiful.theme_assets")
-local xresources   = require("beautiful.xresources")
-local dpi          = xresources.apply_dpi
-local helpers      = require("helpers")
-local icons        = require("icons")
+local gears                                           = require("gears")
+local gfs                                             = require("gears.filesystem")
+local themes_path                                     = gfs.get_themes_dir()
+local theme                                           = dofile(themes_path .. "default/theme.lua")
+local theme_assets                                    = require("beautiful.theme_assets")
+local xresources                                      = require("beautiful.xresources")
+local dpi                                             = xresources.apply_dpi
+local helpers                                         = require("helpers")
+local icons                                           = require("icons")
 
 --- Ui Fonts
-theme.font_name    = "MesloLGS NF "
-theme.font         = theme.font_name .. "8"
+theme.font_name                                       = "MesloLGS NF "
+theme.font                                            = theme.font_name .. "8"
 
 --- Icon Fonts
-theme.icon_font    = "Material Icons "
+theme.icon_font                                       = "Material Icons "
 
 -- Colours
-theme.nord0        = "#2e3440"
-theme.nord1        = "#3b4252"
-theme.nord2        = "#434c5e"
-theme.nord3        = "#4c566a"
-theme.nord4        = "#d8dee9"
-theme.nord5        = "#e5e9f0"
-theme.nord6        = "#eceff4"
-theme.nord7        = "#8fbcbb"
-theme.nord8        = "#88c0d0"
-theme.nord9        = "#81a1c1"
-theme.nord10       = "#5E81AC"
-theme.nord11       = "#bf616a"
-theme.nord12       = "#d08770"
-theme.nord13       = "#ebcb8b"
-theme.nord14       = "#a3be8c"
-theme.nord15       = "#b48ead"
+theme.nord0                                           = "#2e3440"
+theme.nord1                                           = "#3b4252"
+theme.nord2                                           = "#434c5e"
+theme.nord3                                           = "#4c566a"
+theme.nord4                                           = "#d8dee9"
+theme.nord5                                           = "#e5e9f0"
+theme.nord6                                           = "#eceff4"
+theme.nord7                                           = "#8fbcbb"
+theme.nord8                                           = "#88c0d0"
+theme.nord9                                           = "#81a1c1"
+theme.nord10                                          = "#5E81AC"
+theme.nord11                                          = "#bf616a"
+theme.nord12                                          = "#d08770"
+theme.nord13                                          = "#ebcb8b"
+theme.nord14                                          = "#a3be8c"
+theme.nord15                                          = "#b48ead"
 
-theme.transparent  = "#00000000"
+theme.transparent                                     = "#00000000"
 
-theme.bg_normal    = theme.nord1
-theme.bg_focus     = theme.nord2
-theme.bg_urgent    = theme.nord3
-theme.bg_systray   = theme.bg_normal
-theme.bg_minimize  = theme.bg_normal
+theme.bg_normal                                       = theme.nord1
+theme.bg_focus                                        = theme.nord2
+theme.bg_urgent                                       = theme.nord3
+theme.bg_systray                                      = theme.bg_normal
+theme.bg_minimize                                     = theme.bg_normal
 
-theme.fg_normal    = theme.nord4
-theme.fg_focus     = theme.nord5
-theme.fg_urgent    = theme.nord6
-theme.fg_minimize  = theme.nord7
+theme.fg_normal                                       = theme.nord4
+theme.fg_focus                                        = theme.nord5
+theme.fg_urgent                                       = theme.nord6
+theme.fg_minimize                                     = theme.nord7
 
-function theme.random_accent_color()
-    local accents = {
-        theme.nord9,
-        -- theme.nord10,
-        -- theme.nord11,
-        -- theme.nord12,
-        -- theme.nord13,
-        -- theme.nord14,
-    }
-
-    local i = math.random(1, #accents)
-    return accents[i]
-end
-
-theme.accent                                          = theme.nord4
+theme.accent                                          = theme.nord9
 
 --- UI events
 theme.leave_event                                     = theme.transparent
@@ -157,7 +143,6 @@ theme.border_radius                                   = 12
 
 --- Edge snap
 theme.snap_bg                                         = theme.nord8
-theme.snap_shape                                      = helpers.ui.rrect(0)
 
 --- Main Menu
 theme.main_menu_bg                                    = theme.nord2
@@ -173,7 +158,6 @@ theme.hotkeys_fg                                      = theme.nord4
 theme.hotkeys_modifiers_fg                            = theme.nord4
 theme.hotkeys_font                                    = theme.font_name .. "Medium 10"
 theme.hotkeys_description_font                        = theme.font_name .. "Regular 8"
-theme.hotkeys_shape                                   = helpers.ui.rrect(theme.border_radius)
 theme.hotkeys_group_margin                            = dpi(50)
 
 --- Tag list
@@ -196,7 +180,6 @@ theme.tag_preview_widget_border_color                 = theme.wibar_bg
 theme.tag_preview_widget_border_width                 = 0
 
 --- Layout List
-theme.layoutlist_shape_selected                       = helpers.ui.rrect(theme.border_radius)
 theme.layoutlist_bg_selected                          = theme.widget_bg
 
 --- Gaps

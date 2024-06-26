@@ -1,12 +1,6 @@
 [submodule "awesome/.config/awesome/modules/bling"]
 	path = awesome/.config/awesome/modules/bling
-	url = https://github.com/BlingCorp/bling.git
+	url = https://github.com/BlingCorp/bling
 [submodule "awesome/.config/awesome/modules/color"]
 	path = awesome/.config/awesome/modules/color
 	url = https://github.com/andOrlando/color.git
-[submodule "awesome/.config/awesome/modules/layout-machi"]
-	path = awesome/.config/awesome/modules/layout-machi
-	url = https://github.com/xinhaoyuan/layout-machi.git
-[submodule "awesome/.config/awesome/modules/awesome-battery_widget"]
-	path = awesome/.config/awesome/modules/UPower
-	url = https://github.com/Aire-One/awesome-battery_widget

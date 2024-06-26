@@ -1,8 +1,3 @@
--------------------------------------------
--- @author https://github.com/Kasper24
--- @copyright 2021-2022 Kasper24
--------------------------------------------
-
 local awful = require("awful")
 local gtable = require("gears.table")
 local gtimer = require("gears.timer")
@@ -216,7 +211,7 @@ function menu.sub_menu_button(args)
         and twidget({
             font = args.icon.font,
             size = args.icon_size,
-            color = beautiful.random_accent_color(),
+            color = beautiful.accent,
             text = args.icon.icon,
         })
         or nil
@@ -276,8 +271,7 @@ function menu.button(args)
         icon = twidget({
             font = args.icon.font,
             size = args.icon_size,
-            color = beautiful.random_accent_color(),
-            -- color = beautiful.theme_fg,
+            color = beautiful.accent,
             text = args.icon.icon,
         })
     elseif args.image ~= nil then

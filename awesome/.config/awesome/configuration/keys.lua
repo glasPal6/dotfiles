@@ -3,12 +3,10 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local naughty = require("naughty")
-local decorations = require("ui.decorations")
-local bling = require("modules.bling")
-local playerctl_daemon = require("signal.playerctl")
-local machi = require("modules.layout-machi")
 local helpers = require("helpers")
 local apps = require("configuration.apps")
+local playerctl_daemon = require("signal.playerctl")
+local bling = require("modules.bling")
 
 --- Make key easier to call
 --- ~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,19 +74,19 @@ awful.keyboard.append_global_keybindings({
         awful.screen.focus_relative(-1)
     end, { description = "focus the previous screen", group = "screen" }),
 
-    -- Bling
-    --- Add client to tabbed layout
-    awful.key({ alt }, "a", function()
-        bling.module.tabbed.pick_with_dmenu()
-    end, { description = "pick client to add to tab group", group = "tabs" }),
-    --- Remove client from tabbed layout
-    awful.key({ alt }, "d", function()
-        bling.module.tabbed.pop()
-    end, { description = "remove focused client from tabbing group", group = "tabs" }),
-    --- Cycle through client in tabbed layout
-    awful.key({ alt }, "s", function()
-        bling.module.tabbed.iter()
-    end, { description = "iterate through tabbing group", group = "tabs" }),
+    -- -- Bling
+    -- --- Add client to tabbed layout
+    -- awful.key({ alt }, "a", function()
+    --     bling.module.tabbed.pick_with_dmenu()
+    -- end, { description = "pick client to add to tab group", group = "tabs" }),
+    -- --- Remove client from tabbed layout
+    -- awful.key({ alt }, "d", function()
+    --     bling.module.tabbed.pop()
+    -- end, { description = "remove focused client from tabbing group", group = "tabs" }),
+    -- --- Cycle through client in tabbed layout
+    -- awful.key({ alt }, "s", function()
+    --     bling.module.tabbed.iter()
+    -- end, { description = "iterate through tabbing group", group = "tabs" }),
 
     -- Brightness
     awful.key({}, "XF86ScreenSaver", function()
@@ -141,6 +139,7 @@ awful.keyboard.append_global_keybindings({
     end, { description = "take a area screenshot", group = "hotkeys" }),
 
     --- Lockscreen
+    -- TODO: lockscreen
     awful.key({ mod, alt }, "l", function()
         lock_screen_show()
     end, { description = "lock screen", group = "hotkeys" }),
@@ -155,20 +154,6 @@ awful.keyboard.append_global_keybindings({
 -- Client key bindings
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
-        -- Swap by direction
-        awful.key({ mod, shift }, "Up", function(c)
-            helpers.client.move_client(c, "up")
-        end),
-        awful.key({ mod, shift }, "Down", function(c)
-            helpers.client.move_client(c, "down")
-        end),
-        awful.key({ mod, shift }, "Left", function(c)
-            helpers.client.move_client(c, "left")
-        end),
-        awful.key({ mod, shift }, "Right", function(c)
-            helpers.client.move_client(c, "right")
-        end),
-
         --- Toggle floating
         awful.key({ mod, ctrl }, "space", awful.client.floating.toggle),
 
@@ -220,11 +205,6 @@ client.connect_signal("request::default_keybindings", function()
             awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
         end),
 
-        --- Window switcher
-        awful.key({ alt }, "Tab", function()
-            awesome.emit_signal("window_switcher::turn_on")
-        end),
-
         -- screens
         awful.key({ mod }, "o", function(c)
             c:move_to_screen()
@@ -253,14 +233,6 @@ awful.keyboard.append_global_keybindings({
     awful.key({ mod, shift }, "s", function()
         awful.layout.set(awful.layout.suit.floating)
     end, { description = "set floating layout", group = "layout" }),
-
-    --- Layout machi
-    awful.key({ mod }, ".", function()
-        machi.default_editor.start_interactive()
-    end, { description = "edit the current layout if it is a machi layout", group = "layout" }),
-    awful.key({ mod }, "/", function()
-        machi.switcher.start(client.focus)
-    end, { description = "switch between windows for a machi layout", group = "layout" }),
 
     --- Number of columns
     awful.key({ mod, alt }, "Up", function()
@@ -335,7 +307,7 @@ awful.keyboard.append_global_keybindings({
 })
 
 -- Mouse Bindings
-local main_menu = require("ui.main-menu")
+local main_menu = require("ui.main_menu")
 awful.mouse.append_global_mousebindings({
     --- Right click
     awful.button({
