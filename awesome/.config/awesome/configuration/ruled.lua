@@ -38,6 +38,7 @@ ruled.client.connect_signal("request::rules", function()
         id = "titlebars",
         rule_any = {
             class = {
+                "Spotify",
                 "Org.gnome.Nautilus",
                 "Peek",
             },
