@@ -21,6 +21,7 @@ local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 require("configuration")
+-- require("modules")
 local terminal = require("configuration.apps").default.terminal
 
 -- {{{ Error handling

@@ -154,6 +154,20 @@ awful.keyboard.append_global_keybindings({
 -- Client key bindings
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
+        -- Swap by direction
+        awful.key({ mod, shift }, "Up", function(c)
+            helpers.client.move_client(c, "up")
+        end),
+        awful.key({ mod, shift }, "Down", function(c)
+            helpers.client.move_client(c, "down")
+        end),
+        awful.key({ mod, shift }, "Left", function(c)
+            helpers.client.move_client(c, "left")
+        end),
+        awful.key({ mod, shift }, "Right", function(c)
+            helpers.client.move_client(c, "right")
+        end),
+
         --- Toggle floating
         awful.key({ mod, ctrl }, "space", awful.client.floating.toggle),
 
