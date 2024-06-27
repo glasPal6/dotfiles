@@ -293,9 +293,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
--- awful.button({}, 3, function()
---     mymainmenu:toggle()
--- end),
+    awful.button({}, 3, function()
+        mymainmenu:toggle()
+    end),
     awful.button({}, 4, awful.tag.viewnext),
     awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -316,16 +316,16 @@ globalkeys = gears.table.join(
 
     -- Layout manipulation
     awful.key({ modkey, "Shift" }, "Right", function()
-        awful.client.swap.byidx(1)
+        awful.screen.focus_relative(-1)
     end, { description = "swap with next client by index", group = "client" }),
     awful.key({ modkey, "Shift" }, "Left", function()
-        awful.client.swap.byidx(-1)
+        awful.screen.focus_relative(1)
     end, { description = "swap with previous client by index", group = "client" }),
     awful.key({ modkey, "Control" }, "Right", function()
-        awful.screen.focus_relative(1)
+        awful.client.swap.byidx(1)
     end, { description = "focus the next screen", group = "screen" }),
     awful.key({ modkey, "Control" }, "Left", function()
-        awful.screen.focus_relative(-1)
+        awful.client.swap.byidx(-1)
     end, { description = "focus the previous screen", group = "screen" }),
     awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
     awful.key({ modkey }, "Tab", function()
