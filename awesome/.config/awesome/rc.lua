@@ -21,7 +21,7 @@ local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 require("configuration")
-terminal = require("configuration.apps").default.terminal
+local terminal = require("configuration.apps").default.terminal
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
