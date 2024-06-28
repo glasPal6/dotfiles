@@ -91,10 +91,10 @@ awful.keyboard.append_global_keybindings({
 
     -- Volume control
     awful.key({}, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
+        awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
     end, { description = "increase volume", group = "hotkeys" }),
     awful.key({}, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
+        awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
     end, { description = "decrease volume", group = "hotkeys" }),
     awful.key({}, "XF86AudioMute", function()
         awful.util.spawn("amixer -D pulse set Master 1+ toggle", false)

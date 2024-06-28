@@ -1,149 +1,229 @@
-local themes_path = require("gears.filesystem").get_configuration_dir() .. "theme/"
-local dpi = require("beautiful.xresources").apply_dpi
+local gears                             = require("gears")
+local gfs                               = require("gears.filesystem")
+local themes_path                       = gfs.get_themes_dir()
+local theme                             = dofile(themes_path .. "default/theme.lua")
+local theme_assets                      = require("beautiful.theme_assets")
+local xresources                        = require("beautiful.xresources")
+local dpi                               = xresources.apply_dpi
+local helpers                           = require("helpers")
+local icons                             = require("icons")
 
--- {{{ Main
-local theme = {}
-theme.wallpaper = themes_path .."nord1.png"
--- }}}
+--- Ui Fonts
+theme.font_name                         = "MesloLGS NF "
+theme.font                              = theme.font_name .. "Medium 8"
 
--- {{{ Styles
-theme.font      = "MesloLGS NF 8"
+--- Icon Fonts
+theme.icon_font                         = "Material Icons "
 
--- {{{ Colors
-nord0 = "#2e3440"
-nord1 = "#3b4252"
-nord2 = "#434c5e"
-nord3 = "#4c566a"
-nord4 = "#d8dee9"
-nord5 = "#e5e9f0"
-nord6 = "#eceff4"
-nord7 = "#8fbcbb"
-nord8 = "#88c0d0"
-nord9 = "#81a1c1"
-nord10 = "#5E81AC"
-nord11 = "#bf616a"
-nord12 = "#d08770"
-nord13 = "#ebcb8b"
-nord14 = "#a3be8c"
-nord15 = "#b48ead"
+--- Special
+theme.nord0                             = "#2e3440"
+theme.nord1                             = "#3b4252"
+theme.nord2                             = "#434c5e"
+theme.nord3                             = "#4c566a"
+theme.nord4                             = "#d8dee9"
+theme.nord5                             = "#e5e9f0"
+theme.nord6                             = "#eceff4"
+theme.nord7                             = "#8fbcbb"
+theme.nord8                             = "#88c0d0"
+theme.nord9                             = "#81a1c1"
+theme.nord10                            = "#5E81AC"
+theme.nord11                            = "#bf616a"
+theme.nord12                            = "#d08770"
+theme.nord13                            = "#ebcb8b"
+theme.nord14                            = "#a3be8c"
+theme.nord15                            = "#b48ead"
 
-theme.fg_normal  = nord4
-theme.fg_focus   = nord5
-theme.fg_urgent  = nord6
-theme.bg_normal  = nord1
-theme.bg_focus   = nord2
-theme.bg_urgent  = nord3
-theme.bg_systray = theme.bg_normal
--- }}}
+theme.transparent                       = "#00000000"
 
--- {{{ Borders
--- theme.useless_gap   = dpi(0)
-theme.useless_gap   = dpi(3)
-theme.border_width  = dpi(2)
-theme.border_normal = nord7
-theme.border_focus  = nord8
-theme.border_marked = nord9
--- }}}
+--- Accent colors
+theme.accent                            = theme.nord4
 
--- {{{ Titlebars
-theme.titlebar_bg_focus  = nord2
-theme.titlebar_bg_normal = nord1
--- }}}
+--- Background Colors
+theme.bg_normal                         = theme.nord1
+theme.bg_focus                          = theme.nord2
+theme.bg_urgent                         = theme.nord3
+theme.bg_systray                        = theme.bg_normal
 
--- There are other variable sets
--- overriding the default one when
--- defined, the sets are:
--- [taglist|tasklist]_[bg|fg]_[focus|urgent|occupied|empty|volatile]
--- titlebar_[normal|focus]
--- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- Example:
---theme.taglist_bg_focus = "#CC9393"
--- }}}
+--- Foreground Colors
+theme.fg_normal                         = theme.nord4
+theme.fg_focus                          = theme.nord5
+theme.fg_urgent                         = theme.nord6
+theme.fg_minimize                       = theme.nord0
 
--- {{{ Widgets
--- You can add as many variables as
--- you wish and access them by using
--- beautiful.variable in your rc.lua
---theme.fg_widget        = "#AECF96"
---theme.fg_center_widget = "#88A175"
---theme.fg_end_widget    = "#FF5656"
---theme.bg_widget        = "#494B4F"
---theme.border_widget    = "#3F3F3F"
--- }}}
+--- UI events
+theme.leave_event                       = theme.transparent
+theme.enter_event                       = "#ffffff" .. "10"
+theme.press_event                       = "#ffffff" .. "15"
+theme.release_event                     = "#ffffff" .. "10"
 
--- {{{ Mouse finder
-theme.mouse_finder_color = nord10
--- mouse_finder_[timeout|animate_timeout|radius|factor]
--- }}}
+--- Widgets
+theme.widget_bg                         = theme.nord0
 
--- {{{ Menu
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
--- }}}
+--- Titlebars
+theme.titlebar_enabled                  = false
+theme.titlebar_bg                       = theme.nord2
+theme.titlebar_fg                       = theme.nord1
 
--- {{{ Icons
--- {{{ Taglist
-theme.taglist_squares_sel   = themes_path .. "taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "taglist/squarez.png"
---theme.taglist_squares_resize = "false"
--- }}}
+local icon_dir                          = gfs.get_configuration_dir() .. "/icons/titlebar/"
 
--- {{{ Misc
-theme.awesome_icon           = themes_path .. "awesome-icon.png"
-theme.menu_submenu_icon      = themes_path .. "default/submenu.png"
--- }}}
+-- Close Button
+theme.titlebar_close_button_normal      = icon_dir .. "normal.svg"
+theme.titlebar_close_button_focus       = icon_dir .. "close_focus.svg"
+theme.titlebar_close_button_normal_hove = icon_dir .. "close_focus_hover.svg"
+theme.titlebar_close_button_focus_hover = icon_dir .. "close_focus_hover.svg"
 
--- {{{ Layout
-theme.layout_tile       = themes_path .. "layouts/tile.png"
-theme.layout_tileleft   = themes_path .. "layouts/tileleft.png"
-theme.layout_tilebottom = themes_path .. "layouts/tilebottom.png"
-theme.layout_tiletop    = themes_path .. "layouts/tiletop.png"
-theme.layout_fairv      = themes_path .. "layouts/fairv.png"
-theme.layout_fairh      = themes_path .. "layouts/fairh.png"
-theme.layout_spiral     = themes_path .. "layouts/spiral.png"
-theme.layout_dwindle    = themes_path .. "layouts/dwindle.png"
-theme.layout_max        = themes_path .. "layouts/max.png"
-theme.layout_fullscreen = themes_path .. "layouts/fullscreen.png"
-theme.layout_magnifier  = themes_path .. "layouts/magnifier.png"
-theme.layout_floating   = themes_path .. "layouts/floating.png"
-theme.layout_cornernw   = themes_path .. "layouts/cornernw.png"
-theme.layout_cornerne   = themes_path .. "layouts/cornerne.png"
-theme.layout_cornersw   = themes_path .. "layouts/cornersw.png"
-theme.layout_cornerse   = themes_path .. "layouts/cornerse.png"
--- }}}
+-- Minimize Button
+theme.titlebar_minimize_button_normal   = icon_dir .. "normal.svg"
+theme.titlebar_minimize_button_focus    = icon_dir .. "minimize_focus.svg"
+theme.titlebar_minimize_button_normal_h = icon_dir .. "minimize_focus_hover.svg"
+theme.titlebar_minimize_button_focus_ho = icon_dir .. "minimize_focus_hover.svg"
 
--- {{{ Titlebar
-theme.titlebar_close_button_focus  = themes_path .. "titlebar/close_focus.png"
-theme.titlebar_close_button_normal = themes_path .. "titlebar/close_normal.png"
+-- Maximized Button (While Window is Ma
+theme.titlebar_maximized_button_normal_ = icon_dir .. "normal.svg"
+theme.titlebar_maximized_button_focus_a = icon_dir .. "maximized_focus.svg"
+theme.titlebar_maximized_button_normal_ = icon_dir .. "maximized_focus_hover.svg"
+theme.titlebar_maximized_button_focus_a = icon_dir .. "maximized_focus_hover.svg"
 
-theme.titlebar_minimize_button_normal = themes_path .. "default/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = themes_path .. "default/titlebar/minimize_focus.png"
+-- Maximized Button (While Window is no
+theme.titlebar_maximized_button_normal_ = icon_dir .. "normal.svg"
+theme.titlebar_maximized_button_focus_i = icon_dir .. "maximized_focus.svg"
+theme.titlebar_maximized_button_normal_ = icon_dir .. "maximized_focus_hover.svg"
+theme.titlebar_maximized_button_focus_i = icon_dir .. "maximized_focus_hover.svg"
 
-theme.titlebar_ontop_button_focus_active  = themes_path .. "titlebar/ontop_focus_active.png"
-theme.titlebar_ontop_button_normal_active = themes_path .. "titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_inactive  = themes_path .. "titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_inactive = themes_path .. "titlebar/ontop_normal_inactive.png"
+--- Wibar
+theme.wibar_bg                          = theme.nord0
+theme.wibar_height                      = dpi(25)
 
-theme.titlebar_sticky_button_focus_active  = themes_path .. "titlebar/sticky_focus_active.png"
-theme.titlebar_sticky_button_normal_active = themes_path .. "titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_inactive  = themes_path .. "titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_inactive = themes_path .. "titlebar/sticky_normal_inactive.png"
+--- Music
+theme.music_bg                          = theme.nord1
+theme.music_bg_accent                   = theme.nord0
+theme.music_accent                      = theme.nord3
 
-theme.titlebar_floating_button_focus_active  = themes_path .. "titlebar/floating_focus_active.png"
-theme.titlebar_floating_button_normal_active = themes_path .. "titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_inactive  = themes_path .. "titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_inactive = themes_path .. "titlebar/floating_normal_inactive.png"
+--- Wallpapers
+theme.wallpaper                         = gears.surface.load_uncached(gfs.get_configuration_dir() ..
+    "theme/assets/nord1.png")
+-- theme.wallpaper                         = gears.surface.load_uncached(gfs.get_configuration_dir() ..
+--     "theme/assets/nord2.jpg")
 
-theme.titlebar_maximized_button_focus_active  = themes_path .. "titlebar/maximized_focus_active.png"
-theme.titlebar_maximized_button_normal_active = themes_path .. "titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_inactive  = themes_path .. "titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_inactive = themes_path .. "titlebar/maximized_normal_inactive.png"
--- }}}
--- }}}
+--- Image Assets
+theme.pfp                               = gears.surface.load_uncached(gfs.get_configuration_dir() ..
+    "theme/assets/pfp.png")
+theme.music                             = gears.surface.load_uncached(gfs.get_configuration_dir() ..
+    "theme/assets/music.png")
+
+--- Layout
+--- You can use your own layout icons l
+theme.layout_floating                   = icons.floating
+theme.layout_max                        = icons.max
+theme.layout_tile                       = icons.tile
+theme.layout_dwindle                    = icons.dwindle
+theme.layout_centered                   = icons.centered
+theme.layout_mstab                      = icons.mstab
+theme.layout_equalarea                  = icons.equalarea
+theme.layout_machi                      = icons.machi
+
+--- Icon Theme
+theme.icon_theme                        = "WhiteSur-dark"
+
+--- Borders
+theme.border_width                      = dpi(2)
+theme.oof_border_width                  = 0
+theme.border_color_marked               = theme.nord7
+theme.border_color_active               = theme.nord7
+theme.border_color_normal               = theme.nord2
+theme.border_color_new                  = theme.nord2
+theme.border_color_urgent               = theme.nord8
+theme.border_color_floating             = theme.nord8
+theme.border_color_maximized            = theme.nord6
+theme.border_color_fullscreen           = theme.nord6
+
+--- Corner Radius
+theme.border_radius                     = 12
+
+--- Edge snap
+theme.snap_bg                           = theme.nord8
+theme.snap_shape                        = helpers.ui.rrect(0)
+
+--- Main Menu
+theme.main_menu_bg                      = theme.nord3
+
+--- Tooltip
+theme.tooltip_bg                        = theme.nord3
+theme.tooltip_fg                        = theme.nord6
+theme.tooltip_font                      = theme.font_name .. "Regular 10"
+
+--- Hotkeys Pop Up
+theme.hotkeys_bg                        = theme.nord1
+theme.hotkeys_fg                        = theme.nord6
+theme.hotkeys_modifiers_fg              = theme.nord6
+theme.hotkeys_font                      = theme.font_name .. "Medium 12"
+theme.hotkeys_description_font          = theme.font_name .. "Regular 10"
+theme.hotkeys_shape                     = helpers.ui.rrect(theme.border_radius)
+theme.hotkeys_group_margin              = dpi(50)
+
+--- Tag list
+local taglist_square_size               = dpi(0)
+theme.taglist_squares_sel               = theme_assets.taglist_squares_sel(taglist_square_size,
+    theme.fg_normal)
+theme.taglist_squares_unsel             = theme_assets.taglist_squares_unsel(taglist_square_size,
+    theme.fg_normal)
+
+--- Tag preview
+theme.tag_preview_widget_margin         = dpi(10)
+theme.tag_preview_widget_border_radius  = theme.border_radius
+theme.tag_preview_client_border_radius  = theme.border_radius / 2
+theme.tag_preview_client_opacity        = 1
+theme.tag_preview_client_bg             = theme.wibar_bg
+theme.tag_preview_client_border_color   = theme.wibar_bg
+theme.tag_preview_client_border_width   = 0
+theme.tag_preview_widget_bg             = theme.wibar_bg
+theme.tag_preview_widget_border_color   = theme.wibar_bg
+theme.tag_preview_widget_border_width   = 0
+
+--- Layout List
+theme.layoutlist_shape_selected         = helpers.ui.rrect(theme.border_radius)
+theme.layoutlist_bg_selected            = theme.widget_bg
+
+--- Gaps
+theme.useless_gap                       = dpi(2)
+
+--- Systray
+theme.systray_icon_size                 = dpi(20)
+theme.systray_icon_spacing              = dpi(10)
+theme.bg_systray                        = theme.wibar_bg
+--- theme.systray_max_rows = 2
+
+--- Tabs
+theme.mstab_bar_height                  = dpi(60)
+theme.mstab_bar_padding                 = dpi(0)
+theme.mstab_border_radius               = dpi(6)
+theme.mstab_bar_disable                 = true
+theme.tabbar_disable                    = true
+theme.tabbar_style                      = "modern"
+theme.tabbar_bg_focus                   = theme.nord1
+theme.tabbar_bg_normal                  = theme.nord0
+theme.tabbar_fg_focus                   = theme.nord0
+theme.tabbar_fg_normal                  = theme.nord15
+theme.tabbar_position                   = "bottom"
+theme.tabbar_AA_radius                  = 0
+theme.tabbar_size                       = 0
+theme.mstab_bar_ontop                   = true
+
+--- Notifications
+theme.notification_spacing              = dpi(4)
+theme.notification_bg                   = theme.nord1
+theme.notification_bg_alt               = theme.nord3
+
+--- Notif center
+theme.notif_center_notifs_bg            = theme.nord2
+theme.notif_center_notifs_bg_alt        = theme.nord3
+
+--- Swallowing
+theme.dont_swallow_classname_list       = {
+    "brave-browser",
+    "gimp",
+    "Google-chrome",
+    "Thunar",
+}
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

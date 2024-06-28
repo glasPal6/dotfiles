@@ -285,8 +285,8 @@ local function worker(user_args)
                                 end
 
                                 return text
-                                    :gsub('%s%-', '\n\t-')      -- put arguments on a new line
-                                    :gsub(':/', '\n\t\t:/')     -- java classpath uses : to separate jars
+                                    :gsub('%s%-', '\n\t-')  -- put arguments on a new line
+                                    :gsub(':/', '\n\t\t:/') -- java classpath uses : to separate jars
                             end,
                         }
 

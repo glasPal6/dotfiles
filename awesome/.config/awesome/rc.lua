@@ -6,6 +6,9 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
+-- Theme handling library
+local beautiful = require("beautiful")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 -- Widget and layout library
 local wibox = require("wibox")
 local battery_widget = require("ui.widgets.battery.battery")
@@ -13,8 +16,6 @@ local network_widget = require("ui.widgets.network.init")
 local cpu_widget = require("ui.widgets.cpu-widget.cpu-widget")
 local ram_widget = require("ui.widgets.ram-widget.ram-widget")
 local volume_widget = require("ui.widgets.volume-widget.volume")
--- Theme handling library
-local beautiful = require("beautiful")
 local menubar = require("menubar")
 -- Notification library
 local naughty = require("naughty")
@@ -27,7 +28,6 @@ require("awful.hotkeys_popup.keys")
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
-beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm start --always-new-process"
