@@ -6,32 +6,32 @@ local gears = require("gears")
 
 local internet = {}
 local function worker(args)
-  local args = args or {}
-  local widget = wibox.widget.background()
-  -- Icons made by http://www.flaticon.com/authors/maxim-basinski from www.flaticon.com 
-  local ICON_DIR      = require("gears.filesystem").get_configuration_dir() .. "widgets/network/icons/"
-  local yes_internet = wibox.widget {
+  local args          = args or {}
+  local widget        = wibox.widget.background()
+  -- Icons made by http://www.flaticon.com/authors/maxim-basinski from www.flaticon.com
+  local ICON_DIR      = require("gears.filesystem").get_configuration_dir() .. "ui/widgets/network/icons/"
+  local yes_internet  = wibox.widget {
     {
       widget = wibox.widget.imagebox,
-      image = ICON_DIR.."internet.png",
+      image = ICON_DIR .. "internet.png",
       resize = false,
     },
     layout = wibox.container.margin(brightness_icon, 0, 0, 2)
   }
-  local no_internet = wibox.widget {
+  local no_internet   = wibox.widget {
     {
       widget = wibox.widget.imagebox,
-      image = ICON_DIR.."internet_na.png",
+      image = ICON_DIR .. "internet_na.png",
       resize = false,
     },
     layout = wibox.container.margin(brightness_icon, 0, 0, 2)
   }
   -- Settings
-  local timeout = args.timeout or 5
-  local onclick = args.onclick
+  local timeout       = args.timeout or 5
+  local onclick       = args.onclick
   local showconnected = args.showconnected or false
 
-  local connected = false
+  local connected     = false
 
   widget:set_widget(no_internet)
   local function net_update()
@@ -48,7 +48,7 @@ local function worker(args)
             widget:set_widget(nil)
           end
         else
-            widget:set_widget(no_internet)
+          widget:set_widget(no_internet)
         end
       end)
 
@@ -62,12 +62,12 @@ local function worker(args)
   -- Bind onclick event function
   if onclick then
     widget:buttons(awful.util.table.join(
-        awful.button({}, 1, function() awful.util.spawn(onclick) end)
+      awful.button({}, 1, function() awful.util.spawn(onclick) end)
     ))
   end
 
   return widget
 end
-return setmetatable(internet, {__call = function(_,...) return worker(...) end})
+return setmetatable(internet, { __call = function(_, ...) return worker(...) end })
 
 -- vim: set ts=2 sw=2 sts=2:

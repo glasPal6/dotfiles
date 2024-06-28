@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local beautiful = require('beautiful')
 local gears = require("gears")
 
-local ICON_DIR = require("gears.filesystem").get_configuration_dir() .. "widgets/volume-widget/icons/"
+local ICON_DIR = require("gears.filesystem").get_configuration_dir() .. "ui/widgets/volume-widget/icons/"
 
 local widget = {}
 

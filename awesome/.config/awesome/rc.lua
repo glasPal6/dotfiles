@@ -8,11 +8,11 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local battery_widget = require("widgets.battery.battery")
-local network_widget = require("widgets.network.init")
-local cpu_widget = require("widgets.cpu-widget.cpu-widget")
-local ram_widget = require("widgets.ram-widget.ram-widget")
-local volume_widget = require("widgets.volume-widget.volume")
+local battery_widget = require("ui.widgets.battery.battery")
+local network_widget = require("ui.widgets.network.init")
+local cpu_widget = require("ui.widgets.cpu-widget.cpu-widget")
+local ram_widget = require("ui.widgets.ram-widget.ram-widget")
+local volume_widget = require("ui.widgets.volume-widget.volume")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -26,6 +26,23 @@ require("awful.hotkeys_popup.keys")
 
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
+
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
+
+-- This is used later as the default terminal and editor to run.
+terminal = "wezterm start --always-new-process"
+editor = os.getenv("EDITOR") or "editor"
+editor_cmd = terminal .. " -e " .. editor
+file_manager = "nautilus"
+app_launcher = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh launcher"
+powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powermenu"
+
+-- Default modkey.
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+-- If you do not like this or do not have such a key,
+-- I suggest you to remap Mod4 to another key using xmodmap or other tools.
+-- However, you can use another modifier like Mod1, but it may interact with others.
+modkey = "Mod4"
 
 require("configuration")
 
@@ -60,24 +77,6 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
-
--- This is used later as the default terminal and editor to run.
-terminal = "wezterm start --always-new-process"
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
-file_manager = "nautilus"
-app_launcher = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh launcher"
-powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powermenu"
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu

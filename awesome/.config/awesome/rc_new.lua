@@ -8,11 +8,11 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local battery_widget = require("widgets.battery.battery")
-local network_widget = require("widgets.network.init")
-local cpu_widget = require("widgets.cpu-widget.cpu-widget")
-local ram_widget = require("widgets.ram-widget.ram-widget")
-local volume_widget = require("widgets.volume-widget.volume")
+local battery_widget = require("ui.widgets.battery.battery")
+local network_widget = require("ui.widgets.network.init")
+local cpu_widget = require("ui.widgets.cpu-widget.cpu-widget")
+local ram_widget = require("ui.widgets.ram-widget.ram-widget")
+local volume_widget = require("ui.widgets.volume-widget.volume")
 -- Theme handling library
 local beautiful = require("beautiful")
 local menubar = require("menubar")
@@ -24,10 +24,10 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- local dpi = beautiful.xresources.apply_dpi
-
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
+
+require("configuration")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -63,6 +63,21 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
+
+-- This is used later as the default terminal and editor to run.
+terminal = "wezterm start --always-new-process"
+editor = os.getenv("EDITOR") or "editor"
+editor_cmd = terminal .. " -e " .. editor
+file_manager = "nautilus"
+app_launcher = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh launcher"
+powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powermenu"
+
+-- Default modkey.
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+-- If you do not like this or do not have such a key,
+-- I suggest you to remap Mod4 to another key using xmodmap or other tools.
+-- However, you can use another modifier like Mod1, but it may interact with others.
+modkey = "Mod4"
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -177,6 +192,9 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    -- Each screen has its own tag table.
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -251,7 +269,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 end)
 -- }}}
---
+
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
@@ -277,6 +295,3 @@ client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
 end)
 -- }}}
-
--- Autostart applications
-require("autostart")
