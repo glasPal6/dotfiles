@@ -1,0 +1,139 @@
+configuration {
+    font:           				"MesloLGS NF 8";
+    show-icons:                     true;
+	icon-theme: 					"WhiteSur-dark";
+    display-drun: 					"";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+	sidebar-mode: 					false;
+	click-to-exit: 					true;
+    location:                       6;
+}
+
+@import "styling.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @foreground;
+    border-radius:                  8px;
+    width:                          700px;
+    x-offset:                       0;
+    y-offset:                       -4.3%;
+}
+
+prompt {
+    enabled: 						true;
+	background-color: 				@background;
+	text-color: 					@foreground;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"";
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    padding:                        10px 0px 0px 12px;
+	font:                           "MesloLGS NF 8";
+}
+
+entry {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    font:                           "MesloLGS NF 8";
+    holder-color:                   @foreground;
+    expand:                         true;
+    horizontal-align:               0;
+    font:                           "MesloLGS NF 8";
+    holder:                         "Type here to search";
+    font:                           "MesloLGS NF 8";
+    blink:                          true;
+    padding:                        10px;
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, entry ];
+    spacing:                        0px;
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    expand:                         false;
+    border-radius:                  8px;
+    position:                       center;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
+}
+
+
+listview {
+    background-color:               #00000000;
+    columns:                        5;
+    lines:							5;
+    spacing:                        4px;
+    cycle:                          false;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ inputbar, listview ];
+    spacing:                       	40px;
+    padding:                        30px;
+}
+
+element {
+    background-color:               #00000000;
+    text-color:                     @foreground;
+    orientation:                    vertical;
+    border-radius:                  8px;
+    padding:                        20px;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           48px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @UGT;
+    text-color:                     @foreground;
+    border-radius:                  8px;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+}
+
+element selected {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    border-radius:                  8px;
+}
+
+element selected.urgent {
+    background-color:               @UGT;
+    text-color:                     @foreground;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground;
+}
