@@ -122,12 +122,9 @@ awful.keyboard.append_global_keybindings({
     end, { description = "lock screen", group = "hotkeys" }),
 
     -- Exit screen
-    -- awful.key({ mod }, "Escape", function()
-    --     awesome.emit_signal("module::exit_screen:show")
-    -- end, { description = "exit screen", group = "hotkeys" }),
     awful.key({ mod }, "Escape", function()
-        awful.spawn(powermenu)
-    end, { description = "show the powermenu", group = "awesome" }),
+        awesome.emit_signal("module::exit_screen:show")
+    end, { description = "exit screen", group = "hotkeys" }),
 })
 
 -- Client key bindings

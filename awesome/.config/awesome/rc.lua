@@ -45,6 +45,7 @@ powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powerm
 modkey = "Mod4"
 
 require("configuration")
+require("modules")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
