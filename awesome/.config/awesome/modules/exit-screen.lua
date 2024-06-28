@@ -4,8 +4,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
--- local lock_screen = require("modules.lockscreen")
--- lock_screen.init()
 
 --- Minimalist Exit Screen
 --- ~~~~~~~~~~~~~~~~~~~~~~
@@ -93,11 +91,11 @@ local create_button = function(symbol, hover_color, text, command)
 end
 
 --- Create the buttons
-local poweroff = create_button(poweroff_text_icon, beautiful.nord6, "Poweroff", poweroff_command)
-local reboot = create_button(reboot_text_icon, beautiful.nord6, "Reboot", reboot_command)
-local suspend = create_button(suspend_text_icon, beautiful.nord6, "Suspend", suspend_command)
-local exit = create_button(exit_text_icon, beautiful.nord6, "Exit", exit_command)
-local lock = create_button(lock_text_icon, beautiful.nord6, "Lock", lock_command)
+local poweroff = create_button(poweroff_text_icon, beautiful.nord11, "Poweroff", poweroff_command)
+local reboot = create_button(reboot_text_icon, beautiful.nord12, "Reboot", reboot_command)
+local suspend = create_button(suspend_text_icon, beautiful.nord13, "Suspend", suspend_command)
+local exit = create_button(exit_text_icon, beautiful.nord15, "Exit", exit_command)
+local lock = create_button(lock_text_icon, beautiful.nord14, "Lock", lock_command)
 
 local create_exit_screen = function(s)
     s.exit_screen = wibox({
