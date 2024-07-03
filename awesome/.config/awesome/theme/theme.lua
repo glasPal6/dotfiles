@@ -7,6 +7,22 @@ local xresources                        = require("beautiful.xresources")
 local dpi                               = xresources.apply_dpi
 local helpers                           = require("helpers")
 local icons                             = require("icons")
+local naughty                           = require("naughty")
+
+naughty.persistence_enabled             = true
+naughty.config.defaults.ontop           = true
+naughty.config.defaults.timeout         = 5
+naughty.config.defaults.title           = "System Notification"
+naughty.config.defaults.position        = "top_right"
+
+local notification_timeout              = 5
+naughty.config.presets.low.timeout      = notification_timeout
+naughty.config.presets.normal.timeout   = notification_timeout
+naughty.config.presets.ok.timeout       = notification_timeout
+naughty.config.presets.critical.timeout = notification_timeout
+naughty.config.presets.info.timeout     = notification_timeout
+naughty.config.presets.warn.timeout     = notification_timeout
+
 
 --- Ui Fonts
 theme.font_name                         = "MesloLGS NF "

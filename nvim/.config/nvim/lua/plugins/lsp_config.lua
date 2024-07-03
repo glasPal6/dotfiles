@@ -111,9 +111,11 @@ return {
                         group = "UserLspConfig",
                         buffer = ev.buf,
                         callback = function()
-                            vim.lsp.buf.format {
-                                async = false,
-                            }
+                            if vim.lsp.buf.format then
+                                vim.lsp.buf.format {
+                                    async = false,
+                                }
+                            end
                         end,
                     })
                 end,
