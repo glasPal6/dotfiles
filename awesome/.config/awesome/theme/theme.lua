@@ -9,7 +9,7 @@ local helpers                           = require("helpers")
 local icons                             = require("icons")
 local naughty                           = require("naughty")
 
-naughty.persistence_enabled             = true
+naughty.persistence_enabled             = false
 naughty.config.defaults.ontop           = true
 naughty.config.defaults.timeout         = 5
 naughty.config.defaults.title           = "System Notification"

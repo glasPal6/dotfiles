@@ -53,7 +53,7 @@ vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
 vim.keymap.set("n", "<C-Right>", "<C-w><Right>")
 vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
 
-vim.keymap.set("n", "<leader>sp", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>sf", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>sl", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
 vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")

@@ -47,8 +47,6 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-# zstyle ':fzf-tab:complete:cd:*' popup-min-size 150 12
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -al --git --color=always --group-directories-first $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --git --color=always --group-directories-first $realpath'
 
@@ -118,6 +116,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1
     --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
     --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+# This has control-r fuzzy finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export _ZO_EXCLUDE_DIRS="*src:*build"
