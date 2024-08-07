@@ -52,6 +52,10 @@ awful.keyboard.append_global_keybindings({
     -- Show help
     awful.key({ mod }, "F1", hotkeys_popup.show_help, { description = "show Help", group = "WM" }),
 
+    -- Prompt
+    awful.key({ mod }, "r", function() awful.screen.focused().mypromptbox:run() end,
+        { description = "run prompt", group = "launcher" }),
+
     -- Client
     -- Focus client by direction
     awful.key({ mod }, "Up", function()
@@ -68,16 +72,16 @@ awful.keyboard.append_global_keybindings({
     end, { description = "focus right", group = "client" }),
 
     -- Resize focused client
-    awful.key({ mod, ctrl }, "Up", function(c)
+    awful.key({ mod, alt }, "Up", function(c)
         helpers.client.resize_client(client.focus, "up")
     end, { description = "resize to the up", group = "client" }),
-    awful.key({ mod, ctrl }, "Down", function(c)
+    awful.key({ mod, alt }, "Down", function(c)
         helpers.client.resize_client(client.focus, "down")
     end, { description = "resize to the down", group = "client" }),
-    awful.key({ mod, ctrl }, "Left", function(c)
+    awful.key({ mod, alt }, "Left", function(c)
         helpers.client.resize_client(client.focus, "left")
     end, { description = "resize to the left", group = "client" }),
-    awful.key({ mod, ctrl }, "Right", function(c)
+    awful.key({ mod, alt }, "Right", function(c)
         helpers.client.resize_client(client.focus, "right")
     end, { description = "resize to the right", group = "client" }),
 
@@ -115,7 +119,6 @@ awful.keyboard.append_global_keybindings({
         awful.spawn.easy_async_with_shell(apps.utils.area_screenshot, function() end)
     end, { description = "take a area screenshot", group = "hotkeys" }),
 
-    -- TODO
     -- Lockscreen
     awful.key({ mod, alt }, "l", function()
         lock_screen_show()
@@ -137,16 +140,16 @@ client.connect_signal("request::default_keybindings", function()
         end, { description = "move to screen", group = "client" }),
 
         -- Move or swap by direction
-        awful.key({ mod, shift, ctrl }, "Up", function(c)
+        awful.key({ mod, ctrl }, "Up", function(c)
             helpers.client.move_client(c, "up")
         end),
-        awful.key({ mod, shift, ctrl }, "Down", function(c)
+        awful.key({ mod, ctrl }, "Down", function(c)
             helpers.client.move_client(c, "down")
         end),
-        awful.key({ mod, shift, ctrl }, "Left", function(c)
+        awful.key({ mod, ctrl }, "Left", function(c)
             helpers.client.move_client(c, "left")
         end),
-        awful.key({ mod, shift, ctrl }, "Right", function(c)
+        awful.key({ mod, ctrl }, "Right", function(c)
             helpers.client.move_client(c, "right")
         end),
 

@@ -11,7 +11,7 @@ awesome.connect_signal("signal::battery", function(percentage, state)
     local value = percentage
 
     --- only display message if its not charging and low
-    if value <= 15 and display_low and state == 2 then
+    if value <= 30 and display_low and state == 2 then
         naughty.notification({
             title = "Battery Status",
             text = "Running low at " .. math.floor(value) .. "%",
@@ -43,7 +43,7 @@ awesome.connect_signal("signal::battery", function(percentage, state)
         display_charge = false
     end
 
-    if value < 88 and value > 18 then
+    if value < 88 and value > 35 then
         display_low = true
         display_high = true
     end

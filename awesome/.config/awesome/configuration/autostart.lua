@@ -19,9 +19,8 @@ local function autostart_apps()
     helpers.run.check_if_running("brave-browser", nil, function()
         awful.spawn("brave-browser", false)
     end)
-    -- helpers.run.check_if_running("superproductivity", nil, function()
-    --     awful.spawn("superproductivity", false)
-    -- end)
+    -- awful.spawn("./Documents/Deb_Packages/clickup.AppImage", false)
+    -- awful.spawn("brave-browser --new-window www.clickup.com", false)
 
     --- Other stuff
     helpers.run.run_once_grep("blueman-applet")

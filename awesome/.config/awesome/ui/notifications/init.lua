@@ -45,7 +45,9 @@ end)
 
 naughty.connect_signal("request::display", function(n)
     local accent_colors = beautiful.accent
-
+    if n.timeout == nil or n.timeout == 0 then
+        n:set_timeout(2 * naughty.config.defaults.timeout)
+    end
     --- table of icons
     local app_icons = {
         ["firefox"] = { icon = "" },
@@ -85,7 +87,7 @@ naughty.connect_signal("request::display", function(n)
             {
                 {
                     image = n.icon,
-                    resize = false, -- This is the issue
+                    resize = false,
                     clip_shape = gears.shape.circle,
                     halign = "center",
                     valign = "center",
@@ -96,7 +98,7 @@ naughty.connect_signal("request::display", function(n)
                 shape = gears.shape.circle,
                 widget = wibox.container.background,
             },
-            strategy = "exact",
+            -- strategy = "exact",
             -- height = dpi(50),
             -- width = dpi(50),
             widget = wibox.container.constraint,
@@ -123,18 +125,18 @@ naughty.connect_signal("request::display", function(n)
         text = n.app_name:gsub("^%l", string.upper),
     })
 
-    -- -- local dismiss = widgets.button.text.normal({
-    -- --     font = beautiful.icon_font .. "Round ",
-    -- --     paddings = dpi(2),
-    -- --     size = 8,
-    -- --     bold = true,
-    -- --     text = "",
-    -- --     text_normal_bg = accent_colors,
-    -- --     animate_size = false,
-    -- --     on_release = function()
-    -- --     n:destroy(naughty.notification_closed_reason.dismissed_by_user)
-    -- --     end,
-    -- -- })
+    -- local dismiss = widgets.button.text.normal({
+    --     font = beautiful.icon_font .. "Round ",
+    --     paddings = dpi(2),
+    --     size = 8,
+    --     bold = true,
+    --     text = "",
+    --     text_normal_bg = accent_colors,
+    --     animate_size = false,
+    --     on_release = function()
+    --         n:destroy(naughty.notification_closed_reason.dismissed_by_user)
+    --     end,
+    -- })
 
     local timeout_arc = wibox.widget({
         widget = wibox.container.arcchart,

@@ -24,11 +24,12 @@ gitworktreeadd() {
     git worktree add $worktreeName
     cd $worktreeName
     hasRemote=$(cd .. && git ls-remote --heads origin refs/heads/$worktreeName)
+    echo "$hasRemote"
     if [ ! -z "$hasRemote" ]; then
         echo "-------------------------Fetching branch $worktreeName's upstream-------------------------"
         git branch --set-upstream-to=origin/$worktreeName
     fi
-    if [ -z "$hasRemote" ] && [ $upstream ]; then
+    if [ ! -z "$hasRemote" ] && [ $upstream ]; then
         echo "-------------------------Setting up upstream branch for $worktreeName-------------------------"
         git push --set-upstream origin $worktreeName
     fi

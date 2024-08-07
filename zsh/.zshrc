@@ -81,6 +81,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
 export ADB=/usr/bin/adb 

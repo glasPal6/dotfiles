@@ -56,6 +56,10 @@ return {
                 capabilities = capabilities,
                 filetypes = { "python" },
             })
+            -- lspconfig.ruff.setup({
+            --     capybilities = capabilities,
+            --     filetypes = { "python" },
+            -- })
             lspconfig.zls.setup({
                 capabilities = capabilities,
                 filetypes = { "zig" },
@@ -67,6 +71,10 @@ return {
             lspconfig.asm_lsp.setup({
                 capabilities = capabilities,
                 filetypes = { "asm" },
+            })
+            lspconfig.texlab.setup({
+                capabilities = capabilities,
+                filetypes = { "tex" },
             })
 
             vim.api.nvim_create_autocmd("LspAttach", {

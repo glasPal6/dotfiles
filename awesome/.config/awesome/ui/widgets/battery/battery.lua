@@ -30,8 +30,10 @@ end
 
 local function color_tags(color)
     if color
-        then return '<span color="' .. color .. '">', '</span>'
-        else return '', ''
+    then
+        return '<span color="' .. color .. '">', '</span>'
+    else
+        return '', ''
     end
 end
 
@@ -83,35 +85,35 @@ end
 local battery_widget = {}
 local sysfs_names = {
     charging = {
-        present   = "present",
-        state     = "status",
-        rate      = "current_now",
-        charge    = "charge_now",
-        capacity  = "charge_full",
-        design    = "charge_full_design",
-        percent   = "capacity",
+        present  = "present",
+        state    = "status",
+        rate     = "current_now",
+        charge   = "charge_now",
+        capacity = "charge_full",
+        design   = "charge_full_design",
+        percent  = "capacity",
     },
     discharging = {
-        present   = "present",
-        state     = "status",
-        rate      = "power_now",
-        charge    = "energy_now",
-        capacity  = "energy_full",
-        design    = "energy_full_design",
-        percent   = "capacity"
+        present  = "present",
+        state    = "status",
+        rate     = "power_now",
+        charge   = "energy_now",
+        capacity = "energy_full",
+        design   = "energy_full_design",
+        percent  = "capacity"
     },
 }
 
 function battery_widget:new(args)
     if args.adapter then
-        return setmetatable({}, {__index = self}):init(args)
+        return setmetatable({}, { __index = self }):init(args)
     end
     -- creates an empty container wibox, which can be added to your panel even if its empty
     local widgets = { layout = wibox.layout.fixed.horizontal }
     local batteries, mains, usb, ups = self:discover()
     local ac = mains[1] or usb[1] or ups[1]
     for i, adapter in ipairs(batteries) do
-        local _args = setmetatable({adapter = adapter, ac = ac}, {__index = args})
+        local _args = setmetatable({ adapter = adapter, ac = ac }, { __index = args })
         table.insert(widgets, self(_args).widget)
     end
     return widgets
@@ -133,9 +135,9 @@ function battery_widget:init(args)
     self.ac_prefix = args.ac_prefix or "AC: "
     self.battery_prefix = args.battery_prefix or "Bat: "
     self.percent_colors = args.percent_colors or args.limits or {
-        { 30, nord11 },
-        { 50, nord13 },
-        {999, nord14 },
+        { 30,  nord11 },
+        { 50,  nord13 },
+        { 999, nord14 },
     }
 
     self.widget_text = args.widget_text or (
@@ -143,7 +145,7 @@ function battery_widget:init(args)
     self.tooltip_text = args.tooltip_text or (
         "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%")
 
-    self.alert_threshold = args.alert_threshold or 5
+    self.alert_threshold = args.alert_threshold or 30
     self.alert_timeout = args.alert_timeout or 0
     self.alert_title = args.alert_title or "Low battery !"
     self.alert_text = args.alert_text or "${AC_BAT}${time_est}"
@@ -151,14 +153,14 @@ function battery_widget:init(args)
 
     self.widget = wibox.widget.textbox()
     self.widget.font = args.widget_font
-    self.tooltip = awful.tooltip({objects={self.widget}})
+    self.tooltip = awful.tooltip({ objects = { self.widget } })
 
     self.warn_full_battery = args.warn_full_battery
     self.full_battery_icon = args.full_battery_icon or nil
 
     self.widget:buttons(awful.util.table.join(
-        awful.button({ }, 1, function() self:update() end),
-        awful.button({ }, 3, function() self:update() end)
+        awful.button({}, 1, function() self:update() end),
+        awful.button({}, 3, function() self:update() end)
     ))
 
     self.timer = timer({ timeout = args.timeout or 10 })
@@ -182,25 +184,25 @@ function battery_widget:get_state()
     local pow   = "/sys/class/power_supply/"
     local ac    = pow .. self.ac
     local bat   = pow .. self.adapter
-    local sysfs = (file_exists(bat.."/"..sysfs_names.charging.rate)
-                   and sysfs_names.charging
-                   or sysfs_names.discharging)
+    local sysfs = (file_exists(bat .. "/" .. sysfs_names.charging.rate)
+        and sysfs_names.charging
+        or sysfs_names.discharging)
 
     -- If there is no battery on this machine.
     if not sysfs.state then return nil end
 
     -- return value
     local r = {
-        state     = tolower (read_trim(bat.."/"..sysfs.state)),
-        present   = tonumber(read_trim(bat.."/"..sysfs.present)),
-        rate      = tonumber(read_trim(bat.."/"..sysfs.rate)),
-        charge    = tonumber(read_trim(bat.."/"..sysfs.charge)),
-        capacity  = tonumber(read_trim(bat.."/"..sysfs.capacity)),
-        design    = tonumber(read_trim(bat.."/"..sysfs.design)),
-        percent   = tonumber(read_trim(bat.."/"..sysfs.percent)),
+        state    = tolower(read_trim(bat .. "/" .. sysfs.state)),
+        present  = tonumber(read_trim(bat .. "/" .. sysfs.present)),
+        rate     = tonumber(read_trim(bat .. "/" .. sysfs.rate)),
+        charge   = tonumber(read_trim(bat .. "/" .. sysfs.charge)),
+        capacity = tonumber(read_trim(bat .. "/" .. sysfs.capacity)),
+        design   = tonumber(read_trim(bat .. "/" .. sysfs.design)),
+        percent  = tonumber(read_trim(bat .. "/" .. sysfs.percent)),
     }
 
-    r.ac_state = tonumber(read_trim(ac.."/online"))
+    r.ac_state = tonumber(read_trim(ac .. "/online"))
 
     if r.state == "unknown" then
         r.state = "charged"
@@ -220,20 +222,20 @@ function battery_widget:update()
     if not ctx then return nil end
 
     -- AC/battery prefix
-    ctx.AC_BAT  = (ctx.ac_state == 1
-                   and lookup_by_limits(self.ac_prefix, ctx.percent)
-                   or lookup_by_limits(self.battery_prefix, ctx.percent)
-                   or "Err!")
+    ctx.AC_BAT                  = (ctx.ac_state == 1
+        and lookup_by_limits(self.ac_prefix, ctx.percent)
+        or lookup_by_limits(self.battery_prefix, ctx.percent)
+        or "Err!")
 
     -- Colors
     ctx.color_on, ctx.color_off = color_tags(
         lookup_by_limits(self.percent_colors, ctx.percent))
 
     -- estimate time
-    ctx.charge_dir = 0    -- +1|0|-1 -> charging|static|discharging
-    ctx.time_left  = nil  -- time until charging/discharging complete
-    ctx.time_text  = ""
-    ctx.time_est   = ""
+    ctx.charge_dir              = 0   -- +1|0|-1 -> charging|static|discharging
+    ctx.time_left               = nil -- time until charging/discharging complete
+    ctx.time_text               = ""
+    ctx.time_est                = ""
 
     if ctx.rate and ctx.rate ~= 0 then
         if not ctx.state or ctx.state == "discharging" then
@@ -249,15 +251,17 @@ function battery_widget:update()
         ctx.hours   = math.floor((ctx.time_left))
         ctx.minutes = math.floor((ctx.time_left - ctx.hours) * 60)
         if ctx.hours > 0
-            then ctx.time_text = ctx.hours .. "h " .. ctx.minutes .. "m"
-            else ctx.time_text =                      ctx.minutes .. "m"
+        then
+            ctx.time_text = ctx.hours .. "h " .. ctx.minutes .. "m"
+        else
+            ctx.time_text = ctx.minutes .. "m"
         end
         ctx.time_est = ": " .. ctx.time_text .. " remaining"
     end
 
     -- capacity text
     if ctx.capacity and ctx.design then
-        ctx.capacity_percent = round(ctx.capacity/ctx.design*100)
+        ctx.capacity_percent = round(ctx.capacity / ctx.design * 100)
     end
 
     -- for use in functions
@@ -272,8 +276,8 @@ function battery_widget:update()
         if (ctx.state == "discharging" and
                 ctx.percent and ctx.percent <= self.alert_threshold) then
             self:notify(substitute(self.alert_title, ctx),
-                        substitute(self.alert_text, ctx),
-                        self.alert_icon)
+                substitute(self.alert_text, ctx),
+                self.alert_icon)
         elseif ctx.state == "full" and self.warn_full_battery then
             self:notify('Battery Full!', 'Remove power cord', self.full_battery_icon)
         else
