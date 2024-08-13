@@ -37,63 +37,56 @@ file_manager = "nautilus"
 app_launcher = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh launcher"
 powermenu = gears.filesystem.get_configuration_dir() .. "rofi_launcher.sh powermenu"
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
-
 require("configuration")
 require("modules")
 require("ui")
 
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-    {
-        "hotkeys",
-        function()
-            hotkeys_popup.show_help(nil, awful.screen.focused())
-        end,
-    },
-    { "manual",      terminal .. " -e man awesome" },
-    { "edit config", editor_cmd .. " " .. awesome.conffile },
-    { "restart",     awesome.restart },
-    {
-        "quit",
-        function()
-            awesome.quit()
-        end,
-    },
-}
-
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
-
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = { menu_awesome },
-        after = { menu_terminal },
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-            menu_awesome,
-            { "Debian", debian.menu.Debian_menu.Debian },
-            menu_terminal,
-        },
-    })
-end
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- -- {{{ Menu
+-- -- Create a launcher widget and a main menu
+-- myawesomemenu = {
+--     {
+--         "hotkeys",
+--         function()
+--             hotkeys_popup.show_help(nil, awful.screen.focused())
+--         end,
+--     },
+--     { "manual",      terminal .. " -e man awesome" },
+--     { "edit config", editor_cmd .. " " .. awesome.conffile },
+--     { "restart",     awesome.restart },
+--     {
+--         "quit",
+--         function()
+--             awesome.quit()
+--         end,
+--     },
+-- }
+--
+-- local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
+-- local menu_terminal = { "open terminal", terminal }
+--
+-- if has_fdo then
+--     mymainmenu = freedesktop.menu.build({
+--         before = { menu_awesome },
+--         after = { menu_terminal },
+--     })
+-- else
+--     mymainmenu = awful.menu({
+--         items = {
+--             menu_awesome,
+--             { "Debian", debian.menu.Debian_menu.Debian },
+--             menu_terminal,
+--         },
+--     })
+-- end
+--
+-- mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+--
+-- -- Menubar configuration
+-- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- -- }}}
+--
+-- -- Keyboard map indicator and switcher
+-- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget

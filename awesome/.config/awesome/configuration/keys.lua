@@ -275,6 +275,36 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     }),
+    awful.key({ mod, shift }, "Page_Up",
+        function()
+            local screen = awful.screen.focused()
+            local tag = screen.selected_tag
+            if tag then
+                local idx = tag.index - 1
+                if idx > #screen.tags then idx = 1 end
+                if idx < 1 then idx = #screen.tags end
+                if client.focus then
+                    client.focus:move_to_tag(screen.tags[idx])
+                    screen.tags[idx]:view_only()
+                end
+            end
+        end, { description = "move focused client to previous tag", group = "tag" }
+    ),
+    awful.key({ mod, shift }, "Page_Down",
+        function()
+            local screen = awful.screen.focused()
+            local tag = screen.selected_tag
+            if tag then
+                local idx = tag.index + 1
+                if idx > #screen.tags then idx = 1 end
+                if idx < 1 then idx = #screen.tags end
+                if client.focus then
+                    client.focus:move_to_tag(screen.tags[idx])
+                    screen.tags[idx]:view_only()
+                end
+            end
+        end, { description = "move focused client to next tag", group = "tag" }
+    ),
 })
 
 -- Screen
