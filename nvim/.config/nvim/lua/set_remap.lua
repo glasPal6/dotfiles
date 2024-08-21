@@ -26,11 +26,19 @@ vim.opt.isfname:append("@-@")
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = false
 -- vim.opt.foldnestmax = 1
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    callback = function()
+        if require("nvim-treesitter.parsers").has_parser() then
+            vim.opt.foldmethod = "expr"
+            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        else
+            vim.opt.foldmethod = "indent"
+        end
+    end,
+})
 
 ---------------------------------------------------------------
 
