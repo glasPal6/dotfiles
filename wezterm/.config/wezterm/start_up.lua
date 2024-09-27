@@ -25,6 +25,12 @@ return function(wezterm)
         -- local tab, window = build_pane:move_to_new_tab()
 
         local tab, build_pane, window = wezterm.mux.spawn_window({
+            workspace = "Business",
+            cwd = wezterm.home_dir .. "/Documents/Business",
+            args = args,
+        })
+
+        local tab, build_pane, window = wezterm.mux.spawn_window({
             workspace = "University",
             cwd = wezterm.home_dir .. "/Documents/University",
             args = args,

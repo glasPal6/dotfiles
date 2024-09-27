@@ -76,6 +76,30 @@ return {
                 capabilities = capabilities,
                 filetypes = { "tex" },
             })
+            lspconfig.svelte.setup({
+                capabilities = capabilities,
+                filetypes = { "svelte" },
+            })
+            lspconfig.htmx.setup({
+                capabilities = capabilities,
+                filetypes = { "html" },
+            })
+            lspconfig.biome.setup({
+                capabilities = capabilities,
+                filetypes = { "js" },
+            })
+            lspconfig.cssls.setup({
+                capabilities = capabilities,
+                filetypes = { "css" },
+            })
+            lspconfig.templ.setup({
+                capabilities = capabilities,
+                filetypes = { "templ" },
+            })
+            lspconfig.gopls.setup({
+                capabilities = capabilities,
+                filetypes = { "go" },
+            })
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),

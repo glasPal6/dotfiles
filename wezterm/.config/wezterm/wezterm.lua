@@ -18,6 +18,11 @@ config.unix_domains = {
         -- connect_automatically = true,
         -- local_echo_threshold_ms = 50000,
     },
+    {
+        name = "Business",
+        -- connect_automatically = true,
+        -- local_echo_threshold_ms = 50000,
+    },
 }
 -- config.default_gui_startup_args = { "connect", "Base_domain", }
 config.default_workspace = "Base"

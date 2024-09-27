@@ -29,6 +29,7 @@ zinit cdreplay -q
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+bindkey '^H' backward-kill-word
 
 # History
 HISTSIZE=5000
@@ -52,9 +53,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --git --color=alway
 
 # Aliases
 alias ls="eza"
-alias ls='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first'
-alias ll='eza -al --git --color=always --group-directories-first'
-alias tree='eza --git --color=always --tree --group-directories-first'
+alias ls='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first -s Name'
+alias ll='eza -al --git --color=always --group-directories-first -s Name'
+alias tree='eza --git --color=always --tree --group-directories-first -s Name'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -96,6 +97,11 @@ export MODULAR_HOME="/home/dylan/.modular"
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
 export MODULAR_HOME="/home/dylan/.modular"
 export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$(go env GOPATH)/bin:$PATH
 
 export MMWAVE_SDK_TOOLS_INSTALL_PATH=/home/dylan/Documents/University/Masters_things/Radar_Dev/TI_Programs/mmWaveSDK/mmWaveSDK_Install_2
 export MMWAVE_SDK_DEVICE=iwr14xx
