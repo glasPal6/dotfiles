@@ -13,11 +13,4 @@ return {
             vim.keymap.set("i", "<A-r>", function() neocodeium.cycle_or_complete(-1) end)
         end,
     }
-    -- {
-    -- 	"github/copilot.vim",
-    -- 	config = function()
-    --         vim.g.copilot_enabled = false
-    -- 		vim.keymap.set("n", "<leader>cp", vim.cmd.Copilot, { silent = true })
-    -- 	end,
-    -- },
 }
