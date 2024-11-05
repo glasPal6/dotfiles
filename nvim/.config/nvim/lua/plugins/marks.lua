@@ -14,10 +14,6 @@ return {
             })
             vim.keymap.set("n", "<leader>bm", vim.cmd.MarksQFListAll)
             vim.keymap.set("n", "<leader>bb", vim.cmd.BookmarksQFListAll)
-
-            -- for i = 0, 9 do
-            -- 	vim.keymap.set("n", "<leader>b" .. tostring(i), ":BookmarksList " .. tostring(i) .. "<CR>")
-            -- end
         end,
     },
     {
