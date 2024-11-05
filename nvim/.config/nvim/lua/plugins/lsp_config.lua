@@ -9,25 +9,13 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    -- Lua
-                    -- "lua_ls",
-                    -- "stylua",
-
-                    -- C/Cpp
-                    -- "clangd",
-                    -- "cmake",
-
-                    -- Python
-                    -- "pyright",
-                    -- "black",
-                    -- "isort",
-                    -- "debugpy",
-
-                    -- Zig
-                    -- "zls",
-                },
             })
+            -- Option for default LSP handling
+            -- require("mason-lspconfig").setup_handlers {
+            --     function(server_name)
+            --         require("lspconfig")[server_name].setup {}
+            --     end,
+            -- }
         end,
     },
     {
@@ -38,8 +26,8 @@ return {
 
             -- LSP setup
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
             local lspconfig = require("lspconfig")
+
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
                 filetypes = { "lua" },
@@ -56,10 +44,6 @@ return {
                 capabilities = capabilities,
                 filetypes = { "python" },
             })
-            -- lspconfig.ruff.setup({
-            --     capybilities = capabilities,
-            --     filetypes = { "python" },
-            -- })
             lspconfig.zls.setup({
                 capabilities = capabilities,
                 filetypes = { "zig" },
@@ -82,7 +66,7 @@ return {
             })
             lspconfig.htmx.setup({
                 capabilities = capabilities,
-                filetypes = { "html" },
+                filetypes = { "html", "markdown" },
             })
             lspconfig.biome.setup({
                 capabilities = capabilities,
