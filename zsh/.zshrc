@@ -86,17 +86,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
 export ADB=/usr/bin/adb 
-export MODULAR_HOME="/home/dylan/.modular"
-export MOJO_PYTHON_LIBRARY=$(modular config mojo.python_lib)
-export PATH="/home/dylan/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/opt/aseprite:$PATH"
 
-export MODULAR_HOME="/home/dylan/.modular"
-export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
-export MODULAR_HOME="/home/dylan/.modular"
-export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
-export MODULAR_HOME="/home/dylan/.modular"
-export PATH="/home/dylan/.modular/pkg/packages.modular.com_max/bin:$PATH"
+export PATH="$PATH:/home/dylan/.modular/bin"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin

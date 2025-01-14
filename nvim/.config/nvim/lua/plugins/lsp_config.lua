@@ -66,7 +66,11 @@ return {
             })
             lspconfig.htmx.setup({
                 capabilities = capabilities,
-                filetypes = { "html", "markdown" },
+                filetypes = { "html" },
+            })
+            lspconfig.marksman.setup({
+                capabilities = capabilities,
+                filetypes = { "markdown" },
             })
             lspconfig.biome.setup({
                 capabilities = capabilities,

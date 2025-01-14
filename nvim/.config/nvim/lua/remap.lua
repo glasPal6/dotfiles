@@ -10,16 +10,16 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set("n", "<leader>nv", ":vsplit<CR>")
-vim.keymap.set("n", "<leader>ns", ":split<CR>")
+-- vim.keymap.set("n", "<leader>nv", ":vsplit<CR>")
+-- vim.keymap.set("n", "<leader>ns", ":split<CR>")
+
+-- vim.keymap.set("n", "<leader>sf", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>sl", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<C-Up>", "<C-w><Up>")
 vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
 vim.keymap.set("n", "<C-Right>", "<C-w><Right>")
 vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
-
-vim.keymap.set("n", "<leader>sf", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>sl", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
 vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
@@ -37,4 +37,4 @@ vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 
 -- vim.keymap.set("n", "<leader>hd", ":%!xxd<CR>")
-vim.keymap.set("n", "<leader>hd", ":%!hexdump -C<CR>")
+-- vim.keymap.set("n", "<leader>hd", ":%!hexdump -C<CR>")
