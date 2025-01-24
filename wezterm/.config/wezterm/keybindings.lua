@@ -95,17 +95,22 @@ local configKeys = {
     {
         mods = "LEADER",
         key = "m",
-        action = wezterm.action.SpawnCommandInNewTab{ args = { 'btop' }},
+        action = wezterm.action.SpawnCommandInNewTab { args = { 'btop' } },
+    },
+    {
+        mods = "LEADER",
+        key = "D",
+        action = wezterm.action.SpawnCommandInNewTab { args = { 'ncdu' } },
     },
     {
         mods = "LEADER",
         key = "g",
-        action = wezterm.action.SpawnCommandInNewTab{ args = { 'lazygit' }},
+        action = wezterm.action.SpawnCommandInNewTab { args = { 'lazygit' } },
     },
     {
         mods = "LEADER",
         key = "c",
-        action = wezterm.action.SpawnCommandInNewTab{ args = { 'lazydocker' }},
+        action = wezterm.action.SpawnCommandInNewTab { args = { 'lazydocker' } },
     },
 
     -- Workspace navigator

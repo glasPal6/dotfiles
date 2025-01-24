@@ -52,6 +52,7 @@ naughty.connect_signal("request::display", function(n)
     local app_icons = {
         ["firefox"] = { icon = "" },
         ["brave"] = { icon = "" },
+        ["zen"] = { icon = "" },
         ["discord"] = { icon = "" },
         ["music"] = { icon = "" },
         ["screenshot tool"] = { icon = "" },

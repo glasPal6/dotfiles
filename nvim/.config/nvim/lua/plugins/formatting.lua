@@ -25,8 +25,11 @@ return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
-            file_types = { "markdown" },
+            file_types = { "markdown", "latex" },
+            indent = {
+                enabled = true,
+            },
         },
-        ft = { "markdown" },
+        ft = { "markdown", "latex" },
     },
 }

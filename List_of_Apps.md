@@ -1,11 +1,4 @@
-# Dotfiles
-
-Uses *stow* as the symbolic link manager.
-Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
-
-# List of Apps
-
-## Basics
+# Basics
 - Terminal: wezterm, look at ghostty
 - Editor: neovim
 - Bash: zsh
@@ -30,7 +23,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - FPGA: Quartus, ModelSim
 - Virtual Machines: Virtual Machine Manager
 
-## Other
+# Other
 - Disk space: ncdu
 - Terminal prompt: starship
 - Git: lazygit

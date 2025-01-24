@@ -236,7 +236,6 @@ theme.notif_center_notifs_bg_alt        = theme.nord3
 
 --- Swallowing
 theme.dont_swallow_classname_list       = {
-    "brave-browser",
     "gimp",
     "Google-chrome",
     "Thunar",

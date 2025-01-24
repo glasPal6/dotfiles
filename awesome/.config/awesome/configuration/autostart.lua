@@ -2,6 +2,7 @@ local awful = require("awful")
 local filesystem = require("gears.filesystem")
 local config_dir = filesystem.get_configuration_dir()
 local helpers = require("helpers")
+local apps = require("configuration.apps")
 
 local function autostart_apps()
     -- Monitors
@@ -16,11 +17,10 @@ local function autostart_apps()
     -- end)
 
     -- Apps
-    helpers.run.check_if_running("brave-browser", nil, function()
-        awful.spawn("brave-browser", false)
+    helpers.run.check_if_running("zen", nil, function()
+        awful.spawn("zen", false)
     end)
     -- awful.spawn("./Documents/Deb_Packages/clickup.AppImage", false)
-    -- awful.spawn("brave-browser --new-window www.clickup.com", false)
 
     --- Other stuff
     helpers.run.run_once_grep("blueman-applet")

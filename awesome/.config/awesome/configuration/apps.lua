@@ -12,7 +12,7 @@ return {
         --- Default text editor
         text_editor = "wezterm start nvim",
         --- Default web browser
-        web_browser = "brave-browser",
+        web_browser = "zen",
         --- Default file manager
         file_manager = "nautilus",
         --- Default network manager
