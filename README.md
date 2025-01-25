@@ -10,7 +10,9 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Editor: neovim
 - Bash: zsh
 - Performance: auto-cpufreq and btop
-- GUI
+- Background tasks: tmux
+
+### GUI
 	- Window manager: awesomeWM
 	- Bar: polybar but look to switching to eww
 	- Menu: rofi
@@ -21,6 +23,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Messaging apps: Discord
 - PDF viewer: Okular with jabref
 
+## Fun stuff
 - Game Engine: Godot, raylib, sdl2
 - Pixel art: Aseprite
 - Music: ?
@@ -34,6 +37,10 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Disk space: ncdu
 - Terminal prompt: starship
 - Git: lazygit
-- Docker: lazydocker
+- Containers: lazydocker - look at podman alternative
 - Fuzzy finder: fzf
+### Terminal help:
+- zoxide
+- eza
+- fd
 

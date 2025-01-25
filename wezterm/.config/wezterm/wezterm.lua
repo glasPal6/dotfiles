@@ -11,17 +11,17 @@ config.unix_domains = {
     {
         name = "Projects",
         -- connect_automatically = true,
-        -- local_echo_threshold_ms = 50000,
+        local_echo_threshold_ms = 50000,
     },
     {
         name = "Univeristy",
         -- connect_automatically = true,
-        -- local_echo_threshold_ms = 50000,
+        local_echo_threshold_ms = 50000,
     },
     {
         name = "Business",
         -- connect_automatically = true,
-        -- local_echo_threshold_ms = 50000,
+        local_echo_threshold_ms = 50000,
     },
 }
 -- config.default_gui_startup_args = { "connect", "Base_domain", }
@@ -43,10 +43,9 @@ config.leader = {
 
 config.keys = require("keybindings")
 
-local smart_splits = require("smart_splits")
+local smart_splits = require("plugins.smart_splits")
 for _, v in ipairs(smart_splits.keys) do
     table.insert(config.keys, v)
 end
-
 
 return config

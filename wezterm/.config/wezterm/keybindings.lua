@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local sessionizer = require("plugins.sessionizer")
 
 local configKeys = {
     -- Terminal
@@ -11,6 +12,11 @@ local configKeys = {
         mods = "LEADER|CTRL",
         key = "Q",
         action = wezterm.action.QuitApplication,
+    },
+    {
+        mods = "LEADER",
+        key = "f",
+        action = wezterm.action_callback(sessionizer.open),
     },
 
     -- splitting
@@ -41,7 +47,7 @@ local configKeys = {
     -- show the pane selection mode, but have it swap the active and selected panes
     {
         mods = "LEADER",
-        key = "0",
+        key = "S",
         action = wezterm.action.PaneSelect({
             mode = "SwapWithActive",
         }),
@@ -57,12 +63,12 @@ local configKeys = {
     -- Tab navigator
     {
         mods = "LEADER",
-        key = "t",
+        key = "T",
         action = wezterm.action.ShowTabNavigator,
     },
     {
         mods = "LEADER",
-        key = "T",
+        key = "t",
         action = wezterm.action.SpawnTab("CurrentPaneDomain"),
     },
     {
@@ -92,6 +98,7 @@ local configKeys = {
         action = wezterm.action.ActivateTabRelative(-1),
     },
 
+    -- Terminal apps
     {
         mods = "LEADER",
         key = "m",
@@ -118,27 +125,6 @@ local configKeys = {
         mods = "LEADER",
         key = "w",
         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
-    },
-    {
-        mods = "LEADER",
-        key = "W",
-        action = wezterm.action.PromptInputLine({
-            description = wezterm.format({
-                { Attribute = { Intensity = "Bold" } },
-                { Foreground = { AnsiColor = "Fuchsia" } },
-                { Text = "Enter name for new workspace" },
-            }),
-            action = wezterm.action_callback(function(window, pane, line)
-                if line then
-                    window:perform_action(
-                        wezterm.action.SwitchToWorkspace({
-                            name = line,
-                        }),
-                        pane
-                    )
-                end
-            end),
-        }),
     },
 
     -- Domain navigator
