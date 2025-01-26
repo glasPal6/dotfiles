@@ -3,7 +3,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local Sessionizer = {}
+local config = {}
 
 local fd = "/home/dylan/.local/bin/fd"
 local work = "/home/dylan/Documents/University/"
@@ -11,7 +11,16 @@ local personal = "/home/dylan/Documents/Personal_Projects/"
 local business = "/home/dylan/Documents/Business/"
 local libraries = "/home/dylan/Documents/Libraries/"
 
-Sessionizer.open = function(window, pane)
+local function get_current_mux_window(workspace)
+    for _, mux_win in ipairs(wezterm.mux.all_windows()) do
+        if mux_win:get_workspace() == workspace then
+            return mux_win
+        end
+    end
+    error("Could not find a workspace with the name: " .. workspace)
+end
+
+config.open = function(window, pane)
     local projects = {}
     local home = os.getenv("HOME") .. "/"
 
@@ -50,13 +59,26 @@ Sessionizer.open = function(window, pane)
 
     -- update previous_workspace before changing to new workspace.
     wezterm.GLOBAL.previous_workspace = window:active_workspace()
+    local workspaces = wezterm.mux.get_workspace_names()
+
     window:perform_action(
         act.InputSelector({
             action = wezterm.action_callback(function(win, _, id, label)
+                wezterm.emit("sessionizer.open.selected", win, id, label)
+
+                -- check if workspace is already open
+                local workspace_open = false
+                for _, v in ipairs(workspaces) do
+                    if v == id then
+                        workspace_open = true
+                    end
+                end
+
                 if not id and not label then
                     wezterm.log_info("Cancelled")
                 else
-                    wezterm.log_info("Selected " .. label)
+                    -- switch to workspace
+                    wezterm.log_info("Selected " .. id)
                     win:perform_action(
                         act.SwitchToWorkspace({
                             name = id,
@@ -64,6 +86,16 @@ Sessionizer.open = function(window, pane)
                         }),
                         pane
                     )
+
+                    -- if workspace is not open, load save
+                    if not workspace_open then
+                        wezterm.log_info("Loading save for " .. id)
+                        wezterm.emit(
+                            "sessionizer.open.created",
+                            get_current_mux_window(id),
+                            id
+                        )
+                    end
                 end
             end),
             fuzzy = true,
@@ -74,4 +106,12 @@ Sessionizer.open = function(window, pane)
     )
 end
 
-return Sessionizer
+config.keys = {
+    {
+        mods = "LEADER",
+        key = "f",
+        action = wezterm.action_callback(config.open),
+    },
+}
+
+return config

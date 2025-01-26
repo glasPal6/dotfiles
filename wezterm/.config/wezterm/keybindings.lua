@@ -106,7 +106,7 @@ local configKeys = {
     },
     {
         mods = "LEADER",
-        key = "D",
+        key = "P",
         action = wezterm.action.SpawnCommandInNewTab { args = { 'ncdu' } },
     },
     {
@@ -138,7 +138,6 @@ local configKeys = {
     {
         mods = "LEADER",
         key = "l",
-        -- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY" }),
         action = wezterm.action.ShowLauncher,
     },
     {
