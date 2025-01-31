@@ -13,29 +13,24 @@ resurrect.set_max_nlines(0)
 resurrect.set_encryption({
     enable      = true,
     method      = "age",
-    -- private_key = "~/dotfiles/wezterm/.config/wezterm/plugins/resurrect_key.txt",
     private_key = wezterm.home_dir .. "/.config/wezterm/plugins/resurrect_key.txt",
     public_key  = "age16neefgeclnu2rqmezvjdqyk3fhdwupd83ffsytaadadd5rs859aq8ahvzc",
 })
 
-wezterm.on("sessionizer.open.created", function(window, label)
+wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
     local workspace_state = resurrect.workspace_state
 
-    wezterm.log_info("Restoring " .. label)
     workspace_state.restore_workspace(resurrect.load_state(label, "workspace"), {
         window = window,
         relative = true,
-        restore_text = true,
+        restore_text = false,
         on_pane_restore = resurrect.tab_state.default_on_pane_restore,
     })
 end)
 
-wezterm.on("sessionizer.open.selected", function(window, path, label)
+wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(window, path, label)
     local workspace_state = resurrect.workspace_state
-    wezterm.log_info("Saving " .. workspace_state.get_workspace_state().workspace)
-    if workspace_state.get_workspace_state().workspace ~= "Base" then
-        resurrect.save_state(workspace_state.get_workspace_state())
-    end
+    resurrect.save_state(workspace_state.get_workspace_state())
 end)
 
 config.keys = {

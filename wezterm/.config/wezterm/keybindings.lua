@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local sessionizer = require("plugins.sessionizer")
 
 local configKeys = {
     -- Terminal
@@ -12,11 +11,6 @@ local configKeys = {
         mods = "LEADER|CTRL",
         key = "Q",
         action = wezterm.action.QuitApplication,
-    },
-    {
-        mods = "LEADER",
-        key = "f",
-        action = wezterm.action_callback(sessionizer.open),
     },
 
     -- splitting
@@ -125,6 +119,23 @@ local configKeys = {
         mods = "LEADER",
         key = "w",
         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+    },
+    {
+        key = '$',
+        mods = 'LEADER|SHIFT',
+        action = wezterm.action.PromptInputLine {
+            description = 'Enter new name for Workspace',
+            action = wezterm.action_callback(
+                function(window, pane, line)
+                    if line then
+                        wezterm.mux.rename_workspace(
+                            window:mux_window():get_workspace(),
+                            line
+                        )
+                    end
+                end
+            ),
+        },
     },
 
     -- Domain navigator
