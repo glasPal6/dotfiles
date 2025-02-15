@@ -7,9 +7,9 @@ local apps = require("configuration.apps")
 local function autostart_apps()
     -- Monitors
     helpers.run.run_once_grep("autorandr --change")
-    awful.spawn.with_shell(
-        "xautolock -detectsleep -time 3 -locker 'betterlockscreen -l -- --inside-color=2e3440FF --insidever-color=b48eadFF --insidewrong-color=282828FF --ring-color=3b4252FF --ringver-color=a3be3cFF --ringwrong-color=FB4934FF --separator-color=282828FF' -notify 30 -notifier 'notify-send -u critical -t 10000 --" ..
-        "'LOCKING screen in 30 seconds'")
+    -- awful.spawn.with_shell(
+    --     "xautolock -detectsleep -time 3 -locker 'betterlockscreen -l -- --inside-color=2e3440FF --insidever-color=b48eadFF --insidewrong-color=282828FF --ring-color=3b4252FF --ringver-color=a3be3cFF --ringwrong-color=FB4934FF --separator-color=282828FF' -notify 30 -notifier 'notify-send -u critical -t 10000 --" ..
+    --     "'LOCKING screen in 30 seconds'")
 
     --- Compositor
     -- helpers.run.check_if_running("picom", nil, function()
