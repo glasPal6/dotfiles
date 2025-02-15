@@ -15,5 +15,4 @@ config.keys = {
         action = workspace_switcher.switch_to_prev_workspace(),
     }
 }
-workspace_switcher.apply_to_config(config)
 return config

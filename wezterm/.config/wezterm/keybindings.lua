@@ -72,7 +72,7 @@ local configKeys = {
             description = wezterm.format({
                 { Attribute = { Intensity = "Bold" } },
                 { Foreground = { AnsiColor = "Fuchsia" } },
-                { Text = "Enter new current for tab" },
+                { Text = "Tab Name: " },
             }),
             action = wezterm.action_callback(function(window, _, line)
                 if line then

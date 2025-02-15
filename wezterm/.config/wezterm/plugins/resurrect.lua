@@ -2,12 +2,12 @@ local config    = {}
 local wezterm   = require 'wezterm'
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
-resurrect.periodic_save({
-    interval_seconds = 60 * 10,
-    save_tabs = true,
-    save_windows = true,
-    save_workspaces = true,
-})
+-- resurrect.periodic_save({
+--     interval_seconds = 60 * 10,
+--     save_tabs = true,
+--     save_windows = true,
+--     save_workspaces = true,
+-- })
 resurrect.set_max_nlines(0)
 
 resurrect.set_encryption({
