@@ -1,6 +1,14 @@
 return {
     {
         "williamboman/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "lua-language-server",
+                "clangd",
+                "pyright",
+                "codelldb",
+            },
+        },
         config = function()
             require("mason").setup()
         end,
