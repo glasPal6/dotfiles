@@ -1,4 +1,6 @@
 return {
+
+    -- Navigation between nvim and wezterm
     {
         "mrjones2014/smart-splits.nvim",
         config = function()
@@ -15,4 +17,5 @@ return {
             vim.keymap.set('n', '<A-Right>', require('smart-splits').resize_right)
         end,
     },
+
 }

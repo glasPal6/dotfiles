@@ -10,11 +10,13 @@ return {
             handlers = {},
         },
     },
+
+    -- C Debugger
     {
-        "rcarriga/nvim-dap-ui",
+        "mfussenegger/nvim-dap",
         event = "VeryLazy",
         dependencies = {
-            "mfussenegger/nvim-dap",
+            "rcarriga/nvim-dap-ui",
             "nvim-neotest/nvim-nio",
         },
         config = function()
@@ -38,7 +40,7 @@ return {
             vim.keymap.set("n", "<leader>dc", function()
                 dap.continue()
             end)
-            vim.keymap.set("n", "<leader>dv", function()
+            vim.keymap.set("n", "<leader>dn", function()
                 dap.step_over()
             end)
             vim.keymap.set("n", "<leader>di", function()
@@ -51,8 +53,5 @@ return {
                 dap.toggle_breakpoint()
             end)
         end,
-    },
-    {
-        "mfussenegger/nvim-dap",
     },
 }

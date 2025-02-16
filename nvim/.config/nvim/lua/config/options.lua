@@ -49,7 +49,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 vim.opt.foldlevel = 99
 vim.opt.foldenable = false
--- vim.opt.foldnestmax = 1
+vim.opt.foldnestmax = 1
 vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = function()
         if require("nvim-treesitter.parsers").has_parser() then

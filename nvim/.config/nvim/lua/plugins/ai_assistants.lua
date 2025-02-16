@@ -1,4 +1,6 @@
 return {
+
+    -- Codium plugin
     {
         "monkoose/neocodeium",
         event = "VeryLazy",
@@ -6,14 +8,25 @@ return {
             local neocodeium = require("neocodeium")
             neocodeium.setup()
             vim.keymap.set("n", "<AS-c>", ":NeoCodeium toggle<CR>")
-            vim.keymap.set("i", "<A-f>", function() neocodeium.accept() end)
-            vim.keymap.set("i", "<A-w>", function() neocodeium.accept_word() end)
-            vim.keymap.set("i", "<A-m>", function() neocodeium.accept_line() end)
-            vim.keymap.set("i", "<A-s>", function() neocodeium.cycle_or_complete() end)
-            vim.keymap.set("i", "<A-r>", function() neocodeium.cycle_or_complete(-1) end)
+            vim.keymap.set("i", "<A-f>", function()
+                neocodeium.accept()
+            end)
+            vim.keymap.set("i", "<A-w>", function()
+                neocodeium.accept_word()
+            end)
+            vim.keymap.set("i", "<A-m>", function()
+                neocodeium.accept_line()
+            end)
+            vim.keymap.set("i", "<A-s>", function()
+                neocodeium.cycle_or_complete()
+            end)
+            vim.keymap.set("i", "<A-r>", function()
+                neocodeium.cycle_or_complete(-1)
+            end)
         end,
     },
 
+    -- For more advanced options
     -- {
     --     "olimorris/codecompanion.nvim",
     --     dependencies = {

@@ -1,4 +1,6 @@
 return {
+
+    -- Cool view of git options
     {
         "NeogitOrg/neogit",
         dependencies = {
@@ -14,13 +16,26 @@ return {
             vim.keymap.set("n", "<leader>gb", ":Neogit branch<CR>")
         end,
     },
+
+    -- Can see the histroy of a file
     {
         "sindrets/diffview.nvim",
+        lazy = true,
         config = function()
             vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
             vim.keymap.set("n", "<leader>gh", ":DiffviewFileHistory %<CR>")
         end,
     },
+    
+    -- Git commands
+    -- {
+    --     "tpope/vim-fugitive",
+    --     config = function()
+    --         vim.keymap.set("n", "<leader>gs", ":vert Git<CR>")
+    --     end,
+    -- },
+
+    -- Show git signs in the project
     {
         "lewis6991/gitsigns.nvim",
         config = function()
@@ -72,5 +87,6 @@ return {
             })
         end,
     },
+
 }
 

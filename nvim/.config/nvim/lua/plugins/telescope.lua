@@ -1,4 +1,6 @@
 return {
+
+    -- Base telescope option
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.5",
@@ -7,10 +9,6 @@ return {
         },
         config = function()
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>pm", ":Telescope find_files<CR>", {})
-            vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
-            vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
-            vim.keymap.set("n", "<leader>pt", builtin.treesitter, {})
             require("telescope").setup({
                 defaults = {
                     layout_config = {
@@ -22,8 +20,15 @@ return {
                     color_devicons = true,
                 },
             })
+
+            vim.keymap.set("n", "<leader>pm", ":Telescope find_files<CR>", {})
+            vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
+            vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
+            vim.keymap.set("n", "<leader>pt", builtin.treesitter, {})
         end,
     },
+
+    -- For other options
     {
         "nvim-telescope/telescope-ui-select.nvim",
         config = function()
@@ -37,4 +42,5 @@ return {
             require("telescope").load_extension("ui-select")
         end,
     },
+
 }

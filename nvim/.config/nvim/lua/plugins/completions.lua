@@ -1,4 +1,6 @@
 return {
+
+    -- Snippets
     {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -10,8 +12,10 @@ return {
             vim.keymap.set("s", "<S-Up>", "<cmd>lua require'luasnip'.jump(-1)<CR>")
             vim.keymap.set("i", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
             vim.keymap.set("s", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
-        end
+        end,
     },
+
+    -- Autocomplete
     {
         "hrsh7th/nvim-cmp",
         dependencies = {

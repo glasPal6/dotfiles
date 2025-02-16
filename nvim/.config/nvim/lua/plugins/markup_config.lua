@@ -1,16 +1,10 @@
 return {
-    {
-        "gbprod/nord.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("nord").setup({})
-            vim.cmd.colorscheme("nord")
-        end,
-    },
+
+    -- Easily embed images into the file
     {
         "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
+        lazy = true,
+        -- event = "VeryLazy",
         opts = {
             default = {
                 embed_image_as_base64 = false,
@@ -22,6 +16,8 @@ return {
             },
         },
     },
+
+    -- Render markdown in a pretty format
     {
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
@@ -32,4 +28,5 @@ return {
         },
         ft = { "markdown", "latex" },
     },
+
 }
