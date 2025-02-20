@@ -3,9 +3,11 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local function merge_all(base, overrides)
-    local ret    = base or {}
+    local ret = base or {}
     local second = overrides or {}
-    for _, v in pairs(second) do table.insert(ret, v) end
+    for _, v in pairs(second) do
+        table.insert(ret, v)
+    end
     return ret
 end
 

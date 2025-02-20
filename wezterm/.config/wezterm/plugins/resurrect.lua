@@ -1,5 +1,5 @@
-local config    = {}
-local wezterm   = require 'wezterm'
+local config = {}
+local wezterm = require("wezterm")
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 -- resurrect.periodic_save({
@@ -11,10 +11,10 @@ local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.
 resurrect.set_max_nlines(0)
 
 resurrect.set_encryption({
-    enable      = true,
-    method      = "age",
+    enable = true,
+    method = "age",
     private_key = wezterm.home_dir .. "/.config/wezterm/plugins/resurrect_key.txt",
-    public_key  = "age16neefgeclnu2rqmezvjdqyk3fhdwupd83ffsytaadadd5rs859aq8ahvzc",
+    public_key = "age16neefgeclnu2rqmezvjdqyk3fhdwupd83ffsytaadadd5rs859aq8ahvzc",
 })
 
 wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
@@ -35,8 +35,8 @@ end)
 
 config.keys = {
     {
-        key = 'W',
-        mods = 'LEADER',
+        key = "w",
+        mods = "LEADER",
         action = wezterm.action_callback(function(win, pane) -- luacheck: ignore 212
             local state = resurrect.workspace_state.get_workspace_state()
             resurrect.save_state(state)
@@ -44,18 +44,18 @@ config.keys = {
         end),
     },
     {
-        key = 'L',
-        mods = 'LEADER',
+        key = "L",
+        mods = "LEADER",
         action = wezterm.action_callback(function(win, pane)
             resurrect.fuzzy_load(win, pane, function(id, label) -- luacheck: ignore 212
-                local type = string.match(id, "^([^/]+)")       -- match before '/'
-                id         = string.match(id, "([^/]+)$")       -- match after '/'
-                id         = string.match(id, "(.+)%..+$")      -- remove file extension
+                local type = string.match(id, "^([^/]+)") -- match before '/'
+                id = string.match(id, "([^/]+)$")      -- match after '/'
+                id = string.match(id, "(.+)%..+$")     -- remove file extension
 
                 local opts = {
-                    window          = win:mux_window(),
-                    relative        = true,
-                    restore_text    = true,
+                    window = win:mux_window(),
+                    relative = true,
+                    restore_text = true,
                     on_pane_restore = resurrect.tab_state.default_on_pane_restore,
                 }
 
@@ -75,24 +75,19 @@ config.keys = {
         end),
     },
     {
-        key = 'D',
-        mods = 'LEADER',
+        key = "D",
+        mods = "LEADER",
         action = wezterm.action_callback(function(win, pane)
-            resurrect.fuzzy_load(
-                win,
-                pane,
-                function(id)
-                    resurrect.delete_state(id)
-                end,
-                {
-                    title             = 'Delete State',
-                    description       = 'Select session to delete and press Enter = accept, Esc = cancel, / = filter',
-                    fuzzy_description = 'Search session to delete: ',
-                    is_fuzzy          = true,
-                }
-            )
+            resurrect.fuzzy_load(win, pane, function(id)
+                resurrect.delete_state(id)
+            end, {
+                title = "Delete State",
+                description = "Select session to delete and press Enter = accept, Esc = cancel, / = filter",
+                fuzzy_description = "Search session to delete: ",
+                is_fuzzy = true,
+            })
         end),
-    }
+    },
 }
 
 return config

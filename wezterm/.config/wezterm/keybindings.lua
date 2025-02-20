@@ -96,46 +96,41 @@ local configKeys = {
     {
         mods = "LEADER",
         key = "m",
-        action = wezterm.action.SpawnCommandInNewTab { args = { 'btop' } },
+        action = wezterm.action.SpawnCommandInNewTab({ args = { "btop" } }),
     },
     {
         mods = "LEADER",
         key = "P",
-        action = wezterm.action.SpawnCommandInNewTab { args = { 'ncdu' } },
+        action = wezterm.action.SpawnCommandInNewTab({ args = { "ncdu" } }),
     },
     {
         mods = "LEADER",
         key = "g",
-        action = wezterm.action.SpawnCommandInNewTab { args = { 'lazygit' } },
+        action = wezterm.action.SpawnCommandInNewTab({ args = { "lazygit" } }),
     },
     {
         mods = "LEADER",
         key = "c",
-        action = wezterm.action.SpawnCommandInNewTab { args = { 'lazydocker' } },
+        action = wezterm.action.SpawnCommandInNewTab({ args = { "lazydocker" } }),
     },
 
     -- Workspace navigator
     {
         mods = "LEADER",
-        key = "w",
+        key = "W",
         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
     },
     {
-        key = '$',
-        mods = 'LEADER|SHIFT',
-        action = wezterm.action.PromptInputLine {
-            description = 'Enter new name for Workspace',
-            action = wezterm.action_callback(
-                function(window, pane, line)
-                    if line then
-                        wezterm.mux.rename_workspace(
-                            window:mux_window():get_workspace(),
-                            line
-                        )
-                    end
+        key = "$",
+        mods = "LEADER|SHIFT",
+        action = wezterm.action.PromptInputLine({
+            description = "Enter new name for Workspace",
+            action = wezterm.action_callback(function(window, pane, line)
+                if line then
+                    wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
                 end
-            ),
-        },
+            end),
+        }),
     },
 
     -- Domain navigator
