@@ -1,25 +1,7 @@
 return {
-
-    -- Easily see the requirements of the project
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        lazy = true,
-        keys = {
-            {
-                "]t",
-                function()
-                    require("todo-comments").jump_next()
-                end,
-            },
-            {
-                "[t",
-                function()
-                    require("todo-comments").jump_prev()
-                end,
-            },
-            { "<leader>t", ":TodoQuickFix<CR>" },
-        },
         config = function()
             local todo_comments = require("todo-comments")
             todo_comments.setup({
@@ -35,9 +17,18 @@ return {
                     WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
                     PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
                     NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-                    TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+                    TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED", "DEBUGGING" } },
                 },
             })
+
+            vim.keymap.set("n", "]t", function()
+                todo_comments.jump_next()
+            end, { desc = "Next todo comment" })
+            vim.keymap.set("n", "[t", function()
+                todo_comments.jump_prev()
+            end, { desc = "Previous todo comment" })
+
+            vim.keymap.set("n", "<leader>t", ":TodoQuickFix<CR>")
         end,
     },
 }

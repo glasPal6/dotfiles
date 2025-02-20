@@ -34,6 +34,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Virtual Machines: Virtual Machine Manager
 
 ## Other
+- compile commands outputter: bear or compiledb
 - Disk space: ncdu
 - Terminal prompt: starship
 - Git: lazygit

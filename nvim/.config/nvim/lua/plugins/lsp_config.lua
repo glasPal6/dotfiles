@@ -40,6 +40,8 @@ return {
             lsp_config.lua_ls.setup({ capabilities = capabilities })
             lsp_config.clangd.setup({ capabilities = capabilities })
             lsp_config.pyright.setup({ capabilities = capabilities })
+            lsp_config.neocmake.setup({ capabilities = capabilities })
+            lsp_config.marksman.setup({ capabilities = capabilities })
 
             -- Commands if there is an LSP
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -106,10 +108,11 @@ return {
                     lua = { "stylua" },
                     python = { "black", "isort" },
                     c = { "clang-format" },
+                    cmake = { "gersemi" },
                 },
                 format_on_save = {
                     -- These options will be passed to conform.format()
-                    timeout_ms = 500,
+                    timeout_ms = 1000,
                     lsp_format = "fallback",
                 },
             })
@@ -121,9 +124,54 @@ return {
         config = function()
             require("lint").linters_by_ft = {
                 lua = { "luacheck" },
-                python = { "black" },
-                c = { "clang-tidy" },
+                python = { "pylint" },
+                c = { "cpplint" },
             }
         end,
     },
 }
+
+-- lspconfig.neocmake.setup({
+--     capabilities = capabilities,
+--     filetypes = { "cmake" },
+-- })
+-- lspconfig.zls.setup({
+--     capabilities = capabilities,
+--     filetypes = { "zig" },
+-- })
+-- lspconfig.mojo.setup({
+--     capabilities = capabilities,
+--     filetypes = { "mojo" },
+-- })
+-- lspconfig.asm_lsp.setup({
+--     capabilities = capabilities,
+--     filetypes = { "asm" },
+-- })
+-- lspconfig.texlab.setup({
+--     capabilities = capabilities,
+--     filetypes = { "tex" },
+-- })
+-- lspconfig.svelte.setup({
+--     capabilities = capabilities,
+--     filetypes = { "svelte" },
+-- })
+-- lspconfig.htmx.setup({
+--     capabilities = capabilities,
+--     filetypes = { "html" },
+-- })
+-- lspconfig.biome.setup({
+--     capabilities = capabilities,
+--     filetypes = { "js" },
+-- })
+-- lspconfig.cssls.setup({
+--     capabilities = capabilities,
+--     filetypes = { "css" },
+-- })
+-- lspconfig.templ.setup({
+--     capabilities = capabilities,
+--     filetypes = { "templ" },
+-- })
+-- lspconfig.gopls.setup({
+--     capabilities = capabilities,
+--     filetypes = { "go" },
+-- })
