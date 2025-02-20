@@ -124,3 +124,6 @@ eval "$(zoxide init --cmd zd zsh)"
 # Source the prompt
 eval "$(starship init zsh)"
 
+# Source ros2
+source /opt/ros/humble/setup.zsh
+

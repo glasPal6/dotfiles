@@ -15,8 +15,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- vim.keymap.set("n", "<leader>sf", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 -- vim.keymap.set("n", "<leader>sl", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
-vim.keymap.set({ "n", "v" }, "<leader>r", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
-vim.vim.vim
+-- vim.keymap.set({ "n", "v" }, "<leader>r", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<C-Up>", "<C-w><Up>")
 vim.keymap.set("n", "<C-Down>", "<C-w><Down>")
