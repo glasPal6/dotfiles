@@ -14,13 +14,12 @@ return {
                     ["<Down>"] = "move_next",
                     ["<Up>"] = "move_prev",
                     ["g<Down>"] = "move2parent",
-                    ["<C-Down>"] = "move_change_next",
-                    ["<C-Up>"] = "move_change_prev",
+                    ["<AC-Down>"] = "move_change_next",
+                    ["<AC-Up>"] = "move_change_prev",
                     ["<cr>"] = "action_enter",
                     ["p"] = "enter_diffbuf",
                 },
             })
         end,
     },
-
 }

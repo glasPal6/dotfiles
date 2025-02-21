@@ -1,10 +1,9 @@
 return {
     {
         "jay-babu/mason-nvim-dap.nvim",
-        event = "VeryLazy",
+        lazy = true,
         dependencies = {
             "williamboman/mason.nvim",
-            "mfussenegger/nvim-dap",
         },
         opts = {
             handlers = {},
@@ -14,10 +13,42 @@ return {
     -- C Debugger
     {
         "mfussenegger/nvim-dap",
-        event = "VeryLazy",
         dependencies = {
             "rcarriga/nvim-dap-ui",
             "nvim-neotest/nvim-nio",
+            "jay-babu/mason-nvim-dap.nvim",
+        },
+        keys = {
+            {
+                "<leader>dc",
+                function()
+                    require("dap").continue()
+                end,
+            },
+            {
+                "<leader>dn",
+                function()
+                    require("dap").step_over()
+                end,
+            },
+            {
+                "<leader>di",
+                function()
+                    require("dap").step_into()
+                end,
+            },
+            {
+                "<leader>do",
+                function()
+                    require("dap").step_out()
+                end,
+            },
+            {
+                "<leader>dt",
+                function()
+                    require("dap").toggle_breakpoint()
+                end,
+            },
         },
         config = function()
             local dap = require("dap")
@@ -37,21 +68,21 @@ return {
                 dapui.close()
             end
 
-            vim.keymap.set("n", "<leader>dc", function()
-                dap.continue()
-            end)
-            vim.keymap.set("n", "<leader>dn", function()
-                dap.step_over()
-            end)
-            vim.keymap.set("n", "<leader>di", function()
-                dap.step_into()
-            end)
-            vim.keymap.set("n", "<leader>do", function()
-                dap.step_out()
-            end)
-            vim.keymap.set("n", "<leader>dt", function()
-                dap.toggle_breakpoint()
-            end)
+            -- vim.keymap.set("n", "<leader>dc", function()
+            --     dap.continue()
+            -- end)
+            -- vim.keymap.set("n", "<leader>dn", function()
+            --     dap.step_over()
+            -- end)
+            -- vim.keymap.set("n", "<leader>di", function()
+            --     dap.step_into()
+            -- end)
+            -- vim.keymap.set("n", "<leader>do", function()
+            --     dap.step_out()
+            -- end)
+            -- vim.keymap.set("n", "<leader>dt", function()
+            --     dap.toggle_breakpoint()
+            -- end)
         end,
     },
 }
