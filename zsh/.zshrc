@@ -74,8 +74,6 @@ alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t com
 
 alias postgrad-login='nmcli radio wifi off; sudo mount -t cifs -o user=u19090634 //up.ac.za/uplogin /mnt ; sudo umount /mnt'
 alias postgrad-exit='nmcli radio wifi on'
-alias postgrad-cluster_login='ssh -X u19090634@137.215.159.216'
-alias postgrad-beast_login='ssh -X dylank@137.215.158.253'
 
 # Exports
 export EDITOR="nvim"
@@ -109,7 +107,15 @@ export C674x_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c674x_3
 export C674x_MATHLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mathlib_c674x_3_1_2_1
 export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr16xx_radarss_rprc.bin
 
+# Sources
+# Source ros2
+# source /opt/ros/humble/setup.zsh
+
 # Shell integrations
+# Source the prompt
+eval "$(starship init zsh)"
+
+# FZF
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1
     --color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1
@@ -117,13 +123,9 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
 # This has control-r fuzzy finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# eval "(fzf --zsh)"
 
+# zoxide
 export _ZO_EXCLUDE_DIRS="*src:*build"
 eval "$(zoxide init --cmd zd zsh)"
-
-# Source the prompt
-eval "$(starship init zsh)"
-
-# Source ros2
-source /opt/ros/humble/setup.zsh
 
