@@ -7,7 +7,9 @@ return {
         opts = {
             modes = {
                 char = {
-                    jump_labels = true,
+                    enabled = false,
+                    -- autohide = true,
+                    jump_labels = false,
                 },
             },
         },
