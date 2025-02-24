@@ -75,9 +75,9 @@ return function(config)
         local time = wezterm.strftime("%H:%M:%S")
 
         -- Domain
-        local domain_name = pane.domain_name
+        local domain_name = pane:get_domain_name()
         if not domain_name then
-            domain_name = "Local"
+            domain_name = "Unknown"
         end
 
         -- Left status (left of the tab line)

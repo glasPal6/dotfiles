@@ -18,21 +18,12 @@ config.unix_domains = {
     --     -- local_echo_threshold_ms = 50000,
     -- },
     {
-        name = "Sessions",
+        name = "persistent",
         -- connect_automatically = true,
         local_echo_threshold_ms = 50000,
     },
-    -- {
-    --     name = "Univeristy",
-    --     -- connect_automatically = true,
-    --     local_echo_threshold_ms = 50000,
-    -- },
-    -- {
-    --     name = "Business",
-    --     -- connect_automatically = true,
-    --     local_echo_threshold_ms = 50000,
-    -- },
 }
+
 -- config.default_gui_startup_args = { "connect", "Base_domain", }
 config.default_workspace = "Base"
 

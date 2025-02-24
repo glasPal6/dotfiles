@@ -116,11 +116,6 @@ local configKeys = {
 
     -- Workspace navigator
     {
-        mods = "LEADER",
-        key = "W",
-        action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
-    },
-    {
         key = "$",
         mods = "LEADER|SHIFT",
         action = wezterm.action.PromptInputLine({
@@ -138,6 +133,16 @@ local configKeys = {
         mods = "LEADER",
         key = "d",
         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }),
+    },
+    {
+        mods = "LEADER",
+        key = "e",
+        action = wezterm.action.DetachDomain({ DomainName = "persistent" }),
+    },
+    {
+        mods = "LEADER",
+        key = "u",
+        action = wezterm.action.AttachDomain("persistent"),
     },
 
     -- General settings

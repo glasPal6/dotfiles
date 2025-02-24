@@ -109,12 +109,9 @@ export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/
 
 # Sources
 # Source ros2
-# source /opt/ros/humble/setup.zsh
+source /opt/ros/humble/setup.zsh
 
 # Shell integrations
-# Source the prompt
-eval "$(starship init zsh)"
-
 # FZF
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1
@@ -128,4 +125,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # zoxide
 export _ZO_EXCLUDE_DIRS="*src:*build"
 eval "$(zoxide init --cmd zd zsh)"
+
+# Source the prompt
+eval "$(starship init zsh)"
 
