@@ -13,10 +13,6 @@ end
 
 -- Unix domains
 config.unix_domains = {
-    -- {
-    --     name = "Base_domain",
-    --     -- local_echo_threshold_ms = 50000,
-    -- },
     {
         name = "persistent",
         -- connect_automatically = true,
@@ -24,8 +20,9 @@ config.unix_domains = {
     },
 }
 
--- config.default_gui_startup_args = { "connect", "Base_domain", }
 config.default_workspace = "Base"
+config.switch_to_last_active_tab_when_closing_tab = true
+config.prefer_to_spawn_tabs = true
 
 -- Style and looks
 require("style")(config)

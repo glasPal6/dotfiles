@@ -2,6 +2,11 @@ return {
     -- Plugin options
     -- Neogit: https://github.com/isakbm/gitgraph.nvim
     -- Git Fugitive: tpope/vim-fugitive
+    -- Lazygit: kdheepak/lazygit.nvim
+
+    -- Git conficts: akinsho/git-conflict.nvim
+    -- Diff view: sindrets/diffview.nvim
+
     -- Git Graph: isakbm/gitgraph.nvim
     -- Git Signs: lewis6991/gitsigns.nvim
 
@@ -10,8 +15,10 @@ return {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
+
+            -- Optional
             "nvim-telescope/telescope.nvim",
+            "sindrets/diffview.nvim",
         },
         config = function()
             require("neogit").setup({})
@@ -36,6 +43,32 @@ return {
     --     "tpope/vim-fugitive",
     --     config = function()
     --         vim.keymap.set("n", "<leader>gs", ":vert Git<CR>")
+    --         vim.keymap.set("n", "<leader>gb", ":Git blame<CR>")
+    --         vim.keymap.set("n", "<leader>gd", ":Gvdiffsplit<CR>")
+    --         vim.keymap.set("n", "<leader>gld", ":vsplit<CR>:GlLog<CR>")
+    --         vim.keymap.set("n", "<leader>gll", ":vsplit<CR>:0Gllog<CR>")
+    --
+    --         local autocmd = vim.api.nvim_create_autocmd
+    --         autocmd("BufWinEnter", {
+    --             pattern = "*",
+    --             callback = function()
+    --                 if vim.bo.ft ~= "fugitive" then
+    --                     return
+    --                 end
+    --
+    --                 local bufnr = vim.api.nvim_get_current_buf()
+    --                 local opts = { buffer = bufnr, remap = false }
+    --
+    --                 vim.keymap.set("n", "<leader>P", function()
+    --                     vim.cmd.Git("push")
+    --                 end, opts)
+    --
+    --                 -- rebase always
+    --                 vim.keymap.set("n", "<leader>p", function()
+    --                     vim.cmd.Git("pull")
+    --                 end, opts)
+    --             end,
+    --         })
     --     end,
     -- },
 

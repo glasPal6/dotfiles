@@ -63,7 +63,17 @@ local configKeys = {
     {
         mods = "LEADER",
         key = "t",
-        action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+        -- action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+        action = wezterm.action_callback(function(win, pane)
+            local mux_win = win:mux_window()
+            for _, item in ipairs(mux_win:tabs_with_info()) do
+                if item.is_active then
+                    mux_win:spawn_tab({})
+                    win:perform_action(wezterm.action.MoveTab(item.index + 1), pane)
+                    return
+                end
+            end
+        end),
     },
     {
         mods = "LEADER|CTRL",
@@ -142,7 +152,22 @@ local configKeys = {
     {
         mods = "LEADER",
         key = "u",
-        action = wezterm.action.AttachDomain("persistent"),
+        -- action = wezterm.action.AttachDomain("persistent"),
+        action = wezterm.action_callback(function(win, pane)
+            local domain = wezterm.mux.get_domain("persistent")
+            -- wezterm.action.AttachDomain(domain)
+            -- domain:attach()
+            -- if not domain:has_any_panes() then
+            local mux_win = win:mux_window()
+            for _, item in ipairs(mux_win:tabs_with_info()) do
+                if item.is_active then
+                    mux_win:spawn_tab({ domain = { DomainName = "persistent" } })
+                    win:perform_action(wezterm.action.MoveTab(item.index + 1), pane)
+                    return
+                end
+            end
+            -- end
+        end),
     },
 
     -- General settings
