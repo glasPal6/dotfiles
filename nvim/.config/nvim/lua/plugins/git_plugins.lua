@@ -10,6 +10,9 @@ return {
     -- Git Graph: isakbm/gitgraph.nvim
     -- Git Signs: lewis6991/gitsigns.nvim
 
+    -- TODO: Look into
+    -- Github pull requests: pwntester/octo.nvim
+
     -- Cool view of git options
     {
         "NeogitOrg/neogit",

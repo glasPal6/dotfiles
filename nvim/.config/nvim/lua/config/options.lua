@@ -60,3 +60,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
         end
     end,
 })
+
+-- Latex documents
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown", "tex", "latex" },
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.keymap.set("n", "<Up>", "gk", { buffer = true, silent = true })
+        vim.keymap.set("n", "<Down>", "gj", { buffer = true, silent = true })
+        vim.opt_local.spell = true
+    end,
+})

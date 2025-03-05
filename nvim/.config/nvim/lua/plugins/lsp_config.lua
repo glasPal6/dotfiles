@@ -42,6 +42,7 @@ return {
             lsp_config.pyright.setup({ capabilities = capabilities })
             lsp_config.neocmake.setup({ capabilities = capabilities })
             lsp_config.marksman.setup({ capabilities = capabilities })
+            lsp_config.texlab.setup({ capabilities = capabilities })
 
             -- Commands if there is an LSP
             vim.api.nvim_create_autocmd("LspAttach", {
