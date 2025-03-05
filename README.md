@@ -16,8 +16,10 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 	- Window manager: awesomeWM
 	- Bar: polybar but look to switching to eww
 	- Menu: rofi
-	- File explorer: nautalis
+	- File explorer: nautalis, nnn (look into this)
 	- Lockscreen: betterlockscreen
+    - Blue light filter: Redshift
+    - GTK theme manager: lxappearance
 
 - Browser: Zen
 - Messaging apps: Discord
@@ -34,12 +36,13 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Virtual Machines: Virtual Machine Manager
 
 ## Other
-- compile commands outputter: bear or compiledb
+- Compile commands outputter: bear or compiledb
 - Disk space: ncdu
 - Terminal prompt: starship
 - Git: lazygit
 - Containers: lazydocker - look at podman alternative
 - Fuzzy finder: fzf
+
 ### Terminal help:
 - zoxide
 - eza
