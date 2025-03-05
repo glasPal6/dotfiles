@@ -67,22 +67,6 @@ return {
             dap.listeners.before.event_exited.dapui_config = function()
                 dapui.close()
             end
-
-            -- vim.keymap.set("n", "<leader>dc", function()
-            --     dap.continue()
-            -- end)
-            -- vim.keymap.set("n", "<leader>dn", function()
-            --     dap.step_over()
-            -- end)
-            -- vim.keymap.set("n", "<leader>di", function()
-            --     dap.step_into()
-            -- end)
-            -- vim.keymap.set("n", "<leader>do", function()
-            --     dap.step_out()
-            -- end)
-            -- vim.keymap.set("n", "<leader>dt", function()
-            --     dap.toggle_breakpoint()
-            -- end)
         end,
     },
 }
