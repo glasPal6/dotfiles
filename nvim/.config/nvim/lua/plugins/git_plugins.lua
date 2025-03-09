@@ -16,6 +16,7 @@ return {
     -- Cool view of git options
     {
         "NeogitOrg/neogit",
+        event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
 
@@ -44,6 +45,7 @@ return {
     -- Show git signs in the project
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         config = function()
             require("gitsigns").setup({
                 on_attach = function(bufnr)
@@ -106,11 +108,11 @@ return {
     -- {
     --     "tpope/vim-fugitive",
     --     config = function()
-    --         vim.keymap.set("n", "<leader>gs", ":vert Git<CR>")
+    --         vim.keymap.set("n", "<leader>gs", ":tab Git<CR>")
     --         vim.keymap.set("n", "<leader>gb", ":Git blame<CR>")
-    --         vim.keymap.set("n", "<leader>gd", ":Gvdiffsplit<CR>")
-    --         vim.keymap.set("n", "<leader>gld", ":vsplit<CR>:GlLog<CR>")
-    --         vim.keymap.set("n", "<leader>gll", ":vsplit<CR>:0Gllog<CR>")
+    --         vim.keymap.set("n", "<leader>gd", ":tab Gvdiffsplit<CR>")
+    --         vim.keymap.set("n", "<leader>gld", ":tab GcLog<CR>")
+    --         vim.keymap.set("n", "<leader>gll", ":tab 0Gclog<CR>")
     --
     --         local autocmd = vim.api.nvim_create_autocmd
     --         autocmd("BufWinEnter", {

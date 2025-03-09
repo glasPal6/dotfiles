@@ -20,6 +20,7 @@ return {
     -- Render markdown in a pretty format
     {
         "MeanderingProgrammer/render-markdown.nvim",
+        event = "VeryLazy",
         ft = { "markdown" },
         -- ft = { "markdown", "latex", "tex" },
         opts = {

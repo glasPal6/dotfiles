@@ -3,6 +3,7 @@ return {
     -- Snippets
     {
         "L3MON4D3/LuaSnip",
+        event = "VeryLazy",
         dependencies = {
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
@@ -18,12 +19,13 @@ return {
     -- Autocomplete
     {
         "hrsh7th/nvim-cmp",
+        event = "VeryLazy",
         dependencies = {
             "neovim/nvim-lspconfig",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
-            -- "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-signature-help",
         },
         config = function()
@@ -62,16 +64,16 @@ return {
             --         { name = 'buffer' }
             --     }
             -- })
-            --
-            -- cmp.setup.cmdline(':', {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources({
-            --         { name = 'path' }
-            --     }, {
-            --         { name = 'cmdline' }
-            --     }),
-            --     matching = { disallow_symbol_nonprefix_matching = false }
-            -- })
+
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                }, {
+                    { name = "cmdline" },
+                }),
+                matching = { disallow_symbol_nonprefix_matching = false },
+            })
         end,
     },
 }

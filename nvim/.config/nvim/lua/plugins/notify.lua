@@ -3,6 +3,7 @@ return {
     -- Notifications
     {
         "rcarriga/nvim-notify",
+        event = "VeryLazy",
         config = function()
             require("notify").setup({
                 render = "wrapped-compact",

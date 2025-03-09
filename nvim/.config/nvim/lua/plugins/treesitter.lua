@@ -3,6 +3,7 @@ return {
     -- Coding objects
     {
         "nvim-treesitter/nvim-treesitter",
+        event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
@@ -14,7 +15,7 @@ return {
                 ensure_installed = { "lua", "vimdoc", "c", "cpp", "python" },
                 highlight = { enable = true },
                 indent = { enable = true },
-    
+
                 textobjects = {
                     select = {
                         enable = true,
@@ -67,5 +68,4 @@ return {
             })
         end,
     },
-
 }

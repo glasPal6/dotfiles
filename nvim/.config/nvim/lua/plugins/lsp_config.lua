@@ -3,7 +3,7 @@ return {
     -- Mason
     {
         "williamboman/mason.nvim",
-        lazy = false,
+        event = "VeryLazy",
         config = function()
             require("mason").setup()
         end,
@@ -11,6 +11,7 @@ return {
 
     {
         "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
@@ -28,10 +29,10 @@ return {
     -- Lsp config
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
         },
-        lazy = false,
         config = function()
             local lsp_config = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -102,6 +103,7 @@ return {
     -- nvim-lint and conform
     {
         "stevearc/conform.nvim",
+        event = "VeryLazy",
         opts = {},
         config = function()
             require("conform").setup({
@@ -122,6 +124,7 @@ return {
 
     {
         "mfussenegger/nvim-lint",
+        event = "VeryLazy",
         config = function()
             require("lint").linters_by_ft = {
                 lua = { "luacheck" },

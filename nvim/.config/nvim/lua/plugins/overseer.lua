@@ -6,6 +6,7 @@ return {
     -- Run commands in nvim
     {
         "stevearc/overseer.nvim",
+        event = "VeryLazy",
         opts = {},
         keys = {
             { "<leader>ot", "<cmd>OverseerToggle<CR>" },

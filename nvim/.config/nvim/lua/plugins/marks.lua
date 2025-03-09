@@ -3,6 +3,7 @@ return {
     -- Better marks experience
     {
         "chentoast/marks.nvim",
+        event = "VeryLazy",
         config = function()
             require("marks").setup({
                 refresh_interval = 250,
@@ -12,11 +13,13 @@ return {
                     virt_text = "",
                     annotate = true,
                 },
-                mappings = {},
+                mappings = {
+                    next = "]m",
+                    prev = "[m",
+                },
             })
-            vim.keymap.set("n", "<leader>bm", vim.cmd.MarksQFListAll)
-            vim.keymap.set("n", "<leader>bb", vim.cmd.BookmarksQFListAll)
+            -- vim.keymap.set("n", "<leader>bm", vim.cmd.MarksQFListAll)
+            -- vim.keymap.set("n", "<leader>bb", vim.cmd.BookmarksQFListAll)
         end,
     },
-
 }

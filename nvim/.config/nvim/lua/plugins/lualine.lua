@@ -3,6 +3,7 @@ return {
     -- Show cool stuff in the lualine
     {
         "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
         config = function()
             require("lualine").setup({
                 options = {

@@ -30,8 +30,8 @@ vim.keymap.set("n", "<leader>ln", ":lnext<CR>")
 vim.keymap.set("n", "<leader>lp", ":lprevious<CR>")
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>")
 
-vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
-vim.keymap.set("n", "<leader>cp", ":cprevious<CR>")
+vim.keymap.set("n", "]q", ":cnext<CR>")
+vim.keymap.set("n", "[q", ":cprevious<CR>")
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
 
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>")
