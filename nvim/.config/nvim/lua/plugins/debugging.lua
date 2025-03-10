@@ -1,10 +1,10 @@
 return {
     {
         "jay-babu/mason-nvim-dap.nvim",
-        lazy = true,
         dependencies = {
             "williamboman/mason.nvim",
         },
+        event = { "VeryLazy" },
         opts = {
             handlers = {},
         },
@@ -13,12 +13,12 @@ return {
     -- C Debugger
     {
         "mfussenegger/nvim-dap",
-        event = "VeryLazy",
         dependencies = {
             "rcarriga/nvim-dap-ui",
             "nvim-neotest/nvim-nio",
             "jay-babu/mason-nvim-dap.nvim",
         },
+        -- event = { "VeryLazy" },
         keys = {
             {
                 "<leader>dc",

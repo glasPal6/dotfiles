@@ -9,8 +9,8 @@ return {
         opts = {
             scope = "git",
         },
-        event = { "BufReadPost", "BufNewFile" },
         cmd = "Grapple",
+        event = { "BufReadPost", "BufNewFile" },
         keys = {
             { "<leader>m", "<cmd>Grapple toggle<cr>",         desc = "Grapple toggle tag",       silent = true },
             { "<leader>M", "<cmd>Grapple toggle_tags<cr>",    desc = "Grapple open tags window", silent = true },

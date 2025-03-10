@@ -3,7 +3,7 @@ return {
     -- Snippets
     {
         "L3MON4D3/LuaSnip",
-        event = "VeryLazy",
+        event = { "VeryLazy" },
         dependencies = {
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
@@ -19,9 +19,9 @@ return {
     -- Autocomplete
     {
         "hrsh7th/nvim-cmp",
-        event = "VeryLazy",
+        -- event = { "VeryLazy" },
         dependencies = {
-            "neovim/nvim-lspconfig",
+            -- "neovim/nvim-lspconfig",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",

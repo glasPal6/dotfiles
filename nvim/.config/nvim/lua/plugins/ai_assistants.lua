@@ -3,7 +3,7 @@ return {
     -- Codium plugin
     {
         "monkoose/neocodeium",
-        event = "VeryLazy",
+        event = { "VeryLazy" },
         config = function()
             local neocodeium = require("neocodeium")
             neocodeium.setup({
@@ -35,6 +35,7 @@ return {
     -- For more advanced options
     -- {
     --     "olimorris/codecompanion.nvim",
+    --     event = { "VeryLazy" },
     --     dependencies = {
     --         "nvim-lua/plenary.nvim",
     --         "nvim-treesitter/nvim-treesitter",

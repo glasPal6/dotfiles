@@ -16,7 +16,7 @@ return {
     -- Cool view of git options
     {
         "NeogitOrg/neogit",
-        event = "VeryLazy",
+        event = { "VeryLazy" },
         dependencies = {
             "nvim-lua/plenary.nvim",
 
@@ -35,13 +35,11 @@ return {
     -- Can see the histroy of a file
     {
         "sindrets/diffview.nvim",
-        lazy = true,
-        config = function()
-            vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
-            vim.keymap.set("n", "<leader>gh", ":DiffviewFileHistory %<CR>")
-        end,
+        keys = {
+            { "<leader>gd", ":DiffviewOpen<CR>" },
+            { "<leader>gh", ":DiffviewFileHistory %<CR>" },
+        },
     },
-
     -- Show git signs in the project
     {
         "lewis6991/gitsigns.nvim",
