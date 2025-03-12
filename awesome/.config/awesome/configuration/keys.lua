@@ -53,8 +53,9 @@ awful.keyboard.append_global_keybindings({
     awful.key({ mod }, "F1", hotkeys_popup.show_help, { description = "show Help", group = "WM" }),
 
     -- Prompt
-    awful.key({ mod }, "r", function() awful.screen.focused().mypromptbox:run() end,
-        { description = "run prompt", group = "launcher" }),
+    awful.key({ mod }, "r", function()
+        awful.screen.focused().mypromptbox:run()
+    end, { description = "run prompt", group = "launcher" }),
 
     -- Client
     -- Focus client by direction
@@ -275,45 +276,51 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     }),
-    awful.key({ mod, shift }, "Page_Up",
-        function()
-            local screen = awful.screen.focused()
-            local tag = screen.selected_tag
-            if tag then
-                local idx = tag.index - 1
-                if idx > #screen.tags then idx = 1 end
-                if idx < 1 then idx = #screen.tags end
-                if client.focus then
-                    client.focus:move_to_tag(screen.tags[idx])
-                    screen.tags[idx]:view_only()
-                end
+    awful.key({ mod, shift }, "Page_Up", function()
+        local screen = awful.screen.focused()
+        local tag = screen.selected_tag
+        if tag then
+            local idx = tag.index - 1
+            if idx > #screen.tags then
+                idx = 1
             end
-        end, { description = "move focused client to previous tag", group = "tag" }
-    ),
-    awful.key({ mod, shift }, "Page_Down",
-        function()
-            local screen = awful.screen.focused()
-            local tag = screen.selected_tag
-            if tag then
-                local idx = tag.index + 1
-                if idx > #screen.tags then idx = 1 end
-                if idx < 1 then idx = #screen.tags end
-                if client.focus then
-                    client.focus:move_to_tag(screen.tags[idx])
-                    screen.tags[idx]:view_only()
-                end
+            if idx < 1 then
+                idx = #screen.tags
             end
-        end, { description = "move focused client to next tag", group = "tag" }
-    ),
+            if client.focus then
+                client.focus:move_to_tag(screen.tags[idx])
+                screen.tags[idx]:view_only()
+            end
+        end
+    end, { description = "move focused client to previous tag", group = "tag" }),
+    awful.key({ mod, shift }, "Page_Down", function()
+        local screen = awful.screen.focused()
+        local tag = screen.selected_tag
+        if tag then
+            local idx = tag.index + 1
+            if idx > #screen.tags then
+                idx = 1
+            end
+            if idx < 1 then
+                idx = #screen.tags
+            end
+            if client.focus then
+                client.focus:move_to_tag(screen.tags[idx])
+                screen.tags[idx]:view_only()
+            end
+        end
+    end, { description = "move focused client to next tag", group = "tag" }),
 })
 
 -- Screen
 ----------
 awful.keyboard.append_global_keybindings({
-    awful.key({ mod, shift }, "Left", function() awful.screen.focus_relative(1) end,
-        { description = "focus the next screen", group = "screen" }),
-    awful.key({ mod, shift }, "Right", function() awful.screen.focus_relative(-1) end,
-        { description = "focus the previous screen", group = "screen" }),
+    awful.key({ mod, shift }, "Left", function()
+        awful.screen.focus_relative(1)
+    end, { description = "focus the next screen", group = "screen" }),
+    awful.key({ mod, shift }, "Right", function()
+        awful.screen.focus_relative(-1)
+    end, { description = "focus the previous screen", group = "screen" }),
 })
 
 -- TODO

@@ -23,7 +23,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 
 - Browser: Zen
 - Messaging apps: Discord
-- PDF viewer: Okular with jabref
+- PDF viewer: Okular with jabref, (potentially change)
 
 ## Fun stuff
 - Game Engine: Godot, raylib, sdl2
@@ -42,6 +42,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Git: lazygit
 - Containers: lazydocker - look at podman alternative
 - Fuzzy finder: fzf
+- Python Package manager: poetry
 
 ### Terminal help:
 - zoxide

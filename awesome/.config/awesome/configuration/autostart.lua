@@ -18,7 +18,7 @@ local function autostart_apps()
 
     -- Apps
     helpers.run.check_if_running("zen", nil, function()
-        awful.spawn("zen", false)
+        awful.spawn("zen -P Home", false)
     end)
     -- awful.spawn("./Documents/Deb_Packages/clickup.AppImage", false)
 

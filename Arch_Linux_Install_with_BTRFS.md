@@ -15,7 +15,7 @@ gdisk /dev/${disk}
 1) n (Make a new partition)
 2) Enter (default partition number)
 3) Enter (To start at default start)
-4) +512M (Size of boot)
+4) +512 M (Size of boot)
 5) Enter for default filetype
 6) n
 7) Enter
@@ -79,7 +79,7 @@ export subvol_options="rw,noatime,compress-force=zstd:1,space_cache=v2"
 
 Create the required mount points
 ```bash
-mount -o ${sv_opts},subvol=@ /dev/${disk}3 /mnt
+mount -o ${subvol_options},subvol=@ /dev/${disk}3 /mnt
 mkdir -p /mnt/{boot,home,.snapshots,var/cache,var/log,var/tmp,var/lib/docker}
 ```
 
@@ -106,8 +106,7 @@ grep vendor_id /proc/cpuinfo
 Install the base system
 ```bash
 pacman -Syy
-pacman -S archlinux-keyring
-pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-lts linux-firmware bash-completion btop man-db neovim networkmanager git
+pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-lts linux-firmware bash-completion htop man-db neovim networkmanager tmux git
 ```
 
 Generate the fstab and go into the filesystem
@@ -182,7 +181,7 @@ sudo systemctl enable grub-btrfsd.service
 
 Housekeeping to include btrfs
 ```bash
-nvim /etc/mkinitnvcpio.conf
+nvim /etc/mkinincpio.conf
 ```
 and add `btrfs` to `MODULES`, and make sure `HOOKS` looks like
 ```bash
@@ -240,12 +239,6 @@ cd paru
 makepkg -si
 cd .. ; sudo rm -r paru
 paru
-```
-
-## Packages
-
-```bash
-pacman -Sy zsh awesome rofi wezterm tumx
 ```
 # Setup snapshots with snapper
 
@@ -308,55 +301,52 @@ reboot
 
 Do any cleanup necessary
 
-# Setup Dotfiles
+# Setup Window Manager
 
-## Required files
+
+## Setup DWM, DMENU, and ST
+
+Note:
+	ST can be changed, but for now, keep it simple.
+
+Download the repos and dependencies
 ```bash
-sudo pacman -S awesome zsh weztrem neovim git tmux eze fzf zoxide starship wezterm rofi wget fontconfig blueman nautilus nmtui xfce4-power-manager doas
+sudo pacman -S libx11 libxft xorg-server xorg-xinit terminus-font libxinerama xorg-xrandr freetype2 fontconfig
 ```
 
-## Neovim and Weztrem
-
-Install these fonts
 ```bash
-sudo wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-
-sudo wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-
-sudo wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-
-sudo wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-
-fc-cache -fv
+mkdir -p ~/.local/src
+git clone git://git.suckless.org/st ~/.local/src/st
+git clone git://git.suckless.org/dmenu ~/.local/src/dmenu
+git clone git://git.suckless.org/dwm ~/.local/src/dwm
 ```
 
-## Zsh
-
-This works if the required packages for the `.zshrc` are installed
-
-## Awesome
-
-### Lightdm
+Install st
 ```bash
-sudo pacman -S lightdm awesome xorg-server lightdm-slick-greeter
-sudo nvim /etc/lightdm/lightdm.conf
+cd ~/.local/src/st
+sudo make clean install
 ```
 
-Change under `[Seat:*]`
+Install dmenu
 ```bash
-#greeter-session=
-```
-to
-```bash
-greet-session=lightdm-slick-greeter
+cd ~/.local/src/dmenu
+sudo make clean install
 ```
 
-Enable the lightdm service
+Install dwm
 ```bash
-sudo systemctl enable lightdm.service
+cd ~/.local/src/dwm
+sudo make clean install
 ```
 
-### Awesome config
+Start dwm
 ```bash
-
+cd
+echo "exec dwm" >> ~/.xinitrc
+```
+and put into your bash_profile
+```bash
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+  exec startx
+fi
 ```
