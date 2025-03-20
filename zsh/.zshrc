@@ -54,7 +54,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --git --color=alway
 # Aliases
 alias ls="eza"
 alias ls='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first -s Name'
-alias ll='eza -al --git --color=always --group-directories-first -s Name'
+alias ll='eza -al --git --icons=always --color=always --group-directories-first -s Name'
 alias tree='eza --git --color=always --tree --group-directories-first -s Name'
 
 alias grep='grep --color=auto'

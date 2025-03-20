@@ -13,7 +13,7 @@ return {
                         alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
                         -- signs = false, -- configure signs for some keywords individually
                     },
-                    TODO = { icon = " ", color = "info" },
+                    TODO = { icon = " ", color = "info", alt = { "CHECK" } },
                     HACK = { icon = " ", color = "warning" },
                     WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
                     PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
@@ -29,7 +29,7 @@ return {
                 todo_comments.jump_prev()
             end, { desc = "Previous todo comment" })
 
-            vim.keymap.set("n", "<leader>t", ":TodoQuickFix<CR>")
+            vim.keymap.set("n", "<leader>ta", ":TodoQuickFix<CR>")
         end,
     },
 }

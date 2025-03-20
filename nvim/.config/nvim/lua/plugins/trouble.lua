@@ -3,7 +3,7 @@ return {
     -- LSP diagnostics
     {
         "folke/trouble.nvim",
-        -- event = "VeryLazy",
+        event = "VeryLazy",
         opts = {
             modes = {
                 symbols = { -- Configure symbols mode
@@ -37,6 +37,11 @@ return {
                 "<leader>cl",
                 "<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.3<cr>",
                 desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>ct",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix list toggle",
             },
         },
     },
