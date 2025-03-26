@@ -36,8 +36,19 @@ return {
         config = function()
             local lsp_config = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
 
             -- Lsp servers
+            -- local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
+            -- for _, ls in ipairs(language_servers) do
+            -- 	lsp_config[ls].setup({
+            -- 		capabilities = capabilities,
+            -- 		-- you can add other fields for setting up lsp server in this table
+            -- 	})
+            -- end
             lsp_config.lua_ls.setup({ capabilities = capabilities })
             lsp_config.clangd.setup({ capabilities = capabilities })
             lsp_config.pyright.setup({ capabilities = capabilities })

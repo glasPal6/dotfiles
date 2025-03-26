@@ -25,6 +25,7 @@ return {
             vim.keymap.set("n", "<leader>pm", ":Telescope find_files<CR>", {})
             vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
             vim.keymap.set("n", "<leader>ps", builtin.grep_string, {})
+            vim.keymap.set("n", "<leader>gc", builtin.git_bcommits, {})
             -- vim.keymap.set("n", "<leader>pt", builtin.treesitter, {})
         end,
     },
