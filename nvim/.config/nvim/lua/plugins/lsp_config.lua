@@ -12,6 +12,10 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         event = "VeryLazy",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "williamboman/mason.nvim",
+        },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
@@ -22,6 +26,16 @@ return {
 
                     "pyright",
                 },
+            })
+            require("mason-lspconfig").setup_handlers({
+                function(server_name) -- default handler (optional)
+                    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+                    capabilities.textDocument.foldingRange = {
+                        dynamicRegistration = false,
+                        lineFoldingOnly = true,
+                    }
+                    require("lspconfig")[server_name].setup({})
+                end,
             })
         end,
     },
@@ -42,19 +56,13 @@ return {
             }
 
             -- Lsp servers
-            -- local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
-            -- for _, ls in ipairs(language_servers) do
-            -- 	lsp_config[ls].setup({
-            -- 		capabilities = capabilities,
-            -- 		-- you can add other fields for setting up lsp server in this table
-            -- 	})
-            -- end
-            lsp_config.lua_ls.setup({ capabilities = capabilities })
-            lsp_config.clangd.setup({ capabilities = capabilities })
-            lsp_config.pyright.setup({ capabilities = capabilities })
-            lsp_config.neocmake.setup({ capabilities = capabilities })
-            lsp_config.marksman.setup({ capabilities = capabilities })
-            lsp_config.texlab.setup({ capabilities = capabilities })
+            -- lsp_config.lua_ls.setup({ capabilities = capabilities })
+            -- lsp_config.clangd.setup({ capabilities = capabilities })
+            -- lsp_config.pyright.setup({ capabilities = capabilities })
+            -- lsp_config.neocmake.setup({ capabilities = capabilities })
+            -- lsp_config.marksman.setup({ capabilities = capabilities })
+            -- lsp_config.texlab.setup({ capabilities = capabilities })
+            lsp_config.mojo.setup({ capabilities = capabilities })
 
             -- Commands if there is an LSP
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -145,48 +153,3 @@ return {
         end,
     },
 }
-
--- lspconfig.neocmake.setup({
---     capabilities = capabilities,
---     filetypes = { "cmake" },
--- })
--- lspconfig.zls.setup({
---     capabilities = capabilities,
---     filetypes = { "zig" },
--- })
--- lspconfig.mojo.setup({
---     capabilities = capabilities,
---     filetypes = { "mojo" },
--- })
--- lspconfig.asm_lsp.setup({
---     capabilities = capabilities,
---     filetypes = { "asm" },
--- })
--- lspconfig.texlab.setup({
---     capabilities = capabilities,
---     filetypes = { "tex" },
--- })
--- lspconfig.svelte.setup({
---     capabilities = capabilities,
---     filetypes = { "svelte" },
--- })
--- lspconfig.htmx.setup({
---     capabilities = capabilities,
---     filetypes = { "html" },
--- })
--- lspconfig.biome.setup({
---     capabilities = capabilities,
---     filetypes = { "js" },
--- })
--- lspconfig.cssls.setup({
---     capabilities = capabilities,
---     filetypes = { "css" },
--- })
--- lspconfig.templ.setup({
---     capabilities = capabilities,
---     filetypes = { "templ" },
--- })
--- lspconfig.gopls.setup({
---     capabilities = capabilities,
---     filetypes = { "go" },
--- })
