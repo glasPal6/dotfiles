@@ -6,20 +6,20 @@ local gears = require("gears")
 
 local indicator = {}
 local function worker(args)
-    local args             = args or {}
-    local widget           = wibox.widget.background()
-    local wired            = wibox.widget.imagebox()
-    local wired_na         = wibox.widget.imagebox()
+    local args = args or {}
+    local widget = wibox.widget.background()
+    local wired = wibox.widget.imagebox()
+    local wired_na = wibox.widget.imagebox()
     -- Settings
-    local interfaces       = args.interfaces or { "enp2s0" }
-    local ICON_DIR         = require("gears.filesystem").get_configuration_dir() .. "ui/widgets/network/icons/"
-    local timeout          = args.timeout or 5
-    local font             = args.font or beautiful.font
-    local onclick          = args.onclick
+    local interfaces = args.interfaces or { "enp2s0" }
+    local ICON_DIR = require("gears.filesystem").get_configuration_dir() .. "ui/widgets/network/icons/"
+    local timeout = args.timeout or 5
+    local font = args.font or beautiful.font
+    local onclick = args.onclick
     local hidedisconnected = args.hidedisconnected
-    local popup_position   = args.popup_position or naughty.config.defaults.position
+    local popup_position = args.popup_position or naughty.config.defaults.position
 
-    local connected        = false
+    local connected = false
     local function text_grabber()
         local msg = ""
         if connected then
@@ -35,13 +35,21 @@ local function worker(args)
                 end
                 f:close()
 
-                msg = "<span font_desc=\"" .. font .. "\">" ..
-                    "┌[" .. i .. "]\n" ..
-                    "├IP:\t" .. inet .. "\n" ..
-                    "└MAC:\t" .. mac .. "</span>"
+                msg = '<span font_desc="'
+                    .. font
+                    .. '">'
+                    .. "┌["
+                    .. i
+                    .. "]\n"
+                    .. "├IP:\t"
+                    .. inet
+                    .. "\n"
+                    .. "└MAC:\t"
+                    .. mac
+                    .. "</span>"
             end
         else
-            msg = "<span font_desc=\"" .. font .. "\">Wired network is disconnected</span>"
+            msg = "Wired network is disconnected"
         end
 
         return msg
@@ -53,10 +61,11 @@ local function worker(args)
     local function net_update()
         connected = false
         for _, i in pairs(interfaces) do
-            awful.spawn.easy_async("bash -c \"ip link show " .. i .. " | awk 'NR==1 {printf \\\"%s\\\", $9}'\"",
+            awful.spawn.easy_async(
+                'bash -c "ip link show ' .. i .. ' | awk \'NR==1 {printf \\"%s\\", $9}\'"',
                 function(stdout, stderr, reason, exit_code)
                     state = stdout:sub(1, stdout:len() - 1)
-                    if (state == "UP") then
+                    if state == "UP" then
                         connected = true
                     end
                     if connected then
@@ -68,7 +77,8 @@ local function worker(args)
                             widget:set_widget(nil)
                         end
                     end
-                end)
+                end
+            )
         end
 
         return true
@@ -94,19 +104,27 @@ local function worker(args)
             text = text_grabber(),
             timeout = t_out,
             screen = mouse.screen,
-            position = popup_position
+            position = popup_position,
         })
     end
 
     -- Bind onclick event function
     if onclick then
-        widget:buttons(awful.util.table.join(
-            awful.button({}, 1, function() awful.util.spawn(onclick) end)
-        ))
+        widget:buttons(awful.util.table.join(awful.button({}, 1, function()
+            awful.util.spawn(onclick)
+        end)))
     end
 
-    widget:connect_signal('mouse::enter', function() widget:show(0) end)
-    widget:connect_signal('mouse::leave', function() widget:hide() end)
+    widget:connect_signal("mouse::enter", function()
+        widget:show(0)
+    end)
+    widget:connect_signal("mouse::leave", function()
+        widget:hide()
+    end)
     return widget
 end
-return setmetatable(indicator, { __call = function(_, ...) return worker(...) end })
+return setmetatable(indicator, {
+    __call = function(_, ...)
+        return worker(...)
+    end,
+})

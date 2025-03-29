@@ -1,4 +1,29 @@
-# Partitioning the disk
+ Arch linux install guide
+
+## References:
+### BTRFS with rollbach
+1. (https://www.dwarmstrong.org/archlinux-install/ - Add docker btrfs partition /var/lib/docker) - (https://www.dwarmstrong.org/btrfs-snapshots-rollbacks/)
+
+### Arch install script reference:
+1. https://github.com/classy-giraffe/easy-arch/blob/main/easy-arch.sh
+2. https://github.com/johnynfulleffect/ArchMatic
+3. https://github.com/sayanchakroborty/arch-installer
+4. https://github.com/mietinen/archer/blob/main/archer.sh
+
+Can also do it in python. Might be easier
+
+### Basic install guides (Ordered by throughness)
+1. https://github.com/egara/arch-btrfs-installation
+2. https://github.com/Zelrin/arch-btrfs-install-guide
+3. https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae - Good for after install
+
+### Useful articles:
+- https://www.lorenzobettini.it/2023/03/snapper-and-grub-btrfs-in-arch-linux/
+
+## Look intos:
+- https://github.com/egara/buttermanager
+
+## Partitioning the disk
 There is a required 2 partitions, one for the boot loader and another for the file system. Generally you should include another partition for the swap space.
 
 | Partition | Size |
@@ -7,7 +32,7 @@ There is a required 2 partitions, one for the boot loader and another for the fi
 | Swap | Variable (Min: 2G) |
 | Arch | Remaining |
 
-## Partitioning with gdisk
+### Partitioning with gdisk
 You can also use cfdisk to do this:
 ```bash
 gdisk /dev/${disk}
@@ -28,7 +53,8 @@ gdisk /dev/${disk}
 14) Enter 
 15) Enter for default filetype
 16) w to write and exit
-## Format the partition types
+
+### Format the partition types
 ```bash
 mkfs.fat -F 32 /dev/${disk}1
 mkswap /dev/${disk}2
@@ -36,17 +62,17 @@ mkfs.btrfs -L archLinux /dev/${disk}3
 swapon /dev/${disk}2
 ```
 
-# Btrfs subvolumes
+## Btrfs subvolumes
 
 Creating subvolumes separates the data, allowing for snapshots to be made for what is important. Thus, create subvolumes for directories that SHOULD NOT be in the snapshot of the system.
 
-## Initial mount point and root subvolume
+### Initial mount point and root subvolume
 
 ```bash
 mount /dev/${disk}3 /mnt
 btrfs subvolume create /mnt/@
 ```
-## Create and mount the subvolumes
+### Create and mount the subvolumes
 
 List of subvolumes to exclude
 - @home - /home - This preserves user data, which generally does not destroy the system
@@ -56,7 +82,7 @@ List of subvolumes to exclude
 - @tmp - /var/tmp
 - @docker - /var/lib/docker
 
-### Create the subvolumes
+#### Create the subvolumes
 ```bash
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots 
@@ -66,7 +92,7 @@ btrfs subvolume create /mnt/@tmp
 btrfs subvolume create /mnt/@docker
 ```
 
-### Mount the subvolumes
+#### Mount the subvolumes
 
 Unmount the root partition and setup the mount options:
 - noatime - Increases performance and reduces SSD writes
@@ -93,7 +119,7 @@ mount -o ${subvol_options},subvol=@tmp /dev/${disk}3 /mnt/var/tmp
 mount -o ${subvol_options},subvol=@docker /dev/${disk}3 /mnt/var/lib/docker
 mount /dev/${disk}1 /mnt/boot
 ```
-# Install the Base system
+## Install the Base system
 
 Get the correct cpu architecture
 ```bash
@@ -156,7 +182,7 @@ Enable the network manager
 systemctl enable NetworkManager
 ```
 
-# Boot manager
+## Boot manager
 
 Install the grub boot manager
 ```bash
@@ -170,6 +196,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 Set the location of the boot directory in `/etc/default/grub-btrfs/config`
+- Should be default
 ```bash
 sed -i 's/#GRUB_BTRFS_GRUB_DIRNAME="/boot/grub"/GRUB_BTRFS_GRUB_DIRNAME="/boot/grub"' /etc/default/grub-btrfs/config
 ```
@@ -199,27 +226,22 @@ umount -R /mnt
 reboot
 ```
 
-# Things to do after the first install
+## Things to do after the first install
 
-## Sudo privileges and Pacman
+### Sudo privileges and Pacman
 
-Allow the user to not have to type the password for sudo
-```bash
-echo "dyl ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sudoer_dyl
-```
-
-And add colour to the package manager
+Add colour to the package manager
 - Add `Color` to `/etc/pacman.conf` under Misc options
 - Run `sudo pacman -Syu` to update the system
 
-## Use TRIM for SSD storage
+### Use TRIM for SSD storage
 
 Enable a weekly task that discards unused blocks on the drive
 ```bash
 sudo systemctl enable fstrim.timer
 ```
 
-## Setup sound
+### Setup sound
 
 ```bash
 sudo pacman -S pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils
@@ -230,7 +252,7 @@ Test with after a reboot
 pactl info | grep Pipe 
 speaker-test -c 2 -t wav -l 1
 ```
-## Install PARU for the AUR
+### Install PARU for the AUR
 
 Install paru for easy access to AUR packages
 ```bash
@@ -240,9 +262,9 @@ makepkg -si
 cd .. ; sudo rm -r paru
 paru
 ```
-# Setup snapshots with snapper
+## Setup snapshots with snapper
 
-## Install snapper
+### Install snapper
 Install snapper
 ```bash
 sudo pacman -S snapper snap-pac
@@ -276,7 +298,7 @@ Automate the taking and cleaning of the snapshots
 sudo systemctl enable --now snapper-timeline.timer
 sudo systemctl enable --now snapper-cleanup.timer
 ```
-## System rollbacks
+### System rollbacks
 
 Boot into a snapshot, taking note of the snapshot number that you want to go back to
 Then
@@ -301,52 +323,3 @@ reboot
 
 Do any cleanup necessary
 
-# Setup Window Manager
-
-
-## Setup DWM, DMENU, and ST
-
-Note:
-	ST can be changed, but for now, keep it simple.
-
-Download the repos and dependencies
-```bash
-sudo pacman -S libx11 libxft xorg-server xorg-xinit terminus-font libxinerama xorg-xrandr freetype2 fontconfig
-```
-
-```bash
-mkdir -p ~/.local/src
-git clone git://git.suckless.org/st ~/.local/src/st
-git clone git://git.suckless.org/dmenu ~/.local/src/dmenu
-git clone git://git.suckless.org/dwm ~/.local/src/dwm
-```
-
-Install st
-```bash
-cd ~/.local/src/st
-sudo make clean install
-```
-
-Install dmenu
-```bash
-cd ~/.local/src/dmenu
-sudo make clean install
-```
-
-Install dwm
-```bash
-cd ~/.local/src/dwm
-sudo make clean install
-```
-
-Start dwm
-```bash
-cd
-echo "exec dwm" >> ~/.xinitrc
-```
-and put into your bash_profile
-```bash
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  exec startx
-fi
-```
