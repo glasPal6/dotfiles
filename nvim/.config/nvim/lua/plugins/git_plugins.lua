@@ -21,7 +21,6 @@ return {
             "nvim-lua/plenary.nvim",
 
             -- Optional
-            "nvim-telescope/telescope.nvim",
             "sindrets/diffview.nvim",
         },
         config = function()

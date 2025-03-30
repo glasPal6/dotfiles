@@ -55,25 +55,13 @@ vim.opt.foldcolumn = "0"
 -- vim.opt.foldcolumn = "1"
 vim.opt.foldopen:remove("block")
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    callback = function()
-        if require("nvim-treesitter.parsers").has_parser() then
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        else
-            vim.opt.foldmethod = "indent"
-        end
-    end,
-})
-
--- Latex documents
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", "tex", "latex" },
-    callback = function()
-        vim.opt_local.wrap = true
-        vim.opt_local.linebreak = true
-        vim.keymap.set("n", "<Up>", "gk", { buffer = true, silent = true })
-        vim.keymap.set("n", "<Down>", "gj", { buffer = true, silent = true })
-        vim.opt_local.spell = true
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+--     callback = function()
+--         if require("nvim-treesitter.parsers").has_parser() then
+--             vim.opt.foldmethod = "expr"
+--             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+--         else
+--             vim.opt.foldmethod = "indent"
+--         end
+--     end,
+-- })

@@ -21,18 +21,6 @@ return {
                 },
             })
 
-            -- Latex documents
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "markdown", "tex", "latex" },
-                callback = function()
-                    vim.keymap.set(
-                        "n",
-                        "<leader>sc",
-                        "<cmd>FzfLua spell_suggest winopts = {row=1.01, col=0, height=0.2, width=0.2}, winopts.relative=cursor<CR>"
-                    )
-                end,
-            })
-
             fzflua.register_ui_select(function(_, items)
                 local min_h, max_h = 0.15, 0.70
                 local h = (#items + 4) / vim.o.lines
