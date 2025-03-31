@@ -22,7 +22,7 @@ return {
                 },
                 constrain_cursor = "name",
             })
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { silent = true, desc = "Open parent directory" })
         end,
     },
 }

@@ -25,9 +25,9 @@ return {
         },
         config = function()
             require("neogit").setup({})
-            vim.keymap.set("n", "<leader>gs", ":Neogit<CR>")
-            vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>")
-            vim.keymap.set("n", "<leader>gb", ":Neogit branch<CR>")
+            vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { silent = true })
+            vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>", { silent = true })
+            vim.keymap.set("n", "<leader>gb", ":Neogit branch<CR>", { silent = true })
         end,
     },
 
@@ -35,8 +35,8 @@ return {
     {
         "sindrets/diffview.nvim",
         keys = {
-            { "<leader>gd", ":DiffviewOpen<CR>" },
-            { "<leader>gh", ":DiffviewFileHistory %<CR>" },
+            { "<leader>gd", ":DiffviewOpen<CR>",          { silent = true } },
+            { "<leader>gh", ":DiffviewFileHistory %<CR>", { silent = true } },
         },
     },
     -- Show git signs in the project
@@ -57,7 +57,7 @@ return {
                     -- Navigation
                     map("n", "]c", function()
                         if vim.wo.diff then
-                            vim.cmd.normal({ "]c", bang = true })
+                            vim.cmd.normal({ "]c", silent = true })
                         else
                             gitsigns.nav_hunk("next")
                         end
@@ -65,7 +65,7 @@ return {
 
                     map("n", "[c", function()
                         if vim.wo.diff then
-                            vim.cmd.normal({ "[c", bang = true })
+                            vim.cmd.normal({ "[c", silent = true })
                         else
                             gitsigns.nav_hunk("prev")
                         end

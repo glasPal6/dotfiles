@@ -10,5 +10,4 @@ return {
             vim.cmd.colorscheme("nord")
         end,
     },
-
 }

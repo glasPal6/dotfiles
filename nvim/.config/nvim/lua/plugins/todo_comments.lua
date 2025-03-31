@@ -29,7 +29,7 @@ return {
                 todo_comments.jump_prev()
             end, { desc = "Previous todo comment" })
 
-            vim.keymap.set("n", "<leader>ta", ":TodoQuickFix<CR>")
+            vim.keymap.set("n", "<leader>ta", ":TodoQuickFix<CR>", { silent = true })
         end,
     },
 }
