@@ -15,26 +15,49 @@ return {
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
         },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
-                    -- "codelldb",
-
                     "lua_ls",
-
+                    "ruff",
                     "pyright",
                 },
             })
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
             require("mason-lspconfig").setup_handlers({
                 function(server_name) -- default handler (optional)
-                    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-                    capabilities.textDocument.foldingRange = {
-                        dynamicRegistration = false,
-                        lineFoldingOnly = true,
-                    }
                     require("lspconfig")[server_name].setup({})
+                end,
+
+                -- ["server"] = function()
+                --                 local lspconfig = require("lspconfig")
+                --                 lspconfig.server.setup({
+                --                 })
+                -- end,
+
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pyright.setup({
+                        settings = {
+                            pyright = {
+                                -- Using Ruff's import organizer
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                                    ignore = { "*" },
+                                },
+                            },
+                        },
+                    })
                 end,
             })
         end,
@@ -128,13 +151,12 @@ return {
             require("conform").setup({
                 formatters_by_ft = {
                     lua = { "stylua" },
-                    python = { "black", "isort" },
+                    python = { "ruff" },
                     c = { "clang-format" },
                     cmake = { "gersemi" },
                 },
                 format_on_save = {
-                    -- These options will be passed to conform.format()
-                    timeout_ms = 1000,
+                    timeout_ms = 500,
                     lsp_format = "fallback",
                 },
             })
@@ -147,7 +169,7 @@ return {
         config = function()
             require("lint").linters_by_ft = {
                 lua = { "luacheck" },
-                python = { "pylint" },
+                python = { "ruff" },
                 c = { "cpplint" },
             }
         end,
