@@ -39,6 +39,7 @@ return {
             { "<leader>gh", ":DiffviewFileHistory %<CR>", { silent = true } },
         },
     },
+
     -- Show git signs in the project
     {
         "lewis6991/gitsigns.nvim",

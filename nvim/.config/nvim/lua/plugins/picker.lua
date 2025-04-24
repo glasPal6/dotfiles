@@ -6,10 +6,10 @@ return {
         event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
-            { "<leader>pm", "<cmd>FzfLua files<CR>",        silent = true },
-            { "<leader>pg", "<cmd>FzfLua live_grep<CR>",    silent = true },
-            { "<leader>pc", "<cmd>FzfLua git_bcommits<CR>", silent = true },
-            { "<leader>pt", "<cmd>FzfLua treesitter<CR>",   silent = true },
+            { "<leader>pm", "<cmd>FzfLua files<CR>",      silent = true },
+            { "<leader>pg", "<cmd>FzfLua live_grep<CR>",  silent = true },
+            { "<leader>pt", "<cmd>FzfLua treesitter<CR>", silent = true },
+            { "<leader>pb", "<cmd>FzfLua buffers<CR>",    silent = true },
         },
         config = function()
             local fzflua = require("fzf-lua")
