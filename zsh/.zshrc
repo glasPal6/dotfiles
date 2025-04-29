@@ -124,7 +124,15 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 
 # zoxide
 export _ZO_EXCLUDE_DIRS="*src:*build"
-eval "$(zoxide init --cmd zd zsh)"
+# eval "$(zoxide init --cmd zd zsh)"
+eval "$(zoxide init --cmd zd zsh --hook none)"
+_zoxide_add_except_worktree() {
+  [[ -f $PWD/.git && ! -d $PWD/.bare ]] && return
+  zoxide add "$PWD"
+}
+
+precmd_functions+=(_zoxide_add_except_worktree)
+
 
 # Source the prompt
 eval "$(starship init zsh)"
