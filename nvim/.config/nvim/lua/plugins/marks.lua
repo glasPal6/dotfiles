@@ -18,8 +18,8 @@ return {
 					prev = "[b",
 				},
 			})
-			-- vim.keymap.set("n", "<leader>bm", vim.cmd.MarksQFListAll)
-			-- vim.keymap.set("n", "<leader>bb", vim.cmd.BookmarksQFListAll)
+			vim.keymap.set("n", "<leader>bm", vim.cmd.MarksQFListAll)
+			vim.keymap.set("n", "<leader>bb", vim.cmd.BookmarksQFListAll)
 		end,
 	},
 }

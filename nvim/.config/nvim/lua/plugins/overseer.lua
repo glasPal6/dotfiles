@@ -9,11 +9,11 @@ return {
 		-- event = "VeryLazy",
 		opts = {},
 		keys = {
-			{ "<leader>ot", "<cmd>OverseerToggle<CR>", silent = true },
-			{ "<leader>or", "<cmd>OverseerRun<CR>", silent = true },
-			{ "<leader>ol", "<cmd>OverseerLoadBundle<CR>", silent = true },
-			{ "<leader>os", "<cmd>OverseerSaveBundle<CR>", silent = true },
-			{ "<leader>od", "<cmd>OverseerDeleteBundle<CR>", silent = true },
+			{ "<leader>et", "<cmd>OverseerToggle<CR>", silent = true },
+			{ "<leader>er", "<cmd>OverseerRun<CR>", silent = true },
+			{ "<leader>el", "<cmd>OverseerLoadBundle<CR>", silent = true },
+			{ "<leader>es", "<cmd>OverseerSaveBundle<CR>", silent = true },
+			{ "<leader>ed", "<cmd>OverseerDeleteBundle<CR>", silent = true },
 			{
 				"<leader>oR",
 				function()

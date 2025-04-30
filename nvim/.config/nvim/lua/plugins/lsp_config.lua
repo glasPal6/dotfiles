@@ -14,7 +14,6 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"saghen/blink.cmp",
-			-- "hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
@@ -82,7 +81,6 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"saghen/blink.cmp",
-			-- "hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			local lsp_config = require("lspconfig")
@@ -140,18 +138,6 @@ return {
 					vim.keymap.set("i", "<C-h>", function()
 						vim.lsp.buf.signature_help()
 					end, opts)
-
-					-- vim.api.nvim_create_autocmd("BufWritePre", {
-					-- 	group = "UserLspConfig",
-					-- 	buffer = ev.buf,
-					-- 	callback = function()
-					-- 		if vim.lsp.buf.format then
-					-- 			vim.lsp.buf.format({
-					-- 				async = false,
-					-- 			})
-					-- 		end
-					-- 	end,
-					-- })
 				end,
 			})
 		end,
@@ -203,11 +189,13 @@ return {
 			}
 
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+			-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
-					lint.try_lint()
+					if vim.opt_local.modifiable:get() then
+						lint.try_lint()
+					end
 				end,
 			})
 		end,
