@@ -13,7 +13,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
+			-- "hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
@@ -36,7 +37,8 @@ return {
 					-- "luacheck",
 				},
 			})
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
@@ -79,11 +81,13 @@ return {
 		"neovim/nvim-lspconfig",
 		event = "VeryLazy",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
+			-- "hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			local lsp_config = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
@@ -151,6 +155,16 @@ return {
 				end,
 			})
 		end,
+	},
+
+	{
+		"zeioth/garbage-day.nvim",
+		dependencies = "neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		opts = {
+			aggressive_mode = false,
+			grace_period = 60 * 10,
+		},
 	},
 
 	-- nvim-lint and conform

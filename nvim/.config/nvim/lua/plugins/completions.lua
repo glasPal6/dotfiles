@@ -1,76 +1,97 @@
 return {
 
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        event = { "VeryLazy" },
-        dependencies = {
-            "saadparwaiz1/cmp_luasnip",
-            "rafamadriz/friendly-snippets",
-        },
-        config = function()
-            vim.keymap.set("i", "<S-Up>", "<cmd>lua require'luasnip'.jump(-1)<CR>")
-            vim.keymap.set("s", "<S-Up>", "<cmd>lua require'luasnip'.jump(-1)<CR>")
-            vim.keymap.set("i", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
-            vim.keymap.set("s", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
-        end,
-    },
+	{
+		{
+			"saghen/blink.cmp",
+			dependencies = { "rafamadriz/friendly-snippets" },
 
-    -- Autocomplete
-    {
-        "hrsh7th/nvim-cmp",
-        -- event = { "VeryLazy" },
-        dependencies = {
-            -- "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
-        },
-        config = function()
-            local cmp = require("cmp")
-            require("luasnip.loaders.from_vscode").lazy_load()
+			version = "1.*",
+			opts = {
+				keymap = { preset = "enter" },
+				appearance = {
+					nerd_font_variant = "mono",
+				},
+				completion = { documentation = { auto_show = false } },
+				-- snippets = { preset = "luasnip" },
+				sources = {
+					default = { "lsp", "path", "snippets", "buffer" },
+				},
+				fuzzy = { implementation = "prefer_rust_with_warning" },
+			},
+			opts_extend = { "sources.default" },
+		},
+	},
 
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    -- 	["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    -- 	["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    -- ["<C-Space>"] = cmp.mapping.complete(),
-                    -- 	["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm(),
-                    -- ["<C-y>"] = cmp.mapping(
-                    -- 	cmp.mapping.confirm({
-                    -- 		behavior = cmp.ConfirmBehavior.Insert,
-                    -- 		select = true,
-                    -- 	}),
-                    -- 	{ "i", "c" }
-                    -- ),
-                }),
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                    { name = "path" },
-                    { name = "buffer" },
-                }),
-            })
+	-- Snippets
+	-- {
+	-- 	"L3MON4D3/LuaSnip",
+	-- 	dependencies = {
+	-- 		-- "saadparwaiz1/cmp_luasnip",
+	-- 		"rafamadriz/friendly-snippets",
+	-- 	},
+	-- 	config = function()
+	-- 		vim.keymap.set("i", "<S-Up>", "<cmd>lua require'luasnip'.jump(-1)<CR>")
+	-- 		vim.keymap.set("s", "<S-Up>", "<cmd>lua require'luasnip'.jump(-1)<CR>")
+	-- 		vim.keymap.set("i", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
+	-- 		vim.keymap.set("s", "<S-Down>", "<cmd>lua require'luasnip'.jump(1)<CR>")
+	-- 	end,
+	-- },
 
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                    { name = "cmdline" },
-                }),
-                matching = { disallow_symbol_nonprefix_matching = false },
-            })
-        end,
-    },
+	-- Autocomplete
+	-- {
+	--     "hrsh7th/nvim-cmp",
+	--     -- event = { "VeryLazy" },
+	--     dependencies = {
+	--         -- "neovim/nvim-lspconfig",
+	--         "hrsh7th/cmp-nvim-lsp",
+	--         "hrsh7th/cmp-path",
+	--         "hrsh7th/cmp-buffer",
+	--         "hrsh7th/cmp-cmdline",
+	--     },
+	--     config = function()
+	--         local cmp = require("cmp")
+	--         require("luasnip.loaders.from_vscode").lazy_load()
+	--
+	--         cmp.setup({
+	--             snippet = {
+	--                 expand = function(args)
+	--                     require("luasnip").lsp_expand(args.body)
+	--                 end,
+	--             },
+	--             window = {
+	--                 completion = cmp.config.window.bordered(),
+	--                 documentation = cmp.config.window.bordered(),
+	--             },
+	--             mapping = cmp.mapping.preset.insert({
+	--                 -- 	["<C-b>"] = cmp.mapping.scroll_docs(-4),
+	--                 -- 	["<C-f>"] = cmp.mapping.scroll_docs(4),
+	--                 -- ["<C-Space>"] = cmp.mapping.complete(),
+	--                 -- 	["<C-e>"] = cmp.mapping.abort(),
+	--                 ["<CR>"] = cmp.mapping.confirm(),
+	--                 -- ["<C-y>"] = cmp.mapping(
+	--                 -- 	cmp.mapping.confirm({
+	--                 -- 		behavior = cmp.ConfirmBehavior.Insert,
+	--                 -- 		select = true,
+	--                 -- 	}),
+	--                 -- 	{ "i", "c" }
+	--                 -- ),
+	--             }),
+	--             sources = cmp.config.sources({
+	--                 { name = "nvim_lsp" },
+	--                 { name = "luasnip" },
+	--                 { name = "path" },
+	--                 { name = "buffer" },
+	--             }),
+	--         })
+	--
+	--         cmp.setup.cmdline(":", {
+	--             mapping = cmp.mapping.preset.cmdline(),
+	--             sources = cmp.config.sources({
+	--                 { name = "path" },
+	--                 { name = "cmdline" },
+	--             }),
+	--             matching = { disallow_symbol_nonprefix_matching = false },
+	--         })
+	--     end,
+	-- },
 }
