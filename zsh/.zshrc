@@ -89,6 +89,7 @@ export PATH="/opt/aseprite:$PATH"
 
 export PATH="$PATH:/home/dylan/.modular/bin"
 
+export PATH="$PATH:/home/dylan/.deno/bin"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin

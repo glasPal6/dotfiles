@@ -38,5 +38,7 @@ vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { silent = true })
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { silent = true })
 
+vim.keymap.set("n", "<leader>xx", ":lua vim.diagnostic.setqflist()<CR>", { silent = true })
+
 -- vim.keymap.set("n", "<leader>hd", ":%!xxd<CR>")
 -- vim.keymap.set("n", "<leader>hd", ":%!hexdump -C<CR>")

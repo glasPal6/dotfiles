@@ -11,17 +11,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			{
-				"MeanderingProgrammer/render-markdown.nvim",
-				ft = { "markdown", "codecompanion" },
-				opts = {
-					file_types = { "markdown", "codecompanion" },
-					render_modes = true, -- Render in ALL modes
-					sign = {
-						enabled = false, -- Turn off in the status column
-					},
-				},
-			},
+			"MeanderingProgrammer/render-markdown.nvim",
 		},
 		config = function()
 			require("codecompanion").setup({
@@ -30,6 +20,7 @@ return {
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
+									-- default = "gpt-4o",
 									-- default = "o1",
 									-- default = "claude-3.7-sonnet-thought",
 									default = "claude-3.7-sonnet",
@@ -67,7 +58,12 @@ return {
 	-- 		provider = "copilot",
 	-- 		copilot = {
 	-- 			-- endpoint = "https://api.githubcopilot.com", -- needs Copilot plugin authentication
-	-- 			model = "claude-3.7-sonnet",
+	-- 			model = "gemini-2.5.pro",
+	-- 			-- model = "gpt-4o",
+	-- 			-- model = "o1",
+	-- 			-- model = "claude-3.7-sonnet-thought",
+	-- 			-- model = "claude-3.7-sonnet",
+	-- 			-- model = "claude-3.5-sonnet",
 	-- 		},
 	-- 		hints = { enabled = false },
 	-- 	},

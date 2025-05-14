@@ -5,7 +5,26 @@ return {
 		"williamboman/mason.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				ensure_installed = {
+					"clangd",
+					"lua_ls",
+					"ruff",
+					"pyright",
+					"marksman",
+					"neocmake",
+
+					"cpplint",
+					"clang-format",
+					"gersemi",
+					"marksman",
+					"texlab",
+					"stylua",
+					"luacheck",
+
+					"codelldb",
+				},
+			})
 		end,
 	},
 
@@ -18,24 +37,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"clangd",
-					"lua_ls",
-					"ruff",
-					"pyright",
-					"marksman",
-
-					-- "cpplint",
-					-- "clang-format",
-					-- "codelldb",
-					-- "gersemi",
-					-- "marksman",
-					-- "texlab",
-					-- "stylua",
-					-- "luacheck",
-				},
-			})
+			require("mason-lspconfig").setup()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			capabilities.textDocument.foldingRange = {
@@ -118,7 +120,7 @@ return {
 						vim.lsp.buf.workspace_symbol()
 					end, opts)
 					vim.keymap.set("n", "<leader>vd", function()
-						vim.diagnostc.open_float()
+						vim.diagnostic.open_float()
 					end, opts)
 					vim.keymap.set("n", "]d", function()
 						vim.diagnostic.goto_next()
@@ -189,12 +191,13 @@ return {
 			}
 
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-			-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
 					if vim.opt_local.modifiable:get() then
-						lint.try_lint()
+						-- lint.try_lint()
+						lint.try_lint(nil, { ignore_errors = true })
 					end
 				end,
 			})

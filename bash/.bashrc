@@ -138,3 +138,4 @@ export PATH="/home/dylan/.fzf/bin:$PATH"
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
+. "/home/dylan/.deno/env"

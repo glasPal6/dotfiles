@@ -48,4 +48,3 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - zoxide
 - eza
 - fd
-

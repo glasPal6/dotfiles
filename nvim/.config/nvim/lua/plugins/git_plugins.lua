@@ -16,8 +16,8 @@ return {
 		config = function()
 			require("neogit").setup({})
 			vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { silent = true })
-			-- vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>", { silent = true })
-			-- vim.keymap.set("n", "<leader>gb", ":Neogit branch<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>gb", ":Neogit branch<CR>", { silent = true })
 		end,
 	},
 

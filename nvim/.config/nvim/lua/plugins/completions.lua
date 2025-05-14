@@ -7,11 +7,11 @@ return {
 
 			version = "1.*",
 			opts = {
-				-- keymap = { preset = "enter" },
 				keymap = {
 					["<C-s>"] = { "show", "show_documentation", "hide_documentation" },
 					["<C-e>"] = { "hide" },
 					["<C-a>"] = { "select_and_accept" },
+					-- ["<S- >"] = { "select_and_accept" },
 
 					["<Up>"] = { "select_prev", "fallback" },
 					["<Down>"] = { "select_next", "fallback" },
