@@ -48,20 +48,20 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
+vim.opt.foldlevelstart = 1
 vim.opt.foldenable = true
 vim.opt.foldnestmax = 1
 vim.opt.foldcolumn = "0"
--- vim.opt.foldcolumn = "1"
+vim.opt.foldtext = ""
 vim.opt.foldopen:remove("block")
 
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---     callback = function()
---         if require("nvim-treesitter.parsers").has_parser() then
---             vim.opt.foldmethod = "expr"
---             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
---         else
---             vim.opt.foldmethod = "indent"
---         end
---     end,
--- })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	callback = function()
+		if require("nvim-treesitter.parsers").has_parser() then
+			vim.opt.foldmethod = "expr"
+			vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		else
+			vim.opt.foldmethod = "indent"
+		end
+	end,
+})

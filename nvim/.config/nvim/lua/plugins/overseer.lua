@@ -15,7 +15,7 @@ return {
 			{ "<leader>es", "<cmd>OverseerSaveBundle<CR>", silent = true },
 			{ "<leader>ed", "<cmd>OverseerDeleteBundle<CR>", silent = true },
 			{
-				"<leader>oR",
+				"<leader>eR",
 				function()
 					local overseer = require("overseer")
 					local tasks = overseer.list_tasks({ recent_first = true })

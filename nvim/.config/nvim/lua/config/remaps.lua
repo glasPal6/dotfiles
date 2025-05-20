@@ -26,12 +26,8 @@ vim.keymap.set("n", "<C-Left>", "<C-w><Left>")
 vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "<leader>ln", ":lnext<CR>", { silent = true })
-vim.keymap.set("n", "<leader>lp", ":lprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>", { silent = true })
 
-vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
-vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { silent = true })

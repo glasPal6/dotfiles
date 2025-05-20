@@ -18,7 +18,6 @@ return {
 						-- "overseer",
 					},
 					lualine_x = {
-						require("noice").api.status.mode.get,
 						"encoding",
 						"fileformat",
 						"filetype",
