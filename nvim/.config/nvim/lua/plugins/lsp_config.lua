@@ -82,6 +82,22 @@ return {
 			vim.diagnostic.config({
 				virtual_text = true,
 				-- virtual_line = true,
+				float = {
+					border = "rounded",
+					source = true,
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN] = "󰀪 ",
+						[vim.diagnostic.severity.INFO] = "󰋽 ",
+						[vim.diagnostic.severity.HINT] = "󰌶 ",
+					},
+					numhl = {
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+						[vim.diagnostic.severity.WARN] = "WarningMsg",
+					},
+				},
 			})
 
 			-- Commands if there is an LSP
@@ -110,16 +126,6 @@ return {
 		end,
 	},
 
-	{
-		"zeioth/garbage-day.nvim",
-		dependencies = "neovim/nvim-lspconfig",
-		event = "VeryLazy",
-		opts = {
-			aggressive_mode = false,
-			grace_period = 60 * 10,
-		},
-	},
-
 	-- nvim-lint and conform
 	{
 		"stevearc/conform.nvim",
@@ -134,6 +140,13 @@ return {
 					c = { "clang-format" },
 					cmake = { "gersemi" },
 				},
+				-- formatters = {
+				-- 	clang_format = {
+				-- 		prepend_args = {
+				-- 			"--style={BasedOnStyle: Google, IndentWidth: 4, BreakBeforeBraces: Attach}",
+				-- 		},
+				-- 	},
+				-- },
 				format_on_save = {
 					async = false,
 					timeout_ms = 500,
@@ -143,29 +156,29 @@ return {
 		end,
 	},
 
-	{
-		"mfussenegger/nvim-lint",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local lint = require("lint")
-
-			lint.linters_by_ft = {
-				-- lua = { "luacheck" },
-				python = { "ruff" },
-				c = { "cpplint" },
-			}
-
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					if vim.opt_local.modifiable:get() then
-						-- lint.try_lint()
-						lint.try_lint(nil, { ignore_errors = true })
-					end
-				end,
-			})
-		end,
-	},
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	config = function()
+	-- 		local lint = require("lint")
+	--
+	-- 		lint.linters_by_ft = {
+	-- 			-- lua = { "luacheck" },
+	-- 			python = { "ruff" },
+	-- 			-- c = { "cpplint" },
+	-- 		}
+	--
+	-- 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+	-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+	-- 			-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+	-- 			group = lint_augroup,
+	-- 			callback = function()
+	-- 				if vim.opt_local.modifiable:get() then
+	-- 					-- lint.try_lint()
+	-- 					lint.try_lint(nil, { ignore_errors = true })
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 }

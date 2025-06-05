@@ -43,8 +43,10 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Containers: lazydocker - look at podman alternative
 - Fuzzy finder: fzf
 - Python Package manager: poetry
+- Keymapp or Wally to flash keyboard
 
 ### Terminal help:
 - zoxide
 - eza
 - fd
+- sshfs
