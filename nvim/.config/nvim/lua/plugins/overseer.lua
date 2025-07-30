@@ -1,7 +1,4 @@
 return {
-	-- Also options:
-	-- https://github.com/ej-shafran/compile-mode.nvim
-	-- https://github.com/tpope/vim-dispatch
 
 	-- Run commands in nvim
 	{
