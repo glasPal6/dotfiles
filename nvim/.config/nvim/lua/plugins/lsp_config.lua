@@ -115,12 +115,12 @@ return {
 					vim.keymap.set("n", "<leader>ca", function()
 						vim.lsp.buf.code_action()
 					end, opts)
-					-- vim.keymap.set("n", "<leader>vrr", function()
-					-- 	vim.lsp.buf.references()
-					-- end, opts)
-					-- vim.keymap.set("n", "<leader>vrn", function()
-					-- 	vim.lsp.buf.rename()
-					-- end, opts)
+					vim.keymap.set("n", "<leader>vrr", function()
+						vim.lsp.buf.references()
+					end, opts)
+					vim.keymap.set("n", "<leader>vrn", function()
+						vim.lsp.buf.rename()
+					end, opts)
 				end,
 			})
 		end,

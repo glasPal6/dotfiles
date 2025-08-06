@@ -1,4 +1,6 @@
  Arch linux install guide
+ -- Look at this: https://sharafat.pages.dev/archlinux-install/
+    -- Still need to do docker and the other stuff here
 
 ## References:
 ### BTRFS with rollbach
@@ -132,7 +134,7 @@ grep vendor_id /proc/cpuinfo
 Install the base system
 ```bash
 pacman -Syy
-pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-lts linux-firmware bash-completion htop man-db neovim networkmanager tmux git
+pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-firmware htop man-db neovim networkmanager git fwupd
 ```
 
 Generate the fstab and go into the filesystem
@@ -179,7 +181,7 @@ sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/" /etc/sudoers
 
 Enable the network manager
 ```bash
-systemctl enable NetworkManager
+systemctl enable NetworkManager.service
 ```
 
 ## Boot manager
@@ -231,8 +233,13 @@ reboot
 ### Sudo privileges and Pacman
 
 Add colour to the package manager
-- Add `Color` to `/etc/pacman.conf` under Misc options
+- Add `Color` to `/etc/pacman.conf` under Misc options and ParallelDownloads
 - Run `sudo pacman -Syu` to update the system
+
+```bash
+sudo sed -i '/#Color/Color' /etc/pacman.conf
+sudo sed -i '/#ParallelDownloads/ParallelDownloads' /etc/pacman.conf
+```
 
 ### Use TRIM for SSD storage
 
@@ -262,6 +269,189 @@ makepkg -si
 cd .. ; sudo rm -r paru
 paru
 ```
+
+### Other Packages
+
+```bash
+sudo pacman -S libnotify
+```
+
+### Grub Timeout
+
+Edit the `/etc/default/grub` to remove the grub menu. This will then be shown if you hold the shift key
+```bash
+grep -q '^GRUB_FORCE_HIDDEN_MENU="true"' /etc/default/grub || \
+echo 'GRUB_FORCE_HIDDEN_MENU="true"' | sudo tee -a /etc/default/grub
+```
+
+Then create this file
+```bash
+sudo tee /etc/grub.d/31_hold_shift > /dev/null <<'EOF'
+#! /bin/sh
+set -e
+
+prefix="/usr"
+exec_prefix="${prefix}"
+datarootdir="${prefix}/share"
+
+export TEXTDOMAIN=grub
+export TEXTDOMAINDIR="${datarootdir}/locale"
+source "${datarootdir}/grub/grub-mkconfig_lib"
+
+found_other_os=
+
+make_timeout () {
+
+  if [ "x${GRUB_FORCE_HIDDEN_MENU}" = "xtrue" ] ; then
+    if [ "x${1}" != "x" ] ; then
+      if [ "x${GRUB_HIDDEN_TIMEOUT_QUIET}" = "xtrue" ] ; then
+    verbose=
+      else
+    verbose=" --verbose"
+      fi
+
+      if [ "x${1}" = "x0" ] ; then
+    cat <<EOF
+if [ "x\${timeout}" != "x-1" ]; then
+  if keystatus; then
+    if keystatus --shift; then
+      set timeout=-1
+    else
+      set timeout=0
+    fi
+  else
+    if sleep$verbose --interruptible 3 ; then
+      set timeout=0
+    fi
+  fi
+fi
+EOF
+      else
+    cat << EOF
+if [ "x\${timeout}" != "x-1" ]; then
+  if sleep$verbose --interruptible ${GRUB_HIDDEN_TIMEOUT} ; then
+    set timeout=0
+  fi
+fi
+EOF
+      fi
+    fi
+  fi
+}
+
+adjust_timeout () {
+  if [ "x$GRUB_BUTTON_CMOS_ADDRESS" != "x" ]; then
+    cat <<EOF
+if cmostest $GRUB_BUTTON_CMOS_ADDRESS ; then
+EOF
+    make_timeout "${GRUB_HIDDEN_TIMEOUT_BUTTON}" "${GRUB_TIMEOUT_BUTTON}"
+    echo else
+    make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}"
+    echo fi
+  else
+    make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}"
+  fi
+}
+
+  adjust_timeout
+
+    cat <<EOF
+if [ "x\${timeout}" != "x-1" ]; then
+  if keystatus; then
+    if keystatus --shift; then
+      set timeout=-1
+    else
+      set timeout=0
+    fi
+  else
+    if sleep$verbose --interruptible 3 ; then
+      set timeout=0
+    fi
+  fi
+fi
+EOF
+```
+
+Then make it executable and regenerate the grub config
+```bash
+sudo chmod +x /etc/grub.d/31_hold_shift
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Install sddm and hyprland
+
+#### Install SDDM (Simple Desktop Display Manager)
+
+Install SDDM:
+```bash
+sudo pacman -S sddm
+```
+
+Enable SDDM to start on boot:
+```bash
+sudo systemctl enable sddm
+```
+
+Optionally, you can install a theme for SDDM:
+```bash
+sudo pacman -S sddm-kcm
+```
+This allows you to configure SDDM themes via KDE System Settings.
+
+#### Install Hyprland (Wayland Compositor)
+
+Install Hyprland and its dependencies:
+```bash
+sudo pacman -S hyprland wayland xorg-xwayland wl-clipboard grim slurp mako wofi
+```
+
+Optionally, install additional tools for a better experience:
+```bash
+sudo pacman -S swaybg swaylock swayidle
+```
+
+Set up the environment for Hyprland:
+1. Add the following to your `~/.bash_profile` or `~/.zshrc`:
+   ```bash
+   export XDG_SESSION_TYPE=wayland
+   export GDK_BACKEND=wayland
+   export QT_QPA_PLATFORM=wayland
+   export CLUTTER_BACKEND=wayland
+   export SDL_VIDEODRIVER=wayland
+   export _JAVA_AWT_WM_NONREPARENTING=1
+   export WLR_NO_HARDWARE_CURSORS=1
+   ```
+
+2. Create a basic Hyprland configuration file:
+   ```bash
+   mkdir -p ~/.config/hypr
+   cp /etc/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
+   ```
+
+3. Start Hyprland by adding it to your `.xinitrc`:
+   ```bash
+   exec Hyprland
+   ```
+
+After rebooting, SDDM will handle the login, and you can select Hyprland as your session.
+
+- Install a terminal emulator (e.g., Alacritty or Kitty):
+  ```bash
+  sudo pacman -S alacritty
+  ```
+
+- Install a compositor-friendly file manager (e.g., Thunar):
+  ```bash
+  sudo pacman -S thunar
+  ```
+
+- Install a notification daemon (e.g., Mako):
+  ```bash
+  sudo pacman -S mako
+  ```
+
+- Customize Hyprland further by editing `~/.config/hypr/hyprland.conf`.
+
 ## Setup snapshots with snapper
 
 ### Install snapper
@@ -298,6 +488,7 @@ Automate the taking and cleaning of the snapshots
 sudo systemctl enable --now snapper-timeline.timer
 sudo systemctl enable --now snapper-cleanup.timer
 ```
+
 ### System rollbacks
 
 Boot into a snapshot, taking note of the snapshot number that you want to go back to

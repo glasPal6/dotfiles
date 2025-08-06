@@ -26,7 +26,7 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - PDF viewer: Okular with jabref, (potentially change)
 
 ## Fun stuff
-- Game Engine: Godot, raylib, sdl2
+- Game Engine: raylib
 - Pixel art: Aseprite
 - Music: ?
 
