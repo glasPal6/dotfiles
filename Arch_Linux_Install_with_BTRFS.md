@@ -273,7 +273,7 @@ paru
 ### Other Packages
 
 ```bash
-sudo pacman -S libnotify htop man-db neovim networkmanager git fwupd
+sudo pacman -S libnotify btop man-db neovim git fwupd
 ```
 
 ### Grub Timeout
@@ -402,7 +402,7 @@ This allows you to configure SDDM themes via KDE System Settings.
 
 Install Hyprland and its dependencies:
 ```bash
-sudo pacman -S hyprland wayland xorg-xwayland wl-clipboard grim slurp mako wofi alacritty
+sudo pacman -S hyprland wayland xorg-xwayland wl-clipboard grim slurp mako wofi kitty
 ```
 
 Optionally, install additional tools for a better experience:

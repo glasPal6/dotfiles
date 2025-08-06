@@ -271,6 +271,40 @@ mkinitcpio -P
 # Generate GRUB config
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# Install and configure Snapper
+pacman -S --noconfirm snapper snap-pac
+
+# Unmount .snapshots if mounted
+mountpoint -q /.snapshots && umount /.snapshots
+rm -rf /.snapshots
+
+# Create Snapper config for root
+snapper -c root create-config /
+
+# Remove auto-created .snapshots subvolume
+btrfs subvolume delete /.snapshots
+
+# Re-create .snapshots directory and remount
+mkdir /.snapshots
+mount -a
+
+# Set permissions
+chmod 750 /.snapshots
+chown :wheel /.snapshots
+
+# Allow user to manage snapshots
+sed -i "s/^ALLOW_USERS=\"\"/ALLOW_USERS=\"${username}\"/" /etc/snapper/configs/root
+
+# Enable timeline and cleanup services
+systemctl enable snapper-timeline.timer
+systemctl enable snapper-cleanup.timer
+
+# Enable SSD TRIM if needed
+systemctl enable fstrim.timer
+
+# Take initial snapshot
+snapper -c root create -d "Base system snapshot"
+
 EOF
     
     # Make the script executable
