@@ -2,7 +2,7 @@ return {
 
 	-- For more advanced options
 	-- {
-	--     "github/copilot.vim",
+	-- 	"github/copilot.vim",
 	-- },
 
 	{
@@ -57,7 +57,6 @@ return {
 				"<cmd>CodeCompanionChat Toggle<cr>",
 				{ noremap = true, silent = true }
 			)
-			vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
 			vim.cmd([[cab cc CodeCompanion]])
 		end,

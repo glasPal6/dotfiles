@@ -134,7 +134,7 @@ grep vendor_id /proc/cpuinfo
 Install the base system
 ```bash
 pacman -Syy
-pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-firmware htop man-db neovim networkmanager git fwupd
+pacstrap /mnt base base-devel ${microcode} btrfs-progs linux linux-firmware networkmanager
 ```
 
 Generate the fstab and go into the filesystem
@@ -273,7 +273,7 @@ paru
 ### Other Packages
 
 ```bash
-sudo pacman -S libnotify
+sudo pacman -S libnotify htop man-db neovim networkmanager git fwupd
 ```
 
 ### Grub Timeout
@@ -402,7 +402,7 @@ This allows you to configure SDDM themes via KDE System Settings.
 
 Install Hyprland and its dependencies:
 ```bash
-sudo pacman -S hyprland wayland xorg-xwayland wl-clipboard grim slurp mako wofi
+sudo pacman -S hyprland wayland xorg-xwayland wl-clipboard grim slurp mako wofi alacritty
 ```
 
 Optionally, install additional tools for a better experience:
@@ -451,6 +451,28 @@ After rebooting, SDDM will handle the login, and you can select Hyprland as your
   ```
 
 - Customize Hyprland further by editing `~/.config/hypr/hyprland.conf`.
+
+## Custom software that I use
+
+- wezterm
+- neovim
+- zsh
+- btop
+- tmux
+- Zen
+- Discord
+- Okular with jabref
+- bear or compiledb
+- ncdu
+- starship
+- lazygit
+- lazydocker
+- fzf
+- poetry
+- zoxide
+- eza
+- fd
+- sshfs
 
 ## Setup snapshots with snapper
 
