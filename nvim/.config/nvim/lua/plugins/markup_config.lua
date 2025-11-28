@@ -21,14 +21,14 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		event = "VeryLazy",
-		ft = { "markdown", "codecompanion" },
-		-- ft = { "markdown", "Avante" },
+		-- ft = { "markdown", "codecompanion" },
+		ft = { "markdown", "Avante" },
 		opts = {
-			file_types = { "markdown", "codecompanion" },
-			-- file_types = { "markdown", "Avante" },
+			-- file_types = { "markdown", "codecompanion" },
+			file_types = { "markdown", "Avante" },
 			render_modes = true, -- Render in ALL modes
 			sign = {
-				enabled = false, -- Turn off in the status column
+				enabled = true, -- Turn off in the status column
 			},
 		},
 	},

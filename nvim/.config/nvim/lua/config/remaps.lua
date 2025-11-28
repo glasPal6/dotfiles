@@ -9,6 +9,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<S-CR>", "<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 
 -- vim.keymap.set("n", "<leader>nv", ":vsplit<CR>")
@@ -27,7 +28,6 @@ vim.keymap.set("v", "<CS-Down>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<CS-Up>", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<leader>lc", ":lclose<CR>", { silent = true })
-
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { silent = true })

@@ -21,6 +21,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit snippet OMZP::command-not-found
 
 # Load completions
+fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
@@ -94,6 +95,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 export PATH=$(go env GOPATH)/bin:$PATH
+export PATH="/home/dylan/.pixi/bin:$PATH"
 
 export MMWAVE_SDK_TOOLS_INSTALL_PATH=/home/dylan/Documents/University/Masters_things/Radar_Dev/TI_Programs/mmWaveSDK/mmWaveSDK_Install_2
 export MMWAVE_SDK_DEVICE=iwr14xx
@@ -108,9 +110,6 @@ export C64Px_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c64Px_3
 export C674x_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c674x_3_4_0_0
 export C674x_MATHLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mathlib_c674x_3_1_2_1
 export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr16xx_radarss_rprc.bin
-
-# Magic - Modular - MAX - Mojo
-# eval "$(magic completion --shell zsh)"
 
 # Shell integrations
 # FZF

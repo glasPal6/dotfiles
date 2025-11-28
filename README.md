@@ -45,8 +45,11 @@ Therefore the **dotfiles** directory needs to be in the ***HOME*** directory
 - Python Package manager: poetry
 - Keymapp or Wally to flash keyboard
 
+- Self hosted webserver: searxng
+
 ### Terminal help:
 - zoxide
 - eza
 - fd
 - sshfs
+- yazi
