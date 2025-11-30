@@ -33,9 +33,15 @@ if [ $? -eq 0 ]; then
     # ~/.config/starship.toml \
 
   cd "$REPO_NAME"
-  stow nvim
+  # Install stow
+  yay -S --noconfirm --needed stow
+  
   stow ghostty
-  # stow starship
+  stow nvim
+  stow scripts
+  stow starship
+  stow waybar
+  stow yazi
 else
   echo "Failed to clone the repository."
   exit 1
