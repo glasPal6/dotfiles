@@ -3,29 +3,31 @@ return {
 	-- Mason
 	{
 		"mason-org/mason.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("mason").setup({
-				ensure_installed = {
-					"clangd",
-					"lua_ls",
-					"ruff",
-					"pyright",
-					"marksman",
-					"neocmake",
-
-					"cpplint",
-					"clang-format",
-					"gersemi",
-					"marksman",
-					"texlab",
-					"stylua",
-					"luacheck",
-
-					"codelldb",
+		opts = {
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
 				},
-			})
-		end,
+			},
+		},
+		-- "clangd",
+		-- "lua_ls",
+		-- "ruff",
+		-- "pyright",
+		-- "marksman",
+		-- "neocmake",
+		--
+		-- "cpplint",
+		-- "clang-format",
+		-- "gersemi",
+		-- "marksman",
+		-- "texlab",
+		-- "stylua",
+		-- "luacheck",
+		--
+		-- "codelldb",
 	},
 
 	{
@@ -49,8 +51,6 @@ return {
 			"saghen/blink.cmp",
 		},
 		config = function()
-			-- local lsp_config = require("lspconfig")
-
 			-- Add capabilities
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			capabilities.textDocument.foldingRange = {
@@ -101,28 +101,28 @@ return {
 			})
 
 			-- Commands if there is an LSP
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-				callback = function(ev)
-					-- -- Enable completion triggered by <c-x><c-o>
-					-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-					local opts = { buffer = ev.buf }
-
-					vim.keymap.set("n", "gd", function()
-						vim.lsp.buf.definition()
-					end, opts)
-					vim.keymap.set("n", "<leader>ca", function()
-						vim.lsp.buf.code_action()
-					end, opts)
-					vim.keymap.set("n", "<leader>vrr", function()
-						vim.lsp.buf.references()
-					end, opts)
-					vim.keymap.set("n", "<leader>vrn", function()
-						vim.lsp.buf.rename()
-					end, opts)
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("LspAttach", {
+			-- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			-- 	callback = function(ev)
+			-- 		-- -- Enable completion triggered by <c-x><c-o>
+			-- 		-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+			--
+			-- 		local opts = { buffer = ev.buf }
+			--
+			-- 		vim.keymap.set("n", "gd", function()
+			-- 			vim.lsp.buf.definition()
+			-- 		end, opts)
+			-- 		vim.keymap.set("n", "<leader>ca", function()
+			-- 			vim.lsp.buf.code_action()
+			-- 		end, opts)
+			-- 		vim.keymap.set("n", "<leader>vrr", function()
+			-- 			vim.lsp.buf.references()
+			-- 		end, opts)
+			-- 		vim.keymap.set("n", "<leader>vrn", function()
+			-- 			vim.lsp.buf.rename()
+			-- 		end, opts)
+			-- 	end,
+			-- })
 		end,
 	},
 
@@ -156,29 +156,29 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"mfussenegger/nvim-lint",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- 	config = function()
-	-- 		local lint = require("lint")
-	--
-	-- 		lint.linters_by_ft = {
-	-- 			-- lua = { "luacheck" },
-	-- 			python = { "ruff" },
-	-- 			-- c = { "cpplint" },
-	-- 		}
-	--
-	-- 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-	-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-	-- 			-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-	-- 			group = lint_augroup,
-	-- 			callback = function()
-	-- 				if vim.opt_local.modifiable:get() then
-	-- 					-- lint.try_lint()
-	-- 					lint.try_lint(nil, { ignore_errors = true })
-	-- 				end
-	-- 			end,
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local lint = require("lint")
+
+			lint.linters_by_ft = {
+				lua = { "luacheck" },
+				python = { "ruff" },
+				c = { "cpplint" },
+			}
+
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+				group = lint_augroup,
+				callback = function()
+					if vim.opt_local.modifiable:get() then
+						-- lint.try_lint()
+						lint.try_lint(nil, { ignore_errors = true })
+					end
+				end,
+			})
+		end,
+	},
 }
