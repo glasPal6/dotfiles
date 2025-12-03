@@ -97,6 +97,7 @@
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
     "interval": 5,
     "on-click": "omarchy-menu power",
+    "on-click-right": "omarchy-launch-or-focus-tui battery-zen tui",
     "states": {
       "warning": 20,
       "critical": 10
