@@ -17,6 +17,7 @@ return {
 			-- local model_choice = "claude-3.5-sonnet"
 			local model_choice = "gpt-4.1"
 			require("codecompanion").setup({
+				ignore_warnings = true,
 				strategies = {
 					chat = {
 						adapter = {

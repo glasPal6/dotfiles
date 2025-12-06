@@ -21,27 +21,13 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		event = "VeryLazy",
-		-- ft = { "markdown", "codecompanion" },
-		ft = { "markdown", "Avante" },
+		ft = { "markdown", "tex", "codecompanion" },
 		opts = {
-			-- file_types = { "markdown", "codecompanion" },
-			file_types = { "markdown", "Avante" },
+			file_types = { "markdown", "tex", "codecompanion" },
 			render_modes = true, -- Render in ALL modes
 			sign = {
 				enabled = true, -- Turn off in the status column
 			},
 		},
-	},
-
-	-- Live markdown
-	{
-		"toppair/peek.nvim",
-		event = { "VeryLazy" },
-		build = "deno task --quiet build:fast",
-		config = function()
-			require("peek").setup()
-			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
-		end,
 	},
 }

@@ -6,7 +6,7 @@ return {
 		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
-			{ "<leader>pm", "<cmd>FzfLua oldfiles<CR>" },
+			{ "<leader>pm", "<cmd>FzfLua files<CR>" },
 			{ "<leader>pg", "<cmd>FzfLua live_grep<CR>" },
 			{ "<leader>pc", "<cmd>FzfLua git_bcommits<CR>" },
 			-- { "<leader>pt", "<cmd>FzfLua treesitter<CR>" },
