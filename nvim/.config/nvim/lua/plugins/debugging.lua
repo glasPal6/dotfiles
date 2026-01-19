@@ -1,25 +1,24 @@
 return {
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        event = { "VeryLazy" },
-        opts = {
-            handlers = {},
-        },
-    },
 
-    -- C Debugger
-    {
-        "mfussenegger/nvim-dap",
-        dependencies = {
-            "rcarriga/nvim-dap-ui",
-            "nvim-neotest/nvim-nio",
-            "jay-babu/mason-nvim-dap.nvim",
-            "theHamsta/nvim-dap-virtual-text",
-        },
-        event = { "VeryLazy" },
+	-- C Debugger
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
+			{
+				"jay-babu/mason-nvim-dap.nvim",
+				dependencies = {
+					"williamboman/mason.nvim",
+				},
+				-- event = { "VeryLazy" },
+				opts = {
+					handlers = {},
+				},
+			},
+			"theHamsta/nvim-dap-virtual-text",
+		},
+        -- event = { "VeryLazy" },
         -- stylua: ignore
         keys = {
             { "<leader>dc", function() require("dap").continue() end, },
@@ -28,24 +27,24 @@ return {
             { "<leader>do", function() require("dap").step_out() end, },
             { "<leader>dt", function() require("dap").toggle_breakpoint() end, },
         },
-        config = function()
-            local dap = require("dap")
-            local dapui = require("dapui")
-            require("dapui").setup()
-            require("nvim-dap-virtual-text").setup()
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			require("dapui").setup()
+			require("nvim-dap-virtual-text").setup()
 
-            dap.listeners.before.attach.dapui_config = function()
-                dapui.open()
-            end
-            dap.listeners.before.launch.dapui_config = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated.dapui_config = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited.dapui_config = function()
-                dapui.close()
-            end
-        end,
-    },
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+		end,
+	},
 }

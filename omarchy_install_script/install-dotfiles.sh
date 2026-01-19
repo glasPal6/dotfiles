@@ -41,7 +41,6 @@ if [ $? -eq 0 ]; then
   stow scripts
   stow starship
   stow waybar
-  stow yazi
 else
   echo "Failed to clone the repository."
   exit 1
