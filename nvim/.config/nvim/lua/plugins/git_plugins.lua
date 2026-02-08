@@ -28,6 +28,21 @@ return {
 			{ "<leader>gd", ":DiffviewOpen<CR>", { silent = true } },
 			{ "<leader>gh", ":DiffviewFileHistory %<CR>", { silent = true } },
 		},
+		opts = {
+			file_panel = {
+				listing_style = "tree", -- One of 'list' or 'tree'
+				tree_options = { -- Only applies when listing_style is 'tree'
+					flatten_dirs = true, -- Flatten dirs that only contain one single dir
+					folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
+				},
+				win_config = { -- See |diffview-config-win_config|
+					position = "bottom",
+					width = 35,
+					height = 10,
+					win_opts = {},
+				},
+			},
+		},
 	},
 
 	-- Show git signs in the project

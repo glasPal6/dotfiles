@@ -35,6 +35,7 @@
     "orientation": "inherit",
     "modules": [
     // "backlight", 
+    "custom/tailscale",
     "network",
     "bluetooth",
     "pulseaudio#output",
@@ -47,7 +48,23 @@
   },
     "group/right2": {
     "orientation": "inherit",
-    "modules": ["mpris"]
+    // "modules": ["mpris"]
+  },
+
+"custom/tailscale": {
+    "exec": "~/.config/waybar/scripts/waybar_tailscale.sh --status",
+    "on-click": "exec ~/.config/waybar/scripts/waybar_tailscale.sh --toggle",
+    "exec-on-event": true,
+    "format": "{icon} {text}",
+    "format-icons": {
+      "connected": "",
+      "stopped": "",
+      "connecting": "",
+      "disconnecting": ""
+    },
+    "tooltip": true,
+    "return-type": "json",
+    "interval": 5
   },
 
 "custom/omarchy-theme": {
@@ -278,6 +295,7 @@
     "tooltip-format-charging": "{timeTo}",
     "interval": 5,
     "on-click": "omarchy-menu power",
+    "on-click-right": "omarchy-launch-tui battery-zen tui",
     "states": {
       "warning": 20,
       "critical": 10

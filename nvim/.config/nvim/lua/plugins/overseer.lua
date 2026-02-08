@@ -8,9 +8,19 @@ return {
 		keys = {
 			{ "<leader>et", "<cmd>OverseerToggle<CR>", silent = true },
 			{ "<leader>er", "<cmd>OverseerRun<CR>", silent = true },
-			{ "<leader>el", "<cmd>OverseerLoadBundle<CR>", silent = true },
-			{ "<leader>es", "<cmd>OverseerSaveBundle<CR>", silent = true },
-			{ "<leader>ed", "<cmd>OverseerDeleteBundle<CR>", silent = true },
+			{ "<leader>ea", "<cmd>OverseerTaskAction<CR>", silent = true },
+			{
+				"<leader>es",
+				function()
+					vim.ui.input({ prompt = "Shell command: " }, function(cmd)
+						if cmd and cmd ~= "" then
+							vim.cmd("OverseerShell " .. cmd)
+						end
+					end)
+				end,
+				desc = "Run shell command with Overseer",
+				silent = true,
+			},
 			{
 				"<leader>eR",
 				function()
@@ -30,7 +40,6 @@ return {
 				component_aliases = {
 					default = {
 						{ "display_duration", detail_level = 3 },
-						"on_output_summarize",
 						"on_exit_set_status",
 						"on_complete_notify",
 						{ "on_complete_dispose", require_view = { "SUCCESS", "FAILURE" } },
