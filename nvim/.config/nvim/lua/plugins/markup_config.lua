@@ -18,15 +18,25 @@ return {
 	},
 
 	-- Render markdown in a pretty format
+	-- {
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	-- 	event = "VeryLazy",
+	-- 	ft = { "markdown", "tex", "codecompanion" },
+	-- 	opts = {
+	-- 		file_types = { "markdown", "tex", "codecompanion" },
+	-- 		-- sign = {
+	-- 		-- 	enabled = true, -- Turn off in the status column
+	-- 		-- },
+	-- 	},
+	-- },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		event = "VeryLazy",
-		ft = { "markdown", "tex", "codecompanion" },
+		ft = { "markdown", "codecompanion" },
 		opts = {
-			file_types = { "markdown", "tex", "codecompanion" },
-			render_modes = true, -- Render in ALL modes
-			sign = {
-				enabled = true, -- Turn off in the status column
+			file_types = { "markdown", "codecompanion" },
+			anti_conceal = {
+				enabled = false,
 			},
 		},
 	},

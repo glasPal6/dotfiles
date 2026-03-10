@@ -148,7 +148,7 @@ window#waybar > box {
 #custom-updatespacman,
 #custom-omarchy,
 #custom-update,
-#custom-screenrecording-indicator,
+
 #clock,
 #custom-omarchy-theme,
 #custom-omarchy-theme-set,
@@ -249,12 +249,21 @@ tooltip label {
 }
 
 /* Specific animation Module */
-
 #custom-screenrecording-indicator {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   color: transparent;
+}
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 10px;
+  padding-bottom: 1px;
 }
 
 #custom-screenrecording-indicator.active {
@@ -311,4 +320,9 @@ animation: repeat;
   animation-timing-function: steps(12);
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
 }

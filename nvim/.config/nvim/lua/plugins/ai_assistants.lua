@@ -16,6 +16,8 @@ return {
 		config = function()
 			-- local model_choice = "claude-3.5-sonnet"
 			local model_choice = "gpt-4.1"
+			-- local model_choice = "gpt-5.1"
+			-- local model_choice = "gpt-5.2-codex"
 			require("codecompanion").setup({
 				ignore_warnings = true,
 				strategies = {

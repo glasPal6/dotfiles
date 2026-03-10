@@ -54,3 +54,6 @@ vim.opt.foldnestmax = 1
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
 vim.opt.foldopen:remove("block")
+
+-- All tex files are latex files
+vim.g.tex_flavor = "latex"
