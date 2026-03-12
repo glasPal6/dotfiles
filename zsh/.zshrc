@@ -22,6 +22,7 @@ zinit snippet OMZP::command-not-found
 
 # Load completions
 fpath+=~/.zfunc
+fpath+=~/.zsh/completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q

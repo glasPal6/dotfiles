@@ -7,7 +7,7 @@
   "margin-top": 0,
   "modules-left": [
     "group/left1", 
-    "group/left2",
+    "tray"
   ],
   "group/left1": {
     "orientation": "inherit",
@@ -388,6 +388,7 @@
   "tray": {
     "icon-size": 11,
     "spacing": 5,
-    "show-passive-items": true
+    "show-passive-items": true,
+    "show-empty": false
   },
 }
