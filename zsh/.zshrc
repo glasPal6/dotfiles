@@ -68,49 +68,14 @@ alias lg='ll | grep'
 alias np='nvim .'
 alias nn='nvim'
 
-alias performance-off='sudo auto-cpufreq --force=reset'
-alias performance-on='sudo auto-cpufreq --force=performance'
-
-alias quick-update='sudo apt-get update ; sudo apt-get upgrade ; sudo apt-get autoremove ; sudo snap refresh'
-
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
 
-alias postgrad-login='nmcli radio wifi off; sudo mount -t cifs -o user=u19090634 //up.ac.za/uplogin /mnt ; sudo umount /mnt'
-alias postgrad-exit='nmcli radio wifi on'
+# PATH
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Exports
 export EDITOR="nvim"
 export VISUAL="nvim"
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-
-export QSYS_ROOTDIR="/home/dylan/intelFPGA_lite/quartus/sopc_builder/bin"
-export ADB=/usr/bin/adb 
-export PATH="/opt/aseprite:$PATH"
-
-export PATH="$PATH:/home/dylan/.modular/bin"
-
-export PATH="$PATH:/home/dylan/.deno/bin"
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH=$(go env GOPATH)/bin:$PATH
-export PATH="/home/dylan/.pixi/bin:$PATH"
-
-export MMWAVE_SDK_TOOLS_INSTALL_PATH=/home/dylan/Documents/University/Masters_things/Radar_Dev/TI_Programs/mmWaveSDK/mmWaveSDK_Install_2
-export MMWAVE_SDK_DEVICE=iwr14xx
-export DOWNLOAD_FROM_CCS=yes
-export MMWAVE_SDK_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mmwave_sdk_02_01_00_04/packages
-export R4F_CODEGEN_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/ti-cgt-arm_16.9.6.LTS
-export XDC_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/xdctools_3_50_04_43_core
-export BIOS_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/bios_6_53_02_00/packages
-export XWR14XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr12xx_xwr14xx_radarss_rprc.bin
-export C674_CODEGEN_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/ti-cgt-c6000_8.1.3
-export C64Px_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c64Px_3_4_0_0
-export C674x_DSPLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/dsplib_c674x_3_4_0_0
-export C674x_MATHLIB_INSTALL_PATH=${MMWAVE_SDK_TOOLS_INSTALL_PATH}/mathlib_c674x_3_1_2_1
-export XWR16XX_RADARSS_IMAGE_BIN=${MMWAVE_SDK_INSTALL_PATH}/../firmware/radarss/xwr16xx_radarss_rprc.bin
 
 # Shell integrations
 # FZF
@@ -138,8 +103,7 @@ precmd_functions+=(_zoxide_add_except_worktree)
 # Source the prompt
 eval "$(starship init zsh)"
 
-#
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new-session -s default
+fi
 
