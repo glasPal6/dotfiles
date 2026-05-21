@@ -5,60 +5,60 @@ return {
 	-- 	"github/copilot.vim",
 	-- },
 
-	{
-		"olimorris/codecompanion.nvim",
-		event = { "VeryLazy" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"MeanderingProgrammer/render-markdown.nvim",
-		},
-		config = function()
-			-- local model_choice = "claude-3.5-sonnet"
-			local model_choice = "gpt-4.1"
-			-- local model_choice = "gpt-5.1"
-			-- local model_choice = "gpt-5.2-codex"
-			require("codecompanion").setup({
-				ignore_warnings = true,
-				strategies = {
-					chat = {
-						adapter = {
-							name = "copilot",
-							model = model_choice,
-						},
-					},
-					inline = {
-						adapter = {
-							name = "copilot",
-							model = model_choice,
-						},
-					},
-				},
-				display = {
-					action_palette = {
-						width = 95,
-						height = 10,
-						prompt = "Prompt ", -- Prompt used for interactive LLM calls
-						provider = "default", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
-						opts = {
-							show_default_actions = true, -- Show the default actions in the action palette?
-							show_default_prompt_library = true, -- Show the default prompt library in the action palette?
-						},
-					},
-				},
-			})
-
-			vim.keymap.set({ "n", "v" }, "<C-f>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-			vim.keymap.set(
-				{ "n", "v" },
-				"<Leader>aa",
-				"<cmd>CodeCompanionChat Toggle<cr>",
-				{ noremap = true, silent = true }
-			)
-
-			vim.cmd([[cab cc CodeCompanion]])
-		end,
-	},
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	event = { "VeryLazy" },
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"MeanderingProgrammer/render-markdown.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		-- local model_choice = "claude-3.5-sonnet"
+	-- 		local model_choice = "gpt-4.1"
+	-- 		-- local model_choice = "gpt-5.1"
+	-- 		-- local model_choice = "gpt-5.2-codex"
+	-- 		require("codecompanion").setup({
+	-- 			ignore_warnings = true,
+	-- 			strategies = {
+	-- 				chat = {
+	-- 					adapter = {
+	-- 						name = "copilot",
+	-- 						model = model_choice,
+	-- 					},
+	-- 				},
+	-- 				inline = {
+	-- 					adapter = {
+	-- 						name = "copilot",
+	-- 						model = model_choice,
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 			display = {
+	-- 				action_palette = {
+	-- 					width = 95,
+	-- 					height = 10,
+	-- 					prompt = "Prompt ", -- Prompt used for interactive LLM calls
+	-- 					provider = "default", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
+	-- 					opts = {
+	-- 						show_default_actions = true, -- Show the default actions in the action palette?
+	-- 						show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		vim.keymap.set({ "n", "v" }, "<C-f>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+	-- 		vim.keymap.set(
+	-- 			{ "n", "v" },
+	-- 			"<Leader>aa",
+	-- 			"<cmd>CodeCompanionChat Toggle<cr>",
+	-- 			{ noremap = true, silent = true }
+	-- 		)
+	--
+	-- 		vim.cmd([[cab cc CodeCompanion]])
+	-- 	end,
+	-- },
 
 	-- {
 	-- 	{
