@@ -133,58 +133,80 @@ precmd_functions+=(_zoxide_add_except_worktree)
 _todo_show() {
   local todo_file="$PWD/.todo.toml"
   [[ -f "$todo_file" ]] || return
-  python3 - "$todo_file" <<'PY'
-import os
-import sys
-from pathlib import Path
 
-path = Path(sys.argv[1])
-try:
-    import tomllib
-except Exception:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
+  local RESET="" CYAN="" BOLD="" GREEN="" YELLOW="" RED=""
+  if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+    RESET=$'\033[0m'
+    CYAN=$'\033[36m'
+    BOLD=$'\033[1m'
+    GREEN=$'\033[32m'
+    YELLOW=$'\033[33m'
+    RED=$'\033[31m'
+  fi
 
-USE_COLOR = sys.stdout.isatty() and os.environ.get("NO_COLOR") is None
-
-def color(code: str) -> str:
-    return f"\033[{code}m" if USE_COLOR else ""
-
-RESET = color("0")
-CYAN = color("36")
-BOLD = color("1")
-GREEN = color("32")
-YELLOW = color("33")
-RED = color("31")
-
-
-def bar(percent: int, width: int = 20) -> str:
-    percent = max(0, min(100, percent))
-    filled = int((percent / 100) * width)
-    if percent >= 67:
-        fill_color = GREEN
-    elif percent >= 34:
-        fill_color = YELLOW
-    else:
-        fill_color = RED
-    filled_part = f"{fill_color}{'=' * filled}{RESET}"
-    empty_part = "-" * (width - filled)
-    return "[" + filled_part + empty_part + "]"
-
-data = tomllib.loads(path.read_text())
-tasks = data.get("tasks", [])
-if not tasks:
-    sys.exit(0)
-
-print(f"\n{CYAN}{BOLD}{path.parent} .todo.toml{RESET}")
-for task in tasks:
-    title = str(task.get("title", "(untitled)"))
-    progress = int(task.get("progress", 0))
-    print(f"• {title} {bar(progress)} {progress}%")
-    for sub in task.get("subtasks", [])[:]:
-        stitle = str(sub.get("title", "(untitled)"))
-        sprogress = int(sub.get("progress", 0))
-        print(f"  - {stitle} {bar(sprogress)} {sprogress}%")
-PY
+  awk -v DIR="$PWD" -v RESET="$RESET" -v CYAN="$CYAN" -v BOLD="$BOLD" \
+      -v GREEN="$GREEN" -v YELLOW="$YELLOW" -v RED="$RED" '
+    function repeat(ch, n, s, i) { for (i = 0; i < n; i++) s = s ch; return s }
+    function bar(p, width, filled, fill_color) {
+      width = 20
+      if (p < 0) p = 0
+      if (p > 100) p = 100
+      filled = int(p * width / 100)
+      if (p >= 67) fill_color = GREEN
+      else if (p >= 34) fill_color = YELLOW
+      else fill_color = RED
+      return "[" fill_color repeat("=", filled) RESET repeat("-", width - filled) "]"
+    }
+    function header() {
+      if (!header_printed) {
+        printf "\n%s%s%s .todo.toml%s\n", CYAN, BOLD, DIR, RESET
+        header_printed = 1
+      }
+    }
+    function print_task() {
+      header()
+      printf "• %s %s %d%%\n", t_title, bar(t_progress), t_progress
+    }
+    function print_sub() {
+      header()
+      printf "  - %s %s %d%%\n", s_title, bar(s_progress), s_progress
+    }
+    /^[[:space:]]*#/ { next }
+    /^[[:space:]]*\[\[tasks\]\]/ {
+      if (sub_seen) { print_sub(); sub_seen = 0 }
+      if (task_seen && !task_printed) { print_task() }
+      task_seen = 1; task_printed = 0; in_sub = 0
+      t_title = "(untitled)"; t_progress = 0
+      next
+    }
+    /^[[:space:]]*\[\[tasks\.subtasks\]\]/ {
+      if (sub_seen) { print_sub() }
+      if (task_seen && !task_printed) { print_task(); task_printed = 1 }
+      in_sub = 1; sub_seen = 1
+      s_title = "(untitled)"; s_progress = 0
+      next
+    }
+    /^[[:space:]]*title[[:space:]]*=/ {
+      line = $0
+      sub(/^[[:space:]]*title[[:space:]]*=[[:space:]]*"/, "", line)
+      sub(/".*/, "", line)
+      if (in_sub) s_title = line
+      else t_title = line
+      next
+    }
+    /^[[:space:]]*progress[[:space:]]*=/ {
+      line = $0
+      sub(/^[[:space:]]*progress[[:space:]]*=[[:space:]]*/, "", line)
+      sub(/[^0-9].*/, "", line)
+      if (in_sub) s_progress = line + 0
+      else t_progress = line + 0
+      next
+    }
+    END {
+      if (sub_seen) print_sub()
+      if (task_seen && !task_printed) print_task()
+    }
+  ' "$todo_file"
 }
 
 chpwd_functions=(${chpwd_functions:#_todo_show})
