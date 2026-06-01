@@ -2,17 +2,16 @@
 theme = Catppuccin Mocha
 
 # Font
-# font-family = "JetBrainsMono Nerd Font Mono"
-font-family = "San Francisco"
+font-family = "JetBrains Mono"
 font-style = Regular
 font-size = 12
 
 # Window
 window-theme = ghostty
-window-decoration = false
+window-decoration = true
 window-padding-x = 14
 window-padding-y = 14
-confirm-close-surface=false
+confirm-close-surface = false
 resize-overlay = never
 gtk-toolbar-style = flat
 
