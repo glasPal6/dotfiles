@@ -87,6 +87,15 @@ return {
 				end,
 			})
 
+			-- Mojo lsp - FIX: Needs updating; is slow
+			-- vim.lsp.config("mojo", {
+			-- 	capabilities = capabilities,
+			-- 	filetypes = { "mojo" },
+			-- 	root_markers = { ".git", "pyproject.toml" },
+			-- 	cmd = { vim.fn.exepath("mojo-lsp-server") },
+			-- })
+			-- vim.lsp.enable("mojo")
+
 			vim.diagnostic.config({
 				virtual_text = true,
 				-- virtual_line = true,
@@ -109,28 +118,28 @@ return {
 			})
 
 			-- Commands if there is an LSP
-			-- vim.api.nvim_create_autocmd("LspAttach", {
-			-- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-			-- 	callback = function(ev)
-			-- 		-- -- Enable completion triggered by <c-x><c-o>
-			-- 		-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-			--
-			-- 		local opts = { buffer = ev.buf }
-			--
-			-- 		vim.keymap.set("n", "gd", function()
-			-- 			vim.lsp.buf.definition()
-			-- 		end, opts)
-			-- 		vim.keymap.set("n", "<leader>ca", function()
-			-- 			vim.lsp.buf.code_action()
-			-- 		end, opts)
-			-- 		vim.keymap.set("n", "<leader>vrr", function()
-			-- 			vim.lsp.buf.references()
-			-- 		end, opts)
-			-- 		vim.keymap.set("n", "<leader>vrn", function()
-			-- 			vim.lsp.buf.rename()
-			-- 		end, opts)
-			-- 	end,
-			-- })
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					-- -- Enable completion triggered by <c-x><c-o>
+					-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+					local opts = { buffer = ev.buf }
+
+					vim.keymap.set("n", "gd", function()
+						vim.lsp.buf.definition()
+					end, opts)
+					vim.keymap.set("n", "<leader>ca", function()
+						vim.lsp.buf.code_action()
+					end, opts)
+					vim.keymap.set("n", "<leader>vrr", function()
+						vim.lsp.buf.references()
+					end, opts)
+					vim.keymap.set("n", "<leader>vrn", function()
+						vim.lsp.buf.rename()
+					end, opts)
+				end,
+			})
 		end,
 	},
 

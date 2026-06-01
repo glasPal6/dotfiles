@@ -73,27 +73,17 @@ alias np='nvim .'
 alias nn='nvim'
 
 dev() {
-    if [[ -z $TMUX ]]; then
-        echo "You must be inside tmux to use 'dev'."
+    if [[ -z ${WEZTERM_PANE:-} ]]; then
+        echo "You must be inside wezterm to use 'dev'."
         return 1
     fi
 
     local current_dir="${PWD}"
-    local base_name
-    base_name="$(basename "$current_dir")"
 
-    # Rename current window to project name and run nvim .
-    tmux rename-window "editor"
-    tmux send-keys -t "editor" "$EDITOR ." C-m
+    wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- pi
+    wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir"
 
-    # Create a new window for 'c'
-    tmux new-window -n "pi-agent" -c "$current_dir" "pi"
-
-    # Create a new window for a shell
-    tmux new-window -n "shell" -c "$current_dir"
-
-    # Select the nvim window for focus
-    tmux select-window -t "$base_name"
+    nvim .
 }
 
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
@@ -101,6 +91,7 @@ alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t com
 # PATH
 export PATH="/Users/dylankamstra/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/Users/dylankamstra/.bun/bin:$PATH"
 export HOMEBREW_NO_ENV_HINTS=1
 
 # Exports
@@ -165,11 +156,13 @@ _todo_show() {
     }
     function print_task() {
       header()
-      printf "• %s %s %d%%\n", t_title, bar(t_progress), t_progress
+      # Pad t_title so all bars line up
+      printf "• %-35s %s %d%%\n", t_title, bar(t_progress), t_progress
     }
     function print_sub() {
       header()
-      printf "  - %s %s %d%%\n", s_title, bar(s_progress), s_progress
+      # Pad s_title so all bars line up
+      printf "  - %-35s %s %d%%\n", s_title, bar(s_progress), s_progress
     }
     /^[[:space:]]*#/ { next }
     /^[[:space:]]*\[\[tasks\]\]/ {
@@ -209,7 +202,7 @@ _todo_show() {
   ' "$todo_file"
 }
 
-chpwd_functions=(${chpwd_functions:#_todo_show})
+# chpwd_functions=(${chpwd_functions:#_todo_show})
 chpwd_functions+=(_todo_show)
 
 
@@ -217,8 +210,8 @@ chpwd_functions+=(_todo_show)
 eval "$(starship init zsh)"
 eval "$(try init ~/src/tries)"
 
-if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new-session -s default
-fi
+# if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
+#     tmux attach -t default || tmux new-session -s default
+# fi
 
 eval "$(mise activate zsh)"

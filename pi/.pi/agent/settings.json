@@ -1,0 +1,28 @@
+{
+  "lastChangelogVersion": "0.78.0",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "gpt-5.2-codex",
+  "defaultThinkingLevel": "minimal",
+  "packages": [
+    "npm:pi-subagents",
+    "npm:pi-web-access",
+    "npm:pi-powerline-footer",
+    "npm:pi-ask-user",
+    "npm:pi-hashline-readmap",
+    "npm:pi-rewind",
+    "npm:pi-caveman",
+    "npm:pi-memory",
+    "npm:@tmustier/pi-usage-extension",
+    "npm:context-mode",
+    "npm:pi-lens",
+    "npm:pi-mcp-adapter"
+  ],
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "enabledModels": [
+    "github-copilot/gpt-5.2-codex",
+    "github-copilot/gpt-4o",
+    "github-copilot/gpt-4.1"
+  ]
+}

@@ -17,18 +17,17 @@ return {
 		},
 	},
 
-	-- Render markdown in a pretty format
 	-- {
-	-- 	"MeanderingProgrammer/render-markdown.nvim",
-	-- 	event = "VeryLazy",
-	-- 	ft = { "markdown", "tex", "codecompanion" },
-	-- 	opts = {
-	-- 		file_types = { "markdown", "tex", "codecompanion" },
-	-- 		-- sign = {
-	-- 		-- 	enabled = true, -- Turn off in the status column
-	-- 		-- },
-	-- 	},
+	-- 	"toppair/peek.nvim",
+	-- 	event = { "VeryLazy" },
+	-- 	build = "deno task --quiet build:fast",
+	-- 	config = function()
+	-- 		require("peek").setup()
+	-- 		vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+	-- 		vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+	-- 	end,
 	-- },
+
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		event = "VeryLazy",
