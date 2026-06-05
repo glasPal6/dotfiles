@@ -73,17 +73,18 @@ alias np='nvim .'
 alias nn='nvim'
 
 dev() {
-    if [[ -z ${WEZTERM_PANE:-} ]]; then
-        echo "You must be inside wezterm to use 'dev'."
-        return 1
+    local current_dir="$PWD"
+
+    if [[ -n ${WEZTERM_PANE:-} ]]; then
+        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- pi
+        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- zsh -ic 'touch todo.txt && tuxedo'
+        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir"
+        nvim .
+        return
     fi
 
-    local current_dir="${PWD}"
-
-    wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- pi
-    wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir"
-
-    nvim .
+    echo "You must be inside wezterm to use 'dev'."
+    return 1
 }
 
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
@@ -113,6 +114,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export _ZO_EXCLUDE_DIRS="*src:*build"
 # eval "$(zoxide init --cmd zd zsh)"
 eval "$(zoxide init --cmd zd zsh --hook none)"
+export _ZO_FZF_OPTS="--height=100% --layout=reverse"
 _zoxide_add_except_worktree() {
   [[ -f $PWD/.git && ! -d $PWD/.bare ]] && return
   zoxide add "$PWD"
@@ -120,91 +122,90 @@ _zoxide_add_except_worktree() {
 
 precmd_functions+=(_zoxide_add_except_worktree)
 
-# Per-directory todo display
-_todo_show() {
-  local todo_file="$PWD/.todo.toml"
-  [[ -f "$todo_file" ]] || return
-
-  local RESET="" CYAN="" BOLD="" GREEN="" YELLOW="" RED=""
-  if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
-    RESET=$'\033[0m'
-    CYAN=$'\033[36m'
-    BOLD=$'\033[1m'
-    GREEN=$'\033[32m'
-    YELLOW=$'\033[33m'
-    RED=$'\033[31m'
-  fi
-
-  awk -v DIR="$PWD" -v RESET="$RESET" -v CYAN="$CYAN" -v BOLD="$BOLD" \
-      -v GREEN="$GREEN" -v YELLOW="$YELLOW" -v RED="$RED" '
-    function repeat(ch, n, s, i) { for (i = 0; i < n; i++) s = s ch; return s }
-    function bar(p, width, filled, fill_color) {
-      width = 20
-      if (p < 0) p = 0
-      if (p > 100) p = 100
-      filled = int(p * width / 100)
-      if (p >= 67) fill_color = GREEN
-      else if (p >= 34) fill_color = YELLOW
-      else fill_color = RED
-      return "[" fill_color repeat("=", filled) RESET repeat("-", width - filled) "]"
-    }
-    function header() {
-      if (!header_printed) {
-        printf "\n%s%s%s .todo.toml%s\n", CYAN, BOLD, DIR, RESET
-        header_printed = 1
-      }
-    }
-    function print_task() {
-      header()
-      # Pad t_title so all bars line up
-      printf "• %-35s %s %d%%\n", t_title, bar(t_progress), t_progress
-    }
-    function print_sub() {
-      header()
-      # Pad s_title so all bars line up
-      printf "  - %-35s %s %d%%\n", s_title, bar(s_progress), s_progress
-    }
-    /^[[:space:]]*#/ { next }
-    /^[[:space:]]*\[\[tasks\]\]/ {
-      if (sub_seen) { print_sub(); sub_seen = 0 }
-      if (task_seen && !task_printed) { print_task() }
-      task_seen = 1; task_printed = 0; in_sub = 0
-      t_title = "(untitled)"; t_progress = 0
-      next
-    }
-    /^[[:space:]]*\[\[tasks\.subtasks\]\]/ {
-      if (sub_seen) { print_sub() }
-      if (task_seen && !task_printed) { print_task(); task_printed = 1 }
-      in_sub = 1; sub_seen = 1
-      s_title = "(untitled)"; s_progress = 0
-      next
-    }
-    /^[[:space:]]*title[[:space:]]*=/ {
-      line = $0
-      sub(/^[[:space:]]*title[[:space:]]*=[[:space:]]*"/, "", line)
-      sub(/".*/, "", line)
-      if (in_sub) s_title = line
-      else t_title = line
-      next
-    }
-    /^[[:space:]]*progress[[:space:]]*=/ {
-      line = $0
-      sub(/^[[:space:]]*progress[[:space:]]*=[[:space:]]*/, "", line)
-      sub(/[^0-9].*/, "", line)
-      if (in_sub) s_progress = line + 0
-      else t_progress = line + 0
-      next
-    }
-    END {
-      if (sub_seen) print_sub()
-      if (task_seen && !task_printed) print_task()
-    }
-  ' "$todo_file"
-}
-
-# chpwd_functions=(${chpwd_functions:#_todo_show})
-chpwd_functions+=(_todo_show)
-
+# # Per-directory todo display
+# _todo_show() {
+#   local todo_file="$PWD/.todo.toml"
+#   [[ -f "$todo_file" ]] || return
+#
+#   local RESET="" CYAN="" BOLD="" GREEN="" YELLOW="" RED=""
+#   if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+#     RESET=$'\033[0m'
+#     CYAN=$'\033[36m'
+#     BOLD=$'\033[1m'
+#     GREEN=$'\033[32m'
+#     YELLOW=$'\033[33m'
+#     RED=$'\033[31m'
+#   fi
+#
+#   awk -v DIR="$PWD" -v RESET="$RESET" -v CYAN="$CYAN" -v BOLD="$BOLD" \
+#       -v GREEN="$GREEN" -v YELLOW="$YELLOW" -v RED="$RED" '
+#     function repeat(ch, n, s, i) { for (i = 0; i < n; i++) s = s ch; return s }
+#     function bar(p, width, filled, fill_color) {
+#       width = 20
+#       if (p < 0) p = 0
+#       if (p > 100) p = 100
+#       filled = int(p * width / 100)
+#       if (p >= 67) fill_color = GREEN
+#       else if (p >= 34) fill_color = YELLOW
+#       else fill_color = RED
+#       return "[" fill_color repeat("=", filled) RESET repeat("-", width - filled) "]"
+#     }
+#     function header() {
+#       if (!header_printed) {
+#         printf "\n%s%s%s .todo.toml%s\n", CYAN, BOLD, DIR, RESET
+#         header_printed = 1
+#       }
+#     }
+#     function print_task() {
+#       header()
+#       # Pad t_title so all bars line up
+#       printf "• %-35s %s %d%%\n", t_title, bar(t_progress), t_progress
+#     }
+#     function print_sub() {
+#       header()
+#       # Pad s_title so all bars line up
+#       printf "  - %-35s %s %d%%\n", s_title, bar(s_progress), s_progress
+#     }
+#     /^[[:space:]]*#/ { next }
+#     /^[[:space:]]*\[\[tasks\]\]/ {
+#       if (sub_seen) { print_sub(); sub_seen = 0 }
+#       if (task_seen && !task_printed) { print_task() }
+#       task_seen = 1; task_printed = 0; in_sub = 0
+#       t_title = "(untitled)"; t_progress = 0
+#       next
+#     }
+#     /^[[:space:]]*\[\[tasks\.subtasks\]\]/ {
+#       if (sub_seen) { print_sub() }
+#       if (task_seen && !task_printed) { print_task(); task_printed = 1 }
+#       in_sub = 1; sub_seen = 1
+#       s_title = "(untitled)"; s_progress = 0
+#       next
+#     }
+#     /^[[:space:]]*title[[:space:]]*=/ {
+#       line = $0
+#       sub(/^[[:space:]]*title[[:space:]]*=[[:space:]]*"/, "", line)
+#       sub(/".*/, "", line)
+#       if (in_sub) s_title = line
+#       else t_title = line
+#       next
+#     }
+#     /^[[:space:]]*progress[[:space:]]*=/ {
+#       line = $0
+#       sub(/^[[:space:]]*progress[[:space:]]*=[[:space:]]*/, "", line)
+#       sub(/[^0-9].*/, "", line)
+#       if (in_sub) s_progress = line + 0
+#       else t_progress = line + 0
+#       next
+#     }
+#     END {
+#       if (sub_seen) print_sub()
+#       if (task_seen && !task_printed) print_task()
+#     }
+#   ' "$todo_file"
+# }
+#
+# # chpwd_functions=(${chpwd_functions:#_todo_show})
+# chpwd_functions+=(_todo_show)
 
 # Source files
 eval "$(starship init zsh)"

@@ -23,6 +23,8 @@ config.unix_domains = {
 config.default_workspace = "Base"
 config.switch_to_last_active_tab_when_closing_tab = true
 config.prefer_to_spawn_tabs = true
+config.window_close_confirmation = "NeverPrompt"
+
 -- config.default_prog = { "zsh", "-c", "nvim ." }
 
 -- Path update

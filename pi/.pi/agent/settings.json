@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.78.0",
+  "lastChangelogVersion": "0.78.1",
   "defaultProvider": "github-copilot",
   "defaultModel": "gpt-5.2-codex",
   "defaultThinkingLevel": "minimal",
@@ -14,8 +14,8 @@
     "npm:pi-memory",
     "npm:@tmustier/pi-usage-extension",
     "npm:context-mode",
-    "npm:pi-lens",
-    "npm:pi-mcp-adapter"
+    "npm:pi-mcp-adapter",
+    "npm:spotme"
   ],
   "terminal": {
     "showTerminalProgress": true

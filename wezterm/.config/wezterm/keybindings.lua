@@ -53,6 +53,11 @@ local configKeys = {
 		key = "Enter",
 		action = wezterm.action.ActivateCopyMode,
 	},
+	{
+		mods = "LEADER",
+		key = "Space",
+		action = wezterm.action.QuickSelect,
+	},
 
 	-- Tab navigator
 	{
