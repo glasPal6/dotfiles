@@ -75,16 +75,53 @@ alias nn='nvim'
 dev() {
     local current_dir="$PWD"
 
-    if [[ -n ${WEZTERM_PANE:-} ]]; then
-        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- pi
-        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir" -- zsh -ic 'touch todo.txt && tuxedo'
-        wezterm cli spawn --pane-id "$WEZTERM_PANE" --cwd "$current_dir"
-        nvim .
-        return
-    fi
+    osascript <<EOF
+tell application "Ghostty"
+    activate
 
-    echo "You must be inside wezterm to use 'dev'."
-    return 1
+    set cfg to new surface configuration
+    set initial working directory of cfg to "$current_dir"
+
+    set win to new window with configuration cfg
+
+    -- TAB 1 (nvim)
+    set tab1 to selected tab of win
+    set term1 to terminal 1 of tab1
+    input text "nvim ." to term1
+    send key "enter" to term1
+
+    -- TAB 2 (pi)
+    tell application "System Events"
+        keystroke "t" using command down
+    end tell
+    delay 0.2
+
+    set tab2 to selected tab of win
+    set term2 to terminal 1 of tab2
+    input text "pi" to term2
+    send key "enter" to term2
+
+    -- TAB 3 (tuxedo)
+    tell application "System Events"
+        keystroke "t" using command down
+    end tell
+    delay 0.2
+
+    set tab3 to selected tab of win
+    set term3 to terminal 1 of tab3
+    input text "touch todo.txt && tuxedo" to term3
+    send key "enter" to term3
+
+    -- TAB 4 (shell)
+    tell application "System Events"
+        keystroke "t" using command down
+    end tell
+    delay 0.2
+
+    set tab4 to selected tab of win
+
+end tell
+EOF
 }
 
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'

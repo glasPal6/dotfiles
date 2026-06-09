@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.78.1",
-  "defaultProvider": "github-copilot",
-  "defaultModel": "gpt-5.2-codex",
-  "defaultThinkingLevel": "minimal",
+  "lastChangelogVersion": "0.79.0",
+  "defaultProvider": "opencode",
+  "defaultModel": "big-pickle",
+  "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-subagents",
     "npm:pi-web-access",
@@ -15,14 +15,71 @@
     "npm:@tmustier/pi-usage-extension",
     "npm:context-mode",
     "npm:pi-mcp-adapter",
-    "npm:spotme"
+    "npm:spotme",
+    "npm:pi-intercom"
   ],
   "terminal": {
     "showTerminalProgress": true
   },
-  "enabledModels": [
-    "github-copilot/gpt-5.2-codex",
-    "github-copilot/gpt-4o",
-    "github-copilot/gpt-4.1"
-  ]
+  "enabledModels": [],
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "opencode/big-pickle",
+        "thinking": "low",
+        "fallbackModels": [
+          "opencode/qwen3.6-plus"
+        ]
+      },
+      "researcher": {
+        "model": "opencode/kimi-k2.6",
+        "thinking": "low",
+        "fallbackModels": [
+          "opencode/qwen3.6-plus"
+        ]
+      },
+      "context-builder": {
+        "model": "opencode/qwen3.6-plus",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode/big-pickle"
+        ]
+      },
+      "planner": {
+        "model": "opencode/minimax-m2.5",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode/qwen3.6-plus"
+        ]
+      },
+      "worker": {
+        "model": "opencode/minimax-m2.7",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode/qwen3.6-plus"
+        ]
+      },
+      "reviewer": {
+        "model": "opencode/qwen3.6-plus",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode/big-pickle"
+        ]
+      },
+      "oracle": {
+        "model": "opencode/minimax-m2.5",
+        "thinking": "high",
+        "fallbackModels": [
+          "opencode/qwen3.6-plus"
+        ]
+      },
+      "delegate": {
+        "model": "opencode/qwen3.6-plus",
+        "thinking": "low",
+        "fallbackModels": [
+          "opencode/big-pickle"
+        ]
+      }
+    }
+  }
 }
