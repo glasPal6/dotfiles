@@ -89,14 +89,14 @@ return {
 			vim.keymap.set({ "x", "o" }, "at", function()
 				select.select_textobject("@comment.outer", "textobjects")
 			end)
-			--
-			-- local move = require("nvim-treesitter-textobjects.move")
-			-- vim.keymap.set({ "n", "x", "o" }, "]f", function()
-			-- 	move.goto_next_start("@function.outer", "textobjects")
-			-- end)
-			-- vim.keymap.set({ "n", "x", "o" }, "[f", function()
-			-- 	move.goto_previous_start("@function.outer", "textobjects")
-			-- end)
+
+			local move = require("nvim-treesitter-textobjects.move")
+			vim.keymap.set({ "n", "x", "o" }, "]f", function()
+				move.goto_next_start("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[f", function()
+				move.goto_previous_start("@function.outer", "textobjects")
+			end)
 		end,
 	},
 }

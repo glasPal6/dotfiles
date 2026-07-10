@@ -1,6 +1,6 @@
 return {
 
-	-- Run commands in nvim
+	-- -- Run commands in nvim
 	{
 		"stevearc/overseer.nvim",
 		-- event = "VeryLazy",

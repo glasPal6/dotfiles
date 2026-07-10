@@ -87,12 +87,12 @@ return {
 				end,
 			})
 
-			-- Mojo lsp - FIX: Needs updating; is slow
+			-- Mojo lsp setup
 			-- vim.lsp.config("mojo", {
 			-- 	capabilities = capabilities,
-			-- 	filetypes = { "mojo" },
 			-- 	root_markers = { ".git", "pyproject.toml" },
-			-- 	cmd = { vim.fn.exepath("mojo-lsp-server") },
+			-- 	single_file_support = true,
+			-- 	cmd = { "mojo-lsp-server" },
 			-- })
 			-- vim.lsp.enable("mojo")
 

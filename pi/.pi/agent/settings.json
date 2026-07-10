@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.79.1",
-  "defaultProvider": "opencode",
-  "defaultModel": "big-pickle",
+  "lastChangelogVersion": "0.80.6",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "kimi-k2.7-code",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-subagents",
@@ -16,7 +16,8 @@
     "npm:context-mode",
     "npm:pi-mcp-adapter",
     "npm:spotme",
-    "npm:pi-intercom"
+    "npm:pi-intercom",
+    "npm:pi-prompt-template-model"
   ],
   "terminal": {
     "showTerminalProgress": true
@@ -25,61 +26,70 @@
   "subagents": {
     "agentOverrides": {
       "scout": {
-        "model": "opencode/big-pickle",
-        "thinking": "low",
+        "model": "opencode-go/big-pickle",
+        "thinking": "medium",
         "fallbackModels": [
-          "opencode/qwen3.6-plus"
+          "opencode-go/mimo-v2.5",
+          "opencode-go/deepseek-v4-flash"
         ]
       },
       "researcher": {
-        "model": "opencode/kimi-k2.6",
-        "thinking": "low",
+        "model": "opencode-go/big-pickle",
+        "thinking": "medium",
         "fallbackModels": [
-          "opencode/qwen3.6-plus"
+          "opencode-go/mimo-v2.5",
+          "opencode-go/deepseek-v4-flash"
         ]
       },
       "context-builder": {
-        "model": "opencode/qwen3.6-plus",
-        "thinking": "medium",
+        "model": "opencode-go/mimo-v2.5",
+        "thinking": "low",
         "fallbackModels": [
-          "opencode/big-pickle"
-        ]
-      },
-      "planner": {
-        "model": "opencode/minimax-m2.5",
-        "thinking": "medium",
-        "fallbackModels": [
-          "opencode/qwen3.6-plus"
-        ]
-      },
-      "worker": {
-        "model": "opencode/minimax-m2.7",
-        "thinking": "medium",
-        "fallbackModels": [
-          "opencode/qwen3.6-plus"
-        ]
-      },
-      "reviewer": {
-        "model": "opencode/qwen3.6-plus",
-        "thinking": "medium",
-        "fallbackModels": [
-          "opencode/big-pickle"
-        ]
-      },
-      "oracle": {
-        "model": "opencode/minimax-m2.5",
-        "thinking": "high",
-        "fallbackModels": [
-          "opencode/qwen3.6-plus"
+          "opencode-go/deepseek-v4-flash",
+          "opencode-go/big-pickle"
         ]
       },
       "delegate": {
-        "model": "opencode/qwen3.6-plus",
+        "model": "opencode-go/mimo-v2.5",
         "thinking": "low",
         "fallbackModels": [
-          "opencode/big-pickle"
+          "opencode-go/deepseek-v4-flash",
+          "opencode-go/big-pickle"
+        ]
+      },
+      "planner": {
+        "model": "opencode-go/minimax-m2.5",
+        "thinking": "low",
+        "fallbackModels": [
+          "opencode-go/qwen3.7-max",
+          "opencode-go/qwen3.7-plus"
+        ]
+      },
+      "oracle": {
+        "model": "opencode-go/qwen3.7-max",
+        "thinking": "high",
+        "fallbackModels": [
+          "opencode-go/minimax-m2.5",
+          "opencode-go/glm-5.1"
+        ]
+      },
+      "worker": {
+        "model": "opencode-go/kimi-k2.7-code",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode-go/minimax-m2.7",
+          "opencode-go/qwen3.7-max"
+        ]
+      },
+      "reviewer": {
+        "model": "opencode-go/minimax-m2.7",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode-go/kimi-k2.6",
+          "opencode-go/qwen3.7-max"
         ]
       }
     }
-  }
+  },
+  "theme": "dark"
 }

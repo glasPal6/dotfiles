@@ -83,6 +83,8 @@ dev() {
 
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
 
+alias ssh="env TERM=xterm-256color COLORTERM=truecolor ssh"
+
 # PATH
 export PATH="/Users/dylankamstra/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
@@ -115,6 +117,9 @@ _zoxide_add_except_worktree() {
 }
 
 precmd_functions+=(_zoxide_add_except_worktree)
+
+# Zellij
+export ZELLIJ_SOCKET_DIR=/tmp/zellij
 
 # # Per-directory todo display
 # _todo_show() {
@@ -209,4 +214,6 @@ eval "$(mise activate zsh)"
 # if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
 #     tmux attach -t default || tmux new-session -s default
 # fi
-eval "$(zellij setup --generate-auto-start zsh)"
+if [[ -z "$ZELLIJ" ]]; then
+    zellij attach Base --create
+fi

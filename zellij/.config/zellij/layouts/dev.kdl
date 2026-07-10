@@ -1,0 +1,61 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:/Users/dylankamstra/.config/zellij/plugins/zjstatus.wasm" {
+                format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
+                // format_center "{tabs}"
+                format_right  ""
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#585B70]{char}"
+                border_position "top"
+
+                hide_frame_for_single_pane "false"
+
+                // Catppuccin Mocha modes
+                mode_normal  "#[bg=#89B4FA,fg=#1E1E2E,bold] "
+                mode_tmux    "#[bg=#FAB387,fg=#1E1E2E,bold] "
+
+                // Tabs
+                tab_normal   "#[fg=#7F849C] {name} "
+                tab_active   "#[fg=#CBA6F7,bold,italic] {name} "
+
+                // Git branch
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=#89B4FA,bold] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
+
+                // Date & time
+                datetime          "#[fg=#A6ADC8,bold] {format} "
+                datetime_format   "%A, %d %b %Y %H:%M"
+                datetime_timezone "Africa/Johannesburg"
+            }
+        }
+        children
+    }
+
+    tab name="nvim" {
+    pane command="zsh" {
+        args "-ic" "nvim ."
+    }
+}
+
+tab name="pi" {
+    pane command="zsh" {
+        args "-ic" "pi"
+    }
+}
+
+tab name="tuxedo" {
+    pane command="zsh" {
+        args "-ic" "touch todo.txt && tuxedo"
+    }
+}
+
+tab name="term" {
+    pane
+}
+}

@@ -31,9 +31,9 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		event = "VeryLazy",
-		ft = { "markdown", "codecompanion" },
+		ft = { "markdown" },
 		opts = {
-			file_types = { "markdown", "codecompanion" },
+			file_types = { "markdown" },
 			anti_conceal = {
 				enabled = false,
 			},
