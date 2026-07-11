@@ -221,6 +221,68 @@ then recreate the file
 mkinitcpio -P
 ```
 
+## Setup snapshots with snapper
+
+### Install snapper
+Install snapper
+```bash
+sudo pacman -S snapper snap-pac
+```
+
+Umount .snapshots and remove the mount point to allow snapper to create a config
+```bash
+sudo umount /.snapshots
+sudo rm -rf /.snapshots
+sudo snapper -c root create-config / # creats a .snapshots directory
+sudo btrfs subvolume delete /.snapshots
+sudo mkdir /.snapshots
+sudo mount -a
+sudo chmod 750 /.snapshots
+sudo chown :wheel /.snapshots
+```
+
+Take a snapshot of the base system
+```bash
+sudo snapper -c root create -d "**Base system**"
+```
+
+Modify the configs in `/etc/snapper/configs/root` to allow the user to work with snapshots
+```bash
+ALLOW_USER="dyl"
+```
+and to take snapshots when wanted
+
+Automate the taking and cleaning of the snapshots
+```bash
+sudo systemctl enable --now snapper-timeline.timer
+sudo systemctl enable --now snapper-cleanup.timer
+```
+
+### System rollbacks
+
+Boot into a snapshot, taking note of the snapshot number that you want to go back to
+Then
+```bash
+sudo mount /dev/${disk}3 /mnt
+	sudo mv /mnt/@ /mnt/@.broken
+		OR
+	sudo btrfs subvolume delete /mnt/@
+```
+
+Get the number of the snapshot that you want to roll back to
+```bash
+sudo grep -r '<date>' /mnt/@snapshots/*/info.xml
+```
+
+Rollback the system
+```bash
+sudo btrfs subvolume snapshot /mnt/@snapshots/{number}/snapshot /mnt/@
+sudo umount /mnt
+reboot
+```
+
+Do any cleanup necessary
+
 Exit and reboot
 ```bash
 exit
@@ -473,66 +535,4 @@ After rebooting, SDDM will handle the login, and you can select Hyprland as your
 - eza
 - fd
 - sshfs
-
-## Setup snapshots with snapper
-
-### Install snapper
-Install snapper
-```bash
-sudo pacman -S snapper snap-pac
-```
-
-Umount .snapshots and remove the mount point to allow snapper to create a config
-```bash
-sudo umount /.snapshots
-sudo rm -rf /.snapshots
-sudo snapper -c root create-config / # creats a .snapshots directory
-sudo btrfs subvolume delete /.snapshots
-sudo mkdir /.snapshots
-sudo mount -a
-sudo chmod 750 /.snapshots
-sudo chown :wheel /.snapshots
-```
-
-Take a snapshot of the base system
-```bash
-sudo snapper -c root create -d "**Base system**"
-```
-
-Modify the configs in `/etc/snapper/configs/root` to allow the user to work with snapshots
-```bash
-ALLOW_USER="dyl"
-```
-and to take snapshots when wanted
-
-Automate the taking and cleaning of the snapshots
-```bash
-sudo systemctl enable --now snapper-timeline.timer
-sudo systemctl enable --now snapper-cleanup.timer
-```
-
-### System rollbacks
-
-Boot into a snapshot, taking note of the snapshot number that you want to go back to
-Then
-```bash
-sudo mount /dev/${disk}3 /mnt
-	sudo mv /mnt/@ /mnt/@.broken
-		OR
-	sudo btrfs subvolume delete /mnt/@
-```
-
-Get the number of the snapshot that you want to roll back to
-```bash
-sudo grep -r '<date>' /mnt/@snapshots/*/info.xml
-```
-
-Rollback the system
-```bash
-sudo btrfs subvolume snapshot /mnt/@snapshots/{number}/snapshot /mnt/@
-sudo umount /mnt
-reboot
-```
-
-Do any cleanup necessary
 
