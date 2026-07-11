@@ -1,5 +1,22 @@
 return {
 
+	-- clang-format
+	-- clangd
+	-- codelldb
+	-- cpplint
+	-- golangci-lint
+	-- gopls
+	-- html-lsp html
+	-- lua-language-server lua_ls
+	-- marksman
+	-- neocmakelsp neocmake
+	-- ols
+	-- pyright
+	-- ruff
+	-- stylua
+	-- texlab
+	-- zls
+
 	-- Mason
 	{
 		"mason-org/mason.nvim",
@@ -11,23 +28,18 @@ return {
 					package_uninstalled = "✗",
 				},
 			},
+			ensure_installed = {
+				-- Linters
+				"cpplint",
+				"golangci-lint",
+				-- Formatters
+				"clang-format",
+				"ruff",
+				"stylua",
+				-- DAP
+				"codelldb",
+			},
 		},
-		-- "clangd",
-		-- "lua_ls",
-		-- "ruff",
-		-- "pyright",
-		-- "marksman",
-		-- "neocmake",
-		--
-		-- "cpplint",
-		-- "clang-format",
-		-- "gersemi",
-		-- "marksman",
-		-- "texlab",
-		-- "stylua",
-		-- "luacheck",
-		--
-		-- "codelldb",
 	},
 
 	{
@@ -39,7 +51,20 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			require("mason-lspconfig").setup({})
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"clangd",
+					"gopls",
+					"html-lsp",
+					"lua_ls",
+					"marksman",
+					"neocmake",
+					"ols",
+					"pyright",
+					"texlab",
+					"zls",
+				},
+			})
 		end,
 	},
 
