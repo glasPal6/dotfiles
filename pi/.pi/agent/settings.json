@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.80.6",
-  "defaultProvider": "opencode",
-  "defaultModel": "big-pickle",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "qwen3.7-max",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-subagents",
@@ -42,7 +42,7 @@
         ]
       },
       "context-builder": {
-        "model": "opencode-go/mimo-v2.5",
+        "model": "opencode-go/mimo-v2.5-Pro",
         "thinking": "low",
         "fallbackModels": [
           "opencode-go/deepseek-v4-flash",
@@ -50,7 +50,7 @@
         ]
       },
       "delegate": {
-        "model": "opencode-go/mimo-v2.5",
+        "model": "opencode-go/mimo-v2.5-Pro",
         "thinking": "low",
         "fallbackModels": [
           "opencode-go/deepseek-v4-flash",
@@ -58,7 +58,7 @@
         ]
       },
       "planner": {
-        "model": "opencode-go/minimax-m2.5",
+        "model": "opencode-go/minimax-m3",
         "thinking": "low",
         "fallbackModels": [
           "opencode-go/qwen3.7-max",
