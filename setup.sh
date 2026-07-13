@@ -144,16 +144,6 @@ else
     ok "pi already installed"
 fi
 
-# ── OpenSpec (AI) ──────────────────────────────────────────────────
-if ! command -v openspec &>/dev/null; then
-    info "Installing openspec..."
-    npm install -g @fission-ai/openspec@latest
-    ok "openspec installed"
-else
-    ok "openspec already installed"
-fi
-
-
 # ── Pi extensions ──────────────────────────────────────────────────
 PI_EXTENSIONS=(
     npm:pi-subagents
