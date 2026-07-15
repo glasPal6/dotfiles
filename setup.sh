@@ -24,7 +24,8 @@ STOW_DIRS=(
     zsh
     nvim
     pypoetry
-    pi
+    pi-coding-agent
+    tuxedo
     tmux
     scripts
     bash
