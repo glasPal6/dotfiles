@@ -28,14 +28,28 @@ return {
 	-- 	end,
 	-- },
 
+	-- {
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	-- 	event = "VeryLazy",
+	-- 	ft = { "markdown" },
+	-- 	opts = {
+	-- 		file_types = { "markdown" },
+	-- 		anti_conceal = {
+	-- 			enabled = false,
+	-- 		},
+	-- 	},
+	-- },
+
+	-- {
+	-- 	"OXY2DEV/markview.nvim",
+	-- 	lazy = false,
+	-- },
+
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		event = "VeryLazy",
-		ft = { "markdown" },
-		opts = {
-			file_types = { "markdown" },
-			anti_conceal = {
-				enabled = false,
+		{
+			"brianhuster/live-preview.nvim",
+			dependencies = {
+				"ibhagwan/fzf-lua",
 			},
 		},
 	},

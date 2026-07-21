@@ -4,7 +4,7 @@ layout {
             plugin location="file:/Users/dylankamstra/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
                 // format_center "{tabs}"
-                format_right  "{command_git_branch}"
+                format_right  ""
                 format_space  ""
 
                 border_enabled  "false"
@@ -22,32 +22,30 @@ layout {
                 tab_normal   "#[fg=#7F849C] {name} "
                 tab_active   "#[fg=#CBA6F7,bold,italic] {name} "
 
-                // Git branch
-                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-                command_git_branch_format      "#[fg=#89B4FA,bold] {stdout} "
-                command_git_branch_interval    "10"
-                command_git_branch_rendermode  "static"
-                command_git_branch_cwd         "{focused_pane_cwd}"
-
-                // Date & time
-                datetime          "#[fg=#A6ADC8,bold] {format} "
-                datetime_format   "%A, %d %b %Y %H:%M"
-                datetime_timezone "Africa/Johannesburg"
+                // // Git branch
+                // command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                // command_git_branch_format      "#[fg=#89B4FA,bold] {stdout} "
+                // command_git_branch_interval    "10"
+                // command_git_branch_rendermode  "static"
+                // command_git_branch_cwd         "{focused_pane_cwd}"
+                //
+                // // Date & time
+                // datetime          "#[fg=#A6ADC8,bold] {format} "
+                // datetime_format   "%A, %d %b %Y %H:%M"
+                // datetime_timezone "Africa/Johannesburg"
             }
         }
         children
     }
 
-    tab name="nvim" {
+tab name="nvim" {
     pane command="zsh" {
         args "-ic" "nvim ."
     }
 }
 
-tab name="pi" {
-    pane command="zsh" {
-        args "-ic" "pi"
-    }
+tab name="cursor" {
+    pane command="agent"
 }
 
 tab name="tuxedo" {
