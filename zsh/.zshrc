@@ -1,3 +1,6 @@
+# Local secrets, untracked (see .gitignore)
+[ -f "${0:A:h}/.zsh_secrets" ] && source "${0:A:h}/.zsh_secrets"
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 

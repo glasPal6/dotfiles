@@ -9,44 +9,41 @@ return {
 			"MeanderingProgrammer/render-markdown.nvim",
 		},
 		config = function()
-			local model_choice = "composer-2.5"
+			local model_choice = "haiku"
 			require("codecompanion").setup({
 				ignore_warnings = true,
 				adapters = {
 					acp = {
-						cursor_cli = function()
-							return require("codecompanion.adapters").extend("cursor_cli", {
-								commands = {
-									default = {
-										"agent",
-										"acp",
-										"--model",
-										model_choice,
-									},
-								},
-								defaults = {
-									session_config_options = {
-										model = model_choice,
-									},
+						claude_code = function()
+							return require("codecompanion.adapters").extend("claude_code", {
+								env = {
+									CLAUDE_CODE_OAUTH_TOKEN = os.getenv("CLAUDE_CODE_OAUTH_TOKEN"),
 								},
 							})
 						end,
 					},
 				},
-				strategies = {
+
+				interactions = {
 					chat = {
 						adapter = {
-							name = "cursor_cli",
+							name = "claude_code",
 							model = model_choice,
 						},
 					},
 					cli = {
-						adapter = {
-							name = "cursor_cli",
-							model = model_choice,
+						agent = "claude_code",
+						agents = {
+							claude_code = {
+								cmd = "claude",
+								args = {},
+								description = "Claude Code CLI",
+								provider = "terminal",
+							},
 						},
 					},
 				},
+
 				display = {
 					action_palette = {
 						width = 95,
