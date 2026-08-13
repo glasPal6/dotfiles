@@ -180,7 +180,8 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         bind "f" {
-            LaunchOrFocusPlugin "file:/Users/dylankamstra/.config/zellij/plugins/zsm.wasm" {
+            // LaunchOrFocusPlugin "file:/Users/dylankamstra/.config/zellij/plugins/zsm.wasm" {
+            LaunchOrFocusPlugin "https://github.com/liam-mackie/zsm/releases/download/v0.5.0/zsm.wasm" {
                 floating true
                 move_to_focused_tab true
                 default_layout "dev"
@@ -188,6 +189,7 @@ keybinds clear-defaults=true {
                 show_resurrectable_sessions true
                 base_paths "/Users/dylankamstra/|/Users/dylankamstra/Documents/"
             }
+            SwitchToMode "locked"
         }
     }
     shared_among "scroll" "search" {
