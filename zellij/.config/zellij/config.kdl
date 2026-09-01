@@ -21,6 +21,8 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "locked"; }
         bind "z" { TogglePaneFrames; SwitchToMode "locked"; }
         bind "tab" { SwitchFocus; }
+        bind ";" { FocusLastPane; SwitchToMode "locked"; }
+        bind "Shift f" { ToggleFocusNoUiFullscreen; SwitchToMode "locked"; }
     }
     tab {
         bind "left" { GoToPreviousTab; }
@@ -77,6 +79,10 @@ keybinds clear-defaults=true {
         bind "e" { EditScrollback; SwitchToMode "locked"; }
         bind "f" { SwitchToMode "entersearch"; SearchInput 0; }
         bind "s" { SwitchToMode "normal"; }
+        bind "[" { ScrollToPreviousPrompt; }
+        bind "]" { ScrollToNextPrompt; }
+        bind "m" { SelectCommandAtScrollPosition; }
+        bind "c" { CopyLastCommandOutput; SwitchToMode "locked"; }
     }
     search {
         bind "c" { SearchToggleOption "CaseSensitivity"; }
@@ -130,6 +136,8 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
+        bind "[" { FocusGuestSession; SwitchToMode "locked"; }
+        bind "]" { FocusHostSession; SwitchToMode "locked"; }
     }
     shared_among "normal" "locked" {
         bind "Alt left" { MoveFocusOrTab "left"; }
@@ -180,14 +188,9 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         bind "f" {
-            // LaunchOrFocusPlugin "file:/Users/dylankamstra/.config/zellij/plugins/zsm.wasm" {
-            LaunchOrFocusPlugin "https://github.com/liam-mackie/zsm/releases/download/v0.5.0/zsm.wasm" {
+            LaunchOrFocusPlugin "zsm" {
                 floating true
                 move_to_focused_tab true
-                default_layout "dev"
-                session_separator "_"
-                show_resurrectable_sessions true
-                base_paths "/Users/dylankamstra/|/Users/dylankamstra/Documents/"
             }
             SwitchToMode "locked"
         }
@@ -238,13 +241,91 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+
+    // Status bar. Configured here rather than in the layouts so that
+    // layouts/default.kdl and layouts/dev.kdl share one definition.
+    // Offline fallback: location="file:/Users/dylankamstra/.config/zellij/plugins/zjstatus.wasm"
+    zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+        format_left   "#[fg=#89B4FA,bold]{session} {tabs}"
+        format_right  "{pipe_zjstatus_hints} {mode}"
+        format_space  ""
+
+        border_enabled  "false"
+        border_char     "─"
+        border_format   "#[fg=#585B70]{char}"
+        border_position "top"
+
+        hide_frame_for_single_pane "false"
+
+        // Catppuccin Mocha modes
+        mode_normal       "#[bg=#89B4FA,fg=#1E1E2E,bold] NORMAL "
+        mode_locked       "#[bg=#585B70,fg=#CDD6F4,bold] LOCKED "
+        mode_pane         "#[bg=#A6E3A1,fg=#1E1E2E,bold] PANE "
+        mode_tab          "#[bg=#A6E3A1,fg=#1E1E2E,bold] TAB "
+        mode_resize       "#[bg=#F9E2AF,fg=#1E1E2E,bold] RESIZE "
+        mode_move         "#[bg=#F9E2AF,fg=#1E1E2E,bold] MOVE "
+        mode_scroll       "#[bg=#94E2D5,fg=#1E1E2E,bold] SCROLL "
+        mode_search       "#[bg=#94E2D5,fg=#1E1E2E,bold] SEARCH "
+        mode_enter_search "#[bg=#94E2D5,fg=#1E1E2E,bold] SEARCH: "
+        mode_session      "#[bg=#CBA6F7,fg=#1E1E2E,bold] SESSION "
+        mode_rename_tab   "#[bg=#F5C2E7,fg=#1E1E2E,bold] RENAME TAB "
+        mode_rename_pane  "#[bg=#F5C2E7,fg=#1E1E2E,bold] RENAME PANE "
+        mode_prompt       "#[bg=#89B4FA,fg=#1E1E2E,bold] PROMPT "
+        mode_tmux         "#[bg=#FAB387,fg=#1E1E2E,bold] TMUX "
+
+        // Tabs
+        tab_normal   "#[fg=#7F849C] {name} "
+        tab_active   "#[fg=#CBA6F7,bold,italic] {name} "
+
+        // Hints (fed by the zjstatus-hints background plugin below)
+        pipe_zjstatus_hints_format "{output}"
+
+        // Git branch
+        // command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+        // command_git_branch_format      "#[fg=#89B4FA,bold] {stdout} "
+        // command_git_branch_interval    "10"
+        // command_git_branch_rendermode  "static"
+        // command_git_branch_cwd         "{focused_pane_cwd}"
+        //
+        // // Date & time
+        // datetime          "#[fg=#A6ADC8,bold] {format} "
+        // datetime_format   "%A, %d %b %Y %H:%M"
+        // datetime_timezone "Africa/Johannesburg"
+    }
+
+    zjstatus-hints location="https://github.com/b0o/zjstatus-hints/releases/latest/download/zjstatus-hints.wasm" {
+        // Maximum number of characters to display
+        max_length 0 // 0 = unlimited
+        // String to append when truncated
+        overflow_str "..." // default
+        // Name of the pipe for zjstatus integration
+        pipe_name "zjstatus_hints" // default
+        // Hide hints in base mode (a.k.a. default mode).
+        // Must stay false: default_mode is "locked", so `true` would hide
+        // the hints in the mode we actually live in.
+        hide_in_base_mode false
+    }
+
+    // Session manager, bound to "f". Configured here so the alias and the
+    // preloaded background instance match and LaunchOrFocusPlugin reuses it.
+    // Offline fallback: location="file:/Users/dylankamstra/.config/zellij/plugins/zsm.wasm"
+    zsm location="https://github.com/liam-mackie/zsm/releases/download/v0.5.0/zsm.wasm" {
+        default_layout "dev"
+        session_separator "_"
+        show_resurrectable_sessions true
+        base_paths "/Users/dylankamstra/|/Users/dylankamstra/Documents/"
+    }
 }
 
-// Plugins to load in the background when a new session starts
-// eg. "file:/path/to/my-plugin.wasm"
-// eg. "https://example.com/my-plugin.wasm"
+// Plugins to load in the background when a new session starts.
+// A bare word is resolved as a plugin alias (see above); a quoted string is
+// resolved as a location. "zellij:link" has no alias, so it must be quoted --
+// unquoted it fails with "Failed to resolve plugin alias".
 load_plugins {
-    zellij:link
+    "zellij:link"
+    zjstatus
+    zjstatus-hints
+    zsm
 }
 web_client {
     font "monospace"

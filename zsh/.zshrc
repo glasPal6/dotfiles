@@ -114,7 +114,10 @@ export _ZO_EXCLUDE_DIRS="*src:*build"
 eval "$(zoxide init --cmd zd zsh --hook none)"
 export _ZO_FZF_OPTS="--height=100% --layout=reverse"
 _zoxide_add_except_worktree() {
-  [[ -f $PWD/.git && ! -d $PWD/.bare ]] && return
+  # Ignore the container root (where .git is a file referencing ./.bare)
+  [[ -f $PWD/.git && -d $PWD/.bare ]] && return
+
+  # Add all other directories (including worktrees like main/, hotfix/, etc.)
   zoxide add "$PWD"
 }
 
