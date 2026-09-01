@@ -90,6 +90,10 @@ keybinds clear-defaults=true {
         bind "o" { SearchToggleOption "WholeWord"; }
         bind "p" { Search "up"; }
         bind "w" { SearchToggleOption "Wrap"; }
+        bind "[" { ScrollToPreviousPrompt; }
+        bind "]" { ScrollToNextPrompt; }
+        bind "m" { SelectCommandAtScrollPosition; }
+        bind "f" { CopyLastCommandOutput; SwitchToMode "locked"; }
     }
     session {
         bind "a" {
@@ -138,6 +142,7 @@ keybinds clear-defaults=true {
         }
         bind "[" { FocusGuestSession; SwitchToMode "locked"; }
         bind "]" { FocusHostSession; SwitchToMode "locked"; }
+        bind "f" { ToggleHostFullscreen; SwitchToMode "locked"; }
     }
     shared_among "normal" "locked" {
         bind "Alt left" { MoveFocusOrTab "left"; }
@@ -186,7 +191,7 @@ keybinds clear-defaults=true {
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
         bind "r" { SwitchToMode "resize"; }
     }
-    shared_except "locked" {
+    shared_except "locked" "search" "session" {
         bind "f" {
             LaunchOrFocusPlugin "zsm" {
                 floating true
@@ -244,6 +249,7 @@ plugins {
 
     // Status bar. Configured here rather than in the layouts so that
     // layouts/default.kdl and layouts/dev.kdl share one definition.
+    // Colors match the "catppuccin-mocha" theme set below.
     // Offline fallback: location="file:/Users/dylankamstra/.config/zellij/plugins/zjstatus.wasm"
     zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
         format_left   "#[fg=#89B4FA,bold]{session} {tabs}"
@@ -347,8 +353,8 @@ web_client {
  
 // Choose the theme that is specified in the themes section.
 // Default: default
-// 
-// theme "dracula"
+//
+theme "catppuccin-mocha"
  
 // Theme to use when the host terminal reports a dark color palette.
 // Requires `theme_light` to also be set; otherwise `theme` is used.

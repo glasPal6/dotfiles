@@ -126,6 +126,23 @@ precmd_functions+=(_zoxide_add_except_worktree)
 # Zellij
 export ZELLIJ_SOCKET_DIR=/tmp/zellij
 
+# Emit OSC 133 shell-integration marks so zellij can track prompt/command
+# boundaries (needed for ScrollToPreviousPrompt/ScrollToNextPrompt/
+# CopyLastCommandOutput/SelectCommandAtScrollPosition).
+if [[ -n "$ZELLIJ" ]]; then
+    __zellij_osc133_precmd() {
+        local ret=$?
+        print -Pn "\e]133;D;$ret\a"
+        print -Pn "\e]133;A\a"
+    }
+    __zellij_osc133_preexec() {
+        print -Pn "\e]133;C\a"
+    }
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd __zellij_osc133_precmd
+    add-zsh-hook preexec __zellij_osc133_preexec
+fi
+
 # Try
 export TRY_PATH=~/Documents/Experiments
 
