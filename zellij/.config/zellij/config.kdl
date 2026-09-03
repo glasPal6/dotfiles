@@ -200,6 +200,15 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
     }
+    shared_except "locked" "search" "session" {
+        // Testing: zextract plugin
+        bind "Alt x" {
+            LaunchOrFocusPlugin "zextract" {
+                floating true
+            }
+            SwitchToMode "locked"
+        }
+    }
     shared_among "scroll" "search" {
         bind "PageDown" { PageScrollDown; }
         bind "PageUp" { PageScrollUp; }
@@ -299,7 +308,7 @@ plugins {
         // datetime_timezone "Africa/Johannesburg"
     }
 
-    zjstatus-hints location="https://github.com/b0o/zjstatus-hints/releases/latest/download/zjstatus-hints.wasm" {
+    zjstatus-hints location="https://github.com/myah-mitchell/zjstatus-hints/releases/latest/download/zjstatus-hints.wasm" {
         // Maximum number of characters to display
         max_length 0 // 0 = unlimited
         // String to append when truncated
@@ -309,7 +318,30 @@ plugins {
         // Hide hints in base mode (a.k.a. default mode).
         // Must stay false: default_mode is "locked", so `true` would hide
         // the hints in the mode we actually live in.
-        hide_in_base_mode false
+        hide_in_base_mode true
+
+        // Curated subset only -- discover_hints true dumps every bind in
+        // mode, too noisy. false uses plugin's built-in important hints.
+        discover_hints false
+        hide_shared_hints true
+
+        // Catppuccin Mocha palette (matches theme "catppuccin-mocha" and
+        // the zjstatus block above)
+        color_black   "#1E1E2E"
+        color_fg      "#CDD6F4"
+        color_bg      "#313244"
+        color_overlay "#585B70"
+        color_blue    "#89B4FA"
+        color_green   "#A6E3A1"
+        color_yellow  "#F9E2AF"
+        color_teal    "#94E2D5"
+        color_mauve   "#CBA6F7"
+        color_pink    "#F5C2E7"
+        color_peach   "#FAB387"
+
+        key_format  "#[fg=$black,bg=$blue,bold] {key} "
+        desc_format "#[fg=$fg,bg=$overlay] {desc} "
+        hint_spacer ""
     }
 
     // Session manager, bound to "f". Configured here so the alias and the
@@ -321,6 +353,9 @@ plugins {
         show_resurrectable_sessions true
         base_paths "/Users/dylankamstra/|/Users/dylankamstra/Documents/"
     }
+
+    // Testing: fzf-like scrollback extractor (copy commands/paths/urls)
+    zextract location="https://github.com/codingfragments/zellij-zextract/releases/download/v0.4.0/zextract.wasm"
 }
 
 // Plugins to load in the background when a new session starts.
