@@ -155,8 +155,6 @@ keybinds clear-defaults=true {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt i" { MoveTab "left"; }
-        bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Alt n" { NewPane; }
@@ -200,10 +198,16 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
     }
-    shared_except "locked" "search" "session" {
+    shared_except "search" "session" {
         // Testing: zextract plugin
         bind "Alt x" {
             LaunchOrFocusPlugin "zextract" {
+                floating true
+            }
+            SwitchToMode "locked"
+        }
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "room" {
                 floating true
             }
             SwitchToMode "locked"
@@ -356,6 +360,12 @@ plugins {
 
     // Testing: fzf-like scrollback extractor (copy commands/paths/urls)
     zextract location="https://github.com/codingfragments/zellij-zextract/releases/download/v0.4.0/zextract.wasm"
+
+    // Fuzzy tab search/switch
+    room location="https://github.com/rvcas/room/releases/download/v1.2.1/room.wasm" {
+        ignore_case true
+        quick_jump true
+    }
 }
 
 // Plugins to load in the background when a new session starts.
