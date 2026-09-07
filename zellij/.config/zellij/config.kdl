@@ -200,7 +200,7 @@ keybinds clear-defaults=true {
     }
     shared_except "search" "session" {
         // Testing: zextract plugin
-        bind "Alt x" {
+        bind "Ctrl k" {
             LaunchOrFocusPlugin "zextract" {
                 floating true
             }
