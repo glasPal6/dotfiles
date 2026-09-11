@@ -21,11 +21,11 @@ layout {
         pane command="claude"
     }
 
-    tab name="tuxedo" {
-        pane command="zsh" {
-            args "-ic" "touch todo.txt && tuxedo"
-        }
-    }
+    // tab name="tuxedo" {
+    //     pane command="zsh" {
+    //         args "-ic" "touch todo.txt && tuxedo"
+    //     }
+    // }
 
     tab name="term" {
         pane

@@ -51,6 +51,7 @@ BREW_FORMULAE=(
     tree-sitter
     pipx
     git-lfs
+    direnv
 )
 
 # Homebrew casks

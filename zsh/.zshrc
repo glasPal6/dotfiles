@@ -148,8 +148,8 @@ export TRY_PATH=~/Documents/Experiments
 
 # Source files
 eval "$(starship init zsh)"
-eval "$(try init ~/Documents/Experiments)"
 eval "$(mise activate zsh)"
+eval "$(direnv hook zsh)"
 
 # if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
 #     tmux attach -t default || tmux new-session -s default

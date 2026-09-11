@@ -9,7 +9,7 @@ return {
 			"MeanderingProgrammer/render-markdown.nvim",
 		},
 		config = function()
-			local model_choice = "haiku"
+			local model_choice = "sonnet"
 			require("codecompanion").setup({
 				adapters = {
 					acp = {
@@ -53,6 +53,9 @@ return {
 							show_preset_actions = true, -- Show the default actions in the action palette?
 							show_preset_prompts = true, -- Show the default prompt library in the action palette?
 						},
+					},
+					inline = {
+						layout = "vertical", -- Show inline diffs in a vertical split
 					},
 				},
 			})
