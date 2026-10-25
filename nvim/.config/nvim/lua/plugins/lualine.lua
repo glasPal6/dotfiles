@@ -8,9 +8,12 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "auto",
+					-- Rounded pills, like the tuios dock
+					component_separators = "",
+					section_separators = { left = "", right = "" },
 				},
 				sections = {
-					lualine_a = { "mode" },
+					lualine_a = { { "mode", separator = { left = "", right = "" } } },
 					lualine_b = { "branch", "diff", "diagnostics" },
 					lualine_c = {
 						"filename",
@@ -23,7 +26,7 @@ return {
 						"filetype",
 					},
 					lualine_y = { "progress" },
-					lualine_z = { "location" },
+					lualine_z = { { "location", separator = { left = "", right = "" } } },
 				},
 			})
 		end,

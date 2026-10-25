@@ -16,6 +16,8 @@ shared_borders = true
 [appearance.sidebar]
 # Hide the session rail
 enabled = false
+# Section order when shown (ctrl+space b): agents above files
+sections = "sessions:25,terminals,agents:34,files:25"
 
 [keybindings]
 # Same prefix as the old zellij setup
