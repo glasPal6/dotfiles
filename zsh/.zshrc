@@ -85,6 +85,23 @@ alias lg='ls | grep'
 alias np='nvim .'
 alias nn='nvim'
 
+# Workspaces nvim / claude / term in the current dir, like the zellij dev layout
+dev() {
+    if [[ -z "$TUIOS_SESSION" ]]; then
+        echo "dev: run this inside tuios" >&2
+        return 1
+    fi
+    local id
+    tuios set-workspace-name 1 nvim
+    id=$(tuios new-window claude --workspace 2 --cwd "$PWD" --no-focus --print-id)
+    tuios send-text -w "$id" $'claude\n'
+    tuios set-workspace-name 2 claude
+    tuios new-window term --workspace 3 --cwd "$PWD" --no-focus >/dev/null
+    tuios set-workspace-name 3 term
+    tuios select-workspace 1
+    nvim .
+}
+
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
 
 # PATH

@@ -1,8 +1,21 @@
 # TuiOS config — only overrides; everything else is the tuios default.
 
+# Without this table startup.daemon and startup.tiled read as false
+[startup]
+daemon = true
+# New sessions start tiled (binary space partitioning)
+tiled = true
+layout = "bsp"
+
 [appearance]
 # Remove the close/minimize/zoom buttons from pane title bars
 hide_window_buttons = true
+# One border between neighbouring panes instead of two
+shared_borders = true
+
+[appearance.sidebar]
+# Hide the session rail
+enabled = false
 
 [keybindings]
 # Same prefix as the old zellij setup
@@ -14,3 +27,8 @@ terminal_focus_left = ["alt+shift+left"]
 terminal_focus_right = ["alt+shift+right"]
 terminal_focus_up = ["alt+shift+up"]
 terminal_focus_down = ["alt+shift+down"]
+
+# Step through workspaces (zellij tabs) on Opt+Ctrl+arrows
+[keybindings.global]
+prev_workspace = ["alt+ctrl+left"]
+next_workspace = ["alt+ctrl+right"]
