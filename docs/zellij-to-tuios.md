@@ -104,6 +104,7 @@ Your zellij binds came from `zellij/.config/zellij/config.kdl`. `P` below means
 |----------------------------------------|-----------------------------------------------|
 | `P o d` detach                         | `P d`                                         |
 | `P o w` session manager                | `P S` session switcher, `P /` find any pane   |
+| `P f` zsm new session (name, folder)   | `P E` popup: name, then folder (`tuios-new-session`) |
 | `ctrl+q` quit                          | `P q` (kills the session), `P X` close session |
 | search / copy scrollback               | `P [` copy mode, `P s` scrollback browser     |
 

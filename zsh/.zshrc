@@ -91,14 +91,7 @@ dev() {
         echo "dev: run this inside tuios" >&2
         return 1
     fi
-    local id
-    tuios set-workspace-name 1 nvim
-    id=$(tuios new-window claude --workspace 2 --cwd "$PWD" --no-focus --print-id)
-    tuios send-text -w "$id" $'claude\n'
-    tuios set-workspace-name 2 claude
-    tuios new-window term --workspace 3 --cwd "$PWD" --no-focus >/dev/null
-    tuios set-workspace-name 3 term
-    tuios select-workspace 1
+    tuios-dev-layout "$TUIOS_SESSION" "$PWD"
     nvim .
 }
 

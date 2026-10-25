@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+# Workspaces nvim / claude / term in a tuios session, like the zellij dev layout
+# Usage: tuios-dev-layout <session> <dir>
+
+session=$1
+dir=$2
+if [[ -z "$session" || -z "$dir" ]]; then
+    echo "usage: tuios-dev-layout <session> <dir>" >&2
+    exit 1
+fi
+
+tuios set-workspace-name -s "$session" 1 nvim
+id=$(tuios new-window -s "$session" claude --workspace 2 --cwd "$dir" --no-focus --print-id)
+tuios send-text -s "$session" -w "$id" $'claude\n'
+tuios set-workspace-name -s "$session" 2 claude
+tuios new-window -s "$session" term --workspace 3 --cwd "$dir" --no-focus >/dev/null
+tuios set-workspace-name -s "$session" 3 term
+tuios select-workspace -s "$session" 1

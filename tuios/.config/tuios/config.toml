@@ -34,3 +34,10 @@ terminal_focus_down = ["alt+shift+down"]
 [keybindings.global]
 prev_workspace = ["alt+ctrl+left"]
 next_workspace = ["alt+ctrl+right"]
+
+# New session: name, then folder (like zellij's zsm on P f) on ctrl+space E
+[[keybindings.command]]
+key = "prefix+E"
+type = "popup"
+command = "tuios-new-session"
+description = "New session: name, then folder"

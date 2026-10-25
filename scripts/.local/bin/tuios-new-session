@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+# New tuios session: type a name, then pick its folder (like zellij's zsm).
+# Bound to ctrl+space n as a popup in tuios/config.toml.
+
+read "name?Session name (blank = folder name): "
+
+dir=$(
+    { zoxide query -l; fd -t d --max-depth 3 . ~ ~/Documents; } 2>/dev/null |
+        awk '!seen[$0]++' |
+        fzf --layout=reverse --prompt "Folder> " \
+            --preview 'eza -al --git --color=always --group-directories-first {}'
+) || exit 0
+[[ -z "$dir" ]] && exit 0
+dir=${dir%/}
+
+name=${name:-${dir:t}}
+name=${name//[. ]/_}
+
+# Existing session: just go there
+if tuios ls --json | jq -e --arg n "$name" 'any(.[]; .name == $n)' >/dev/null; then
+    exec tuios switch-session "$name"
+fi
+
+tuios new "$name" --cwd "$dir" --detach >/dev/null || exit 1
+
+read -q "dev?dev layout? [y/N] "
+echo
+if [[ "$dev" == y ]]; then
+    first=$(tuios list-windows -s "$name" --json | jq -r '.windows[0].window_id')
+    tuios-dev-layout "$name" "$dir"
+    tuios send-text -s "$name" -w "$first" $'nvim .\n'
+fi
+
+exec tuios switch-session "$name"
