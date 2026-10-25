@@ -168,7 +168,7 @@ one as a tape script you can edit. Templates are stored in
 
 ## 6. Copy and paste
 
-- **Paste:** `cmd+v`, `ctrl+shift+v` or middle-click. tuios asks Ghostty for
+- **Paste:** `cmd+v` or middle-click. tuios asks Ghostty for
   the host clipboard over OSC 52. Ghostty's default `clipboard-read = ask` is
   what showed the "this application is trying to read from the clipboard"
   prompt. `clipboard-read = allow` in the Ghostty config removes it. Restart

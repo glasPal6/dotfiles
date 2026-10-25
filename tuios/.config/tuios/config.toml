@@ -36,6 +36,7 @@ terminal_focus_left = ["alt+shift+left"]
 terminal_focus_right = ["alt+shift+right"]
 terminal_focus_up = ["alt+shift+up"]
 terminal_focus_down = ["alt+shift+down"]
+terminal_paste_host = ["super+v", "shift+super+v", "middle"]
 
 # Step through workspaces (zellij tabs) on Opt+Ctrl+arrows
 [keybindings.global]
@@ -48,3 +49,6 @@ key = "prefix+E"
 type = "popup"
 command = "tuios-new-session"
 description = "New Session"
+
+[keybindings.gui]
+gui_paste = []
