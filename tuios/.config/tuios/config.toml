@@ -43,9 +43,9 @@ terminal_paste_host = ["super+v", "shift+super+v", "middle"]
 prev_workspace = ["alt+ctrl+left"]
 next_workspace = ["alt+ctrl+right"]
 
-# New session: folder, then name (like zellij's zsm on P f) on ctrl+space E
+# New session: folder, then name (like zellij's zsm on P f) on ctrl+space y
 [[keybindings.command]]
-key = "prefix+E"
+key = "prefix+y"
 type = "popup"
 command = "tuios-new-session"
 description = "New Session"

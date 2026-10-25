@@ -1,15 +1,18 @@
 #!/usr/bin/env zsh
 # New tuios session: pick its folder, then confirm a name (like zellij's zsm).
-# Bound to ctrl+space n as a popup in tuios/config.toml.
+# Bound to ctrl+space y as a popup in tuios/config.toml.
 
 root=~/Documents
 dir=$(
     cd $root && fd -t d --max-depth 3 2>/dev/null |
-        fzf --layout=reverse --prompt "Folder> " \
+        fzf --color=dark --layout=reverse --prompt "Folder> " \
             --preview "eza -al --git --color=always --group-directories-first $root/{}"
 ) || exit 0
 [[ -z "$dir" ]] && exit 0
 dir=$root/${dir%/}
+
+# Drop late terminal replies (fzf's colour query) so they don't land in the prompt
+while read -rs -t 0.05 -k 1; do :; done
 
 # Suggest the folder name; edit in place or press enter to accept
 name=${dir:t}
