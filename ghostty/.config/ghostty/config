@@ -53,9 +53,6 @@ keybind = clear
 # Clipboard
 # tuios reads the clipboard over OSC 52 on paste; don't prompt for it
 clipboard-read = allow
-keybind = ctrl+shift+v=paste_from_clipboard
-keybind = ctrl+shift+c=copy_to_clipboard
-
 keybind = super+v=paste_from_clipboard
 keybind = super+c=copy_to_clipboard
 
