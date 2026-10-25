@@ -1,4 +1,4 @@
-# TuiOS config — only overrides; everything else is the tuios default.
+
 
 # Without this table startup.daemon and startup.tiled read as false
 [startup]
@@ -40,4 +40,4 @@ next_workspace = ["alt+ctrl+right"]
 key = "prefix+E"
 type = "popup"
 command = "tuios-new-session"
-description = "New session: name, then folder"
+description = "New Session"
