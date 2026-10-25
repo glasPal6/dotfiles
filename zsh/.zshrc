@@ -38,6 +38,17 @@ bindkey '^H' backward-kill-word
 bindkey "\e[1;7D" backward-word
 bindkey "\e[1;7C" forward-word
 
+# macOS-style editing (Cmd keys are translated by ghostty)
+WORDCHARS=''                         # stop word ops at / . - _ like macOS
+bindkey '^A' beginning-of-line       # Cmd+Left
+bindkey '^E' end-of-line             # Cmd+Right
+bindkey '^U' backward-kill-line      # Cmd+Backspace
+bindkey '^_' undo                    # Cmd+Z
+bindkey "\e[1;3D" backward-word      # Opt+Left
+bindkey "\e[1;3C" forward-word       # Opt+Right
+bindkey '^[^?' backward-kill-word    # Opt+Backspace
+bindkey "\e[3;3~" kill-word          # Opt+Delete
+
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -69,28 +80,17 @@ alias lt='eza --git --icons=always --color=always --tree --group-directories-fir
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias lg='ll | grep' 
+alias lg='ls | grep'
 
 alias np='nvim .'
 alias nn='nvim'
 
-dev() {
-    zellij action rename-tab "nvim"
-    zellij action new-tab --cwd . --name "pi" -- pi
-    zellij action new-tab --cwd . --name "tuxedo" -- bash -c "touch todo.txt && tuxedo"
-    zellij action new-tab --cwd . --name "term"
-    zellij action go-to-tab 0
-    nvim .
-}
-
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
 
-alias ssh="env TERM=xterm-256color COLORTERM=truecolor ssh"
-
 # PATH
-export PATH="/Users/dylankamstra/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/Users/dylankamstra/.bun/bin:$PATH"
+# export PATH="$HOME/.bun/bin:$PATH"
 export HOMEBREW_NO_ENV_HINTS=1
 
 # Exports
@@ -123,26 +123,6 @@ _zoxide_add_except_worktree() {
 
 precmd_functions+=(_zoxide_add_except_worktree)
 
-# Zellij
-export ZELLIJ_SOCKET_DIR=/tmp/zellij
-
-# Emit OSC 133 shell-integration marks so zellij can track prompt/command
-# boundaries (needed for ScrollToPreviousPrompt/ScrollToNextPrompt/
-# CopyLastCommandOutput/SelectCommandAtScrollPosition).
-if [[ -n "$ZELLIJ" ]]; then
-    __zellij_osc133_precmd() {
-        local ret=$?
-        print -Pn "\e]133;D;$ret\a"
-        print -Pn "\e]133;A\a"
-    }
-    __zellij_osc133_preexec() {
-        print -Pn "\e]133;C\a"
-    }
-    autoload -Uz add-zsh-hook
-    add-zsh-hook precmd __zellij_osc133_precmd
-    add-zsh-hook preexec __zellij_osc133_preexec
-fi
-
 # Try
 export TRY_PATH=~/Documents/Experiments
 
@@ -151,9 +131,7 @@ eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 
-# if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
-#     tmux attach -t default || tmux new-session -s default
-# fi
-if [[ -z "$ZELLIJ" ]]; then
-    zellij attach Base --create
+# TuiOS: attach to (or create) the Base session in top-level Ghostty shells
+if [[ -o interactive && -t 0 && -t 1 && -z "$TUIOS_SESSION" && -z "$SSH_CONNECTION" && "$TERM_PROGRAM" == "ghostty" ]]; then
+    tuios attach Base -c
 fi

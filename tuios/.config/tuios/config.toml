@@ -1,0 +1,16 @@
+# TuiOS config — only overrides; everything else is the tuios default.
+
+[appearance]
+# Remove the close/minimize/zoom buttons from pane title bars
+hide_window_buttons = true
+
+[keybindings]
+# Same prefix as the old zellij setup
+leader_key = "ctrl+space"
+
+# Pane focus on Opt+Shift+arrows, so Opt+arrows reach the shell for word movement
+[keybindings.terminal_mode]
+terminal_focus_left = ["alt+shift+left"]
+terminal_focus_right = ["alt+shift+right"]
+terminal_focus_up = ["alt+shift+up"]
+terminal_focus_down = ["alt+shift+down"]
