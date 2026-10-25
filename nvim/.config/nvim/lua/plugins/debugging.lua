@@ -45,6 +45,20 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
+
+			dap.configurations.odin = {
+				{
+					name = "Launch Odin Binary",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+					args = {},
+				},
+			}
 		end,
 	},
 }

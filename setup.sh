@@ -19,30 +19,32 @@ DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Directories to stow (macOS-relevant configs)
 STOW_DIRS=(
     ghostty
-    zellij
     starship
     zsh
     nvim
     pypoetry
-    pi-coding-agent
-    tuxedo
-    tmux
     scripts
     bash
+    tuios
+)
+
+# Stowed without folding, so only tracked files are linked into dirs that
+# apps also write runtime data to. Existing real files are backed up first.
+STOW_NOFOLD_DIRS=(
+    claude
 )
 
 # Homebrew formulae
 BREW_FORMULAE=(
     # Core tools (idempotent — skips if already installed)
     neovim
-    zellij
+    tuios
     starship
     fzf
     eza
     fd
     ripgrep
     bat
-    tmux
     stow
     node
     uv
@@ -128,55 +130,6 @@ for cask in "${BREW_CASKS[@]}"; do
     fi
 done
 
-# ── Bun ─────────────────────────────────────────────────────────────
-if ! command -v bun &>/dev/null; then
-    info "Installing bun..."
-    curl -fsSL https://bun.sh/install | bash
-    ok "bun installed"
-else
-    ok "bun already installed"
-fi
-
-# ── Pi (coding agent) ──────────────────────────────────────────────
-if ! command -v pi &>/dev/null; then
-    info "Installing pi..."
-    npm install -g pi-coding-agent
-    ok "pi installed"
-else
-    ok "pi already installed"
-fi
-
-# ── Pi extensions ──────────────────────────────────────────────────
-PI_EXTENSIONS=(
-    npm:pi-subagents
-    npm:pi-web-access
-    npm:pi-powerline-footer
-    npm:pi-ask-user
-    npm:pi-hashline-readmap
-    npm:pi-rewind
-    npm:pi-caveman
-    npm:pi-memory
-    npm:@tmustier/pi-usage-extension
-    npm:context-mode
-    npm:pi-mcp-adapter
-    npm:spotme
-    npm:pi-intercom
-    npm:pi-prompt-template-model
-)
-
-if command -v pi &>/dev/null; then
-    info "Installing pi extensions..."
-    for ext in "${PI_EXTENSIONS[@]}"; do
-        name="${ext##*/}"
-        if pi list 2>/dev/null | grep -q "$name"; then
-            ok "pi/$name already installed"
-        else
-            info "Installing $ext..."
-            pi install "$ext" 2>/dev/null && ok "pi/$name installed" || warn "pi/$name failed"
-        fi
-    done
-fi
-
 # ── Stow ────────────────────────────────────────────────────────────
 info "Creating symlinks with stow..."
 cd "$DOTFILES_DIR"
@@ -192,22 +145,20 @@ for dir in "${STOW_DIRS[@]}"; do
     fi
 done
 
-# ── Tmux Plugin Manager ────────────────────────────────────────────
-TPM_DIR="$HOME/.tmux/plugins/tpm"
-if [[ ! -d "$TPM_DIR" ]]; then
-    info "Installing TPM..."
-    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
-    ok "TPM installed"
-else
-    ok "TPM already installed"
-fi
-
-# Install tmux plugins via TPM
-if [[ -x "$TPM_DIR/bin/install_plugins" ]]; then
-    info "Installing tmux plugins..."
-    "$TPM_DIR/bin/install_plugins"
-    ok "tmux plugins installed"
-fi
+for dir in "${STOW_NOFOLD_DIRS[@]}"; do
+    info "Stowing $dir (no folding)..."
+    while IFS= read -r file; do
+        target="$HOME/${file#"$dir"/}"
+        if [[ -e "$target" && ! -L "$target" ]]; then
+            mv "$target" "$target.pre-dotfiles"
+            warn "Backed up $target to $target.pre-dotfiles"
+        fi
+    done < <(find "$dir" -type f)
+    stow -v -d "$DOTFILES_DIR" -t "$HOME" --no-folding --restow "$dir" 2>&1 | while read -r line; do
+        echo "  $line"
+    done
+    ok "Stowed $dir"
+done
 
 # ── FZF keybindings ────────────────────────────────────────────────
 if [[ ! -f ~/.fzf.zsh ]]; then
@@ -257,19 +208,17 @@ echo "  Installed:"
 echo "    brew formulae:     ${#BREW_FORMULAE[@]}"
 echo "    brew tap formulae: ${#BREW_TAP_FORMULAE[@]}"
 echo "    brew casks:        ${#BREW_CASKS[@]}"
-echo "    bun:               $(command -v bun 2>/dev/null || echo 'not found')"
-echo "    pi:                $(command -v pi 2>/dev/null || echo 'not found')"
-echo "    stow dirs:         ${#STOW_DIRS[@]}"
+echo "    stow dirs:         $(( ${#STOW_DIRS[@]} + ${#STOW_NOFOLD_DIRS[@]} ))"
 echo ""
 echo "  Not in Homebrew (install manually if needed):"
 echo "    - screenzen: https://screenzen.app"
 echo "    - autoraise: check GitHub / direct download"
 echo ""
 echo "  Next steps:"
-echo "    1. Open a new terminal (or run: source ~/.zshrc)"
+echo "    1. Open a new Ghostty window — zsh attaches to the TuiOS 'Base' session"
 echo "    2. Open nvim — lazy.nvim will auto-install plugins"
-    3. Open nvim — Mason auto-installs LSPs on first launch
-echo "    4. Launch pi: pi"
+echo "    3. Open nvim — Mason auto-installs LSPs on first launch"
+echo "    4. Machine-specific Claude settings go in ~/.claude/settings.local.json"
 echo ""
 echo "  Fonts: JetBrains Mono Nerd Font installed."
 echo "         Select it in Ghostty config if not auto-detected."

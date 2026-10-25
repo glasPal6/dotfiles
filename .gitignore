@@ -1,1 +1,7 @@
 zsh/.zsh_secrets
+
+# Machine-specific binaries/symlinks
+scripts/.local/bin/claude
+scripts/.local/bin/poetry
+scripts/.local/bin/ruff
+scripts/.local/bin/try
