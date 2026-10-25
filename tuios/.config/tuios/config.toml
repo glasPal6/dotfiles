@@ -19,6 +19,13 @@ enabled = false
 # Section order when shown (ctrl+space b): agents above files
 sections = "sessions:25,terminals,agents:34,files:25"
 
+# Session name in the top bar, after the mode pill
+[dock]
+left = ["mode", "session", "workspaces", "trail", "tape"]
+
+[dock.session]
+format = "{session}"
+
 [keybindings]
 # Same prefix as the old zellij setup
 leader_key = "ctrl+space"

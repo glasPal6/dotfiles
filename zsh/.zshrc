@@ -141,7 +141,8 @@ eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 
-# TuiOS: attach to (or create) the Base session in top-level Ghostty shells
+# TuiOS: attach to (or create) the Base session in top-level Ghostty shells.
+# Run from ~ so a new Base session starts its workspaces in the home dir
 if [[ -o interactive && -t 0 && -t 1 && -z "$TUIOS_SESSION" && -z "$SSH_CONNECTION" && "$TERM_PROGRAM" == "ghostty" ]]; then
-    tuios attach Base -c
+    (cd ~ && tuios attach Base -c)
 fi
