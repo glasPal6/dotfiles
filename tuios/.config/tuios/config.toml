@@ -42,7 +42,7 @@ terminal_focus_down = ["alt+shift+down"]
 prev_workspace = ["alt+ctrl+left"]
 next_workspace = ["alt+ctrl+right"]
 
-# New session: name, then folder (like zellij's zsm on P f) on ctrl+space E
+# New session: folder, then name (like zellij's zsm on P f) on ctrl+space E
 [[keybindings.command]]
 key = "prefix+E"
 type = "popup"

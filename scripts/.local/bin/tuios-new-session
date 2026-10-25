@@ -1,20 +1,22 @@
 #!/usr/bin/env zsh
-# New tuios session: type a name, then pick its folder (like zellij's zsm).
+# New tuios session: pick its folder, then confirm a name (like zellij's zsm).
 # Bound to ctrl+space n as a popup in tuios/config.toml.
 
-read "name?Session name (blank = folder name): "
-
+root=~/Documents
 dir=$(
-    { zoxide query -l; fd -t d --max-depth 3 . ~ ~/Documents; } 2>/dev/null |
-        awk '!seen[$0]++' |
+    cd $root && fd -t d --max-depth 3 2>/dev/null |
         fzf --layout=reverse --prompt "Folder> " \
-            --preview 'eza -al --git --color=always --group-directories-first {}'
+            --preview "eza -al --git --color=always --group-directories-first $root/{}"
 ) || exit 0
 [[ -z "$dir" ]] && exit 0
-dir=${dir%/}
+dir=$root/${dir%/}
 
-name=${name:-${dir:t}}
+# Suggest the folder name; edit in place or press enter to accept
+name=${dir:t}
 name=${name//[. ]/_}
+vared -p "Session name: " name || exit 0
+name=${name//[. ]/_}
+[[ -z "$name" ]] && exit 0
 
 # Existing session: just go there
 if tuios ls --json | jq -e --arg n "$name" 'any(.[]; .name == $n)' >/dev/null; then
