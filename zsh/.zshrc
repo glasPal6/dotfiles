@@ -142,7 +142,14 @@ eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 
 # TuiOS: attach to (or create) the Base session in top-level Ghostty shells.
-# Run from ~ so a new Base session starts its workspaces in the home dir
+# The daemon creates sessions in its own cwd, so create Base with --cwd ~
 if [[ -o interactive && -t 0 && -t 1 && -z "$TUIOS_SESSION" && -z "$SSH_CONNECTION" && "$TERM_PROGRAM" == "ghostty" ]]; then
-    (cd ~ && tuios attach Base -c)
+    # Any tuios command (e.g. Claude's agent-hook in a project dir) can auto-start
+    # the daemon in its own cwd, so start it here from ~ first
+    pgrep -qf '[t]uios daemon' || (cd ~ && nohup tuios daemon >/dev/null 2>&1 &)
+    if tuios ls --json 2>/dev/null | jq -e 'any(.[]; .name == "Base")' >/dev/null 2>&1; then
+        tuios attach Base
+    else
+        tuios new Base --cwd ~
+    fi
 fi
