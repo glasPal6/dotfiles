@@ -28,6 +28,15 @@ return {
 					package_uninstalled = "✗",
 				},
 			},
+		},
+	},
+
+	-- Non-LSP tools (mason itself has no ensure_installed)
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		event = "VeryLazy",
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
 			ensure_installed = {
 				-- Linters
 				"cpplint",
@@ -47,7 +56,7 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"saghen/blink.cmp",
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
