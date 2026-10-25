@@ -1,22 +1,13 @@
 {
-  "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "input=$(cat); j() { echo \"$input\" | jq -r \"$1 // empty\"; }; out=\"\"; add() { [ -n \"$1\" ] && out=\"${out:+$out | }$1\"; }; pct() { [ -n \"$2\" ] && add \"$1:$(printf '%.0f' \"$2\")%\"; }; model=$(j .model.display_name); dir=$(j .workspace.current_dir); wt=$(j '.workspace.git_worktree // .worktree.name'); adv=$(echo \"$input\" | jq -r '(.advisor | if type==\"object\" then (.display_name // .model // .id // .name) else . end) // empty' 2>/dev/null); [ -z \"$adv\" ] && adv=$(jq -r '.advisorModel // empty' \"$HOME/.claude/settings.json\" 2>/dev/null); ctx=$(j .context_window.used_percentage); h5=$(j .rate_limits.five_hour.used_percentage); d7=$(j .rate_limits.seven_day.used_percentage); br=\"\"; [ -n \"$dir\" ] && br=$(git -C \"$dir\" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || git -C \"$dir\" --no-optional-locks rev-parse --short HEAD 2>/dev/null); add \"$model\"; [ -n \"$adv\" ] && add \"adv:$adv\"; pct ctx \"$ctx\"; pct 5h \"$h5\"; pct 7d \"$d7\"; [ -n \"$dir\" ] && add \"$(basename \"$dir\")\"; [ -n \"$wt\" ] && add \"wt:$wt\"; add \"$br\"; echo \"$out\""
-  },
-  "enabledPlugins": {
-    "mattpocock-skills@claude-plugins-official": true
-  },
-  "advisorModel": "opus",
-  "theme": "auto",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -25,9 +16,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -36,9 +27,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -47,9 +38,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 310,
-            "type": "command"
+            "timeout": 310
           }
         ]
       }
@@ -58,9 +49,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -69,9 +60,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -80,9 +71,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -91,9 +82,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -102,9 +93,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -113,9 +104,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -124,9 +115,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -135,9 +126,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -146,9 +137,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
@@ -157,12 +148,21 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "tuios agent-hook claude-code --integration 3",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); j() { echo \"$input\" | jq -r \"$1 // empty\"; }; out=\"\"; add() { [ -n \"$1\" ] && out=\"${out:+$out | }$1\"; }; pct() { [ -n \"$2\" ] && add \"$1:$(printf '%.0f' \"$2\")%\"; }; model=$(j .model.display_name); dir=$(j .workspace.current_dir); wt=$(j '.workspace.git_worktree // .worktree.name'); adv=$(echo \"$input\" | jq -r '(.advisor | if type==\"object\" then (.display_name // .model // .id // .name) else . end) // empty' 2>/dev/null); [ -z \"$adv\" ] && adv=$(jq -r '.advisorModel // empty' \"$HOME/.claude/settings.json\" 2>/dev/null); ctx=$(j .context_window.used_percentage); h5=$(j .rate_limits.five_hour.used_percentage); d7=$(j .rate_limits.seven_day.used_percentage); br=\"\"; [ -n \"$dir\" ] && br=$(git -C \"$dir\" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || git -C \"$dir\" --no-optional-locks rev-parse --short HEAD 2>/dev/null); add \"$model\"; [ -n \"$adv\" ] && add \"adv:$adv\"; pct ctx \"$ctx\"; pct 5h \"$h5\"; pct 7d \"$d7\"; [ -n \"$dir\" ] && add \"$(basename \"$dir\")\"; [ -n \"$wt\" ] && add \"wt:$wt\"; add \"$br\"; echo \"$out\""
+  },
+  "enabledPlugins": {
+    "mattpocock-skills@claude-plugins-official": true
+  },
+  "advisorModel": "opus",
+  "theme": "auto"
 }
