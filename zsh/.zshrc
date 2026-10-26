@@ -138,6 +138,7 @@ export TRY_PATH=~/Documents/Experiments
 
 # Source files
 eval "$(starship init zsh)"
+eval "$(try init ~/Documents/Experiments)"
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 

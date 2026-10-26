@@ -5,3 +5,26 @@ scripts/.local/bin/claude
 scripts/.local/bin/poetry
 scripts/.local/bin/ruff
 scripts/.local/bin/try
+
+# Pi agent: credentials, runtime data, caches
+pi/.pi/agent/auth.json
+pi/.pi/agent/cursor-sdk-model-list.json
+pi/.pi/agent/memory/
+pi/.pi/agent/npm/
+pi/.pi/agent/sessions/
+pi/.pi/context-mode/
+
+# Machine-specific binaries and runtime state
+scripts/.local/bin/agent
+scripts/.local/bin/cursor
+scripts/.local/bin/cursor-agent
+scripts/.local/bin/keyring
+scripts/.local/bin/pre-commit
+scripts/.local/share/
+scripts/.local/state/
+
+# Backups
+starship/.config/starship.toml.old
+
+# Machine-specific git identity
+scripts/.gitconfig
