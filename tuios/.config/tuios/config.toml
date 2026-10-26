@@ -1,5 +1,3 @@
-
-
 # Without this table startup.daemon and startup.tiled read as false
 [startup]
 daemon = true
@@ -12,6 +10,14 @@ layout = "bsp"
 hide_window_buttons = true
 # One border between neighbouring panes instead of two
 shared_borders = true
+theme = "catppuccin_mocha"
+frame_panels = false
+window_title_position = "top"
+window_title_style = "pill"
+window_button_style = "dots"
+session_colors = true
+session_border = false
+zen_mode = "disabled"
 
 [appearance.sidebar]
 # Hide the session rail
