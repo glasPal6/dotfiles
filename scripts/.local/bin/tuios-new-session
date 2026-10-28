@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# New tuios session: pick its folder, then confirm a name (like zellij's zsm).
+# New tuios session: pick its folder, then type a name (like zellij's zsm).
 # Bound to ctrl+space y as a popup in tuios/config.toml.
 
 root=~/Documents
@@ -14,10 +14,8 @@ dir=$root/${dir%/}
 # Drop late terminal replies (fzf's colour query) so they don't land in the prompt
 while read -rs -t 0.05 -k 1; do :; done
 
-# Suggest the folder name; edit in place or press enter to accept
-name=${dir:t}
-name=${name//[. ]/_}
-vared -p "Session name: " name || exit 0
+# No prefill: vared's suggested text couldn't be deleted inside the popup
+read -r "name?Session name: " || exit 0
 name=${name//[. ]/_}
 [[ -z "$name" ]] && exit 0
 
