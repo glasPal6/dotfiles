@@ -1,32 +1,37 @@
 ---
 name: code-gym
-description: Train your own coding. Pick a level (1-7) where you write the code and Claude coaches.
+description: Find the right gym level for your situation. A router over the gym skills.
 disable-model-invocation: true
 ---
 
-Claude is the coach. The user is the athlete. The user types the solution code; Claude's output is plans, scaffolding, tests, reviews, hints.
+# Code Gym
 
-## Pick the level
+You write the code, Claude coaches. Each level is its own skill: pick by how much help you want.
 
-Arg is a number or name. No arg: ask which level (list the table below).
+Before stating what a level does, read that level's SKILL.md: the summaries here are for orientation only.
 
-| # | Name | User does | Claude does |
-|---|------|-----------|-------------|
-| 1 | solo-review | plan, then all code | review |
-| 2 | scaffold | plan, then fill stubs | scaffolding, review |
-| 3 | tutorial | exercise | lesson, resources, exercise |
-| 4 | test-first | plan, then make tests pass | failing tests, review |
-| 5 | debug-hunt | find and fix bug | plant bug, grade |
-| 6 | hint-ladder | all code | graduated hints only |
-| 7 | explain-back | explain own code | probe, grade understanding |
+## Build something
 
-Read `references/level-<n>-<name>.md` for the chosen level and follow it. Level 7 chains after any other level.
+You have a real feature to code. Pick by how much structure you want from Claude.
 
-## Rules for every level
+- **`/gym-free-weights`**: you plan and code alone, Claude reviews your form after. Least help, most reps.
+- **`/gym-training-wheels`**: you plan, Claude builds the frame (files, signatures, stubs), you fill it in.
+- **`/gym-red-green`**: you plan, Claude writes the failing tests, you turn them green.
+- **`/gym-spotter`**: you code, Claude steps in only with graduated hints when you are stuck. Never code unless you ask.
 
-- Solution code stays with the user. Claude writes code only where the level file says so (scaffold, tests, planted bug, lesson example).
-- Ask the user for their plan before acting at levels 1, 2, 4. Plan is done when it names inputs, outputs, and the steps in between; push back until it does.
-- Confirm the target directory before writing any file into the user's repo.
-- Reviews and hints are short bullets, most severe first. Each names the file and line.
-- Session ends with one concrete next step for the user (next level up, harder exercise, or a repeat).
-- "Just do it for me" from the user is an explicit level change: say so, then switch.
+## Learn something new
+
+- **`/gym-lesson`**: Claude teaches a skill you don't have yet: short lesson, runnable examples, curated resources, one exercise.
+
+## Sharpen skills
+
+- **`/gym-bug-hunt`**: Claude hides one bug in a small program (or a copy of your code). You find and fix it.
+- **`/gym-teach-back`**: you explain your own code, Claude pokes holes. Run it after any other level to prove you understood what you built.
+
+## Which one?
+
+- New to the area: `/gym-lesson`, then `/gym-red-green`.
+- Know the area, want reps: `/gym-free-weights`.
+- Stuck on a design: `/gym-training-wheels`.
+- Stuck mid-code: `/gym-spotter`.
+- Code works but you can't say why: `/gym-teach-back`.

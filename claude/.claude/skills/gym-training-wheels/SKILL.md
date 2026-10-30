@@ -1,4 +1,11 @@
-# Level 2: scaffold
+---
+name: gym-training-wheels
+description: You plan, Claude builds the frame, you fill it in.
+disable-model-invocation: true
+argument-hint: "What are you building?"
+---
+
+Read `~/.claude/skills/code-gym/RULES.md` and follow it throughout.
 
 User plans. Claude builds the skeleton. User fills it in.
 
@@ -7,4 +14,4 @@ User plans. Claude builds the skeleton. User fills it in.
 3. Create scaffolding: files, imports, types, function signatures with doc comments, and `TODO(user)` stubs that describe what each body must do. Stub bodies throw `not implemented` (or the language equivalent) so unfinished work fails loudly.
 4. List the stubs in implementation order, with the dependencies between them. Done when every plan step maps to a stub.
 5. Tell the user to fill the stubs and report back. Claude leaves stub bodies empty.
-6. On return, review as in `level-1-solo-review.md` step 4 onward. Add: any `TODO(user)` or `not implemented` left behind counts as a finding.
+6. On return, review per `~/.claude/skills/code-gym/REVIEW.md`.

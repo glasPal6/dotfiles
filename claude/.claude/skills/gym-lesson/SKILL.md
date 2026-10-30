@@ -1,4 +1,11 @@
-# Level 3: tutorial
+---
+name: gym-lesson
+description: Learn a new coding skill from scratch, with resources and an exercise.
+disable-model-invocation: true
+argument-hint: "What do you want to learn?"
+---
+
+Read `~/.claude/skills/code-gym/RULES.md` and follow it throughout.
 
 Claude teaches a new coding skill. User practices it.
 
@@ -10,5 +17,5 @@ Claude teaches a new coding skill. User practices it.
 3. Curate resources: primary sources first (official docs, language spec), then 2 to 3 high-quality tutorials or books. Fetch each link to confirm it resolves and covers the topic. Each resource gets one line on what it is best for.
 4. Set one exercise sized for 20 to 45 minutes, with a success check the user can run (a test, an expected output). The exercise reuses the concepts from step 2 in a new combination.
 5. Tell the user to solve it and report back. Claude withholds the solution until the user has attempted it or asks.
-6. On return, review as in `level-1-solo-review.md` step 4 onward. Done when the user's solution passes the success check.
-7. Offer a follow-up exercise one notch harder, or level 7 (explain-back) on this topic.
+6. On return, review per `~/.claude/skills/code-gym/REVIEW.md`. Done when the user's solution passes the success check.
+7. Offer a follow-up exercise one notch harder, or tell the user to run `/gym-teach-back` on this topic.
