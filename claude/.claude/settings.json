@@ -1,4 +1,8 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "model": "sonnet",
   "hooks": {
     "SessionStart": [
@@ -163,6 +167,7 @@
   "enabledPlugins": {
     "mattpocock-skills@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {},
   "advisorModel": "opus",
   "theme": "auto"
 }
