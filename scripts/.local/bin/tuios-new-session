@@ -24,7 +24,34 @@ if tuios ls --json | jq -e --arg n "$name" 'any(.[]; .name == $n)' >/dev/null; t
     exec tuios switch-session "$name"
 fi
 
-tuios new "$name" --cwd "$dir" --detach >/dev/null || exit 1
+# Space: an existing one (current session's first), a new one, or none
+cur_session=${TUIOS_SESSION:-$(tuios session-info --json 2>/dev/null | jq -r '.session_name // empty')}
+sessions_json=$(tuios ls --json)
+cur_space=$(jq -r --arg s "$cur_session" '.[] | select(.name == $s) | .space // empty' <<<"$sessions_json")
+space_choice=$(
+    {
+        [[ -n "$cur_space" ]] && print -r -- "$cur_space"
+        jq -r --arg c "$cur_space" '.[].space // empty | select(. != $c)' <<<"$sessions_json" | sort -u
+        print -r -- "(new space...)"
+        print -r -- "(none)"
+    } | fzf --color=dark --layout=reverse --prompt "Space> "
+)
+while read -rs -t 0.05 -k 1; do :; done
+
+space=
+case "$space_choice" in
+    "" | "(none)") ;;
+    "(new space...)")
+        read -r "space?New space name: " || space=
+        space=${space//[. ]/_}
+        space=${space:0:64}
+        ;;
+    *) space=$space_choice ;;
+esac
+
+new_args=(--cwd "$dir" --detach)
+[[ -n "$space" ]] && new_args+=(--space "$space")
+tuios new "$name" "${new_args[@]}" >/dev/null || exit 1
 
 read -q "dev?dev layout? [y/N] "
 echo
