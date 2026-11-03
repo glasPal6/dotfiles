@@ -8,9 +8,8 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "auto",
-					-- Rounded pills, like the tuios dock
 					component_separators = "",
-					section_separators = { left = "", right = "" },
+					section_separators = { right = "", left = "" },
 				},
 				sections = {
 					lualine_a = { { "mode", separator = { left = "", right = "" } } },
