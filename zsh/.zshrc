@@ -154,3 +154,6 @@ if [[ -o interactive && -t 0 && -t 1 && -z "$TUIOS_SESSION" && -z "$SSH_CONNECTI
         tuios new Base --cwd ~
     fi
 fi
+
+# TuiOS: relaunch TUIs/editors that were running before a session restore
+source "${${(%):-%x}:A:h}/.zsh/tuios-restore.zsh"
