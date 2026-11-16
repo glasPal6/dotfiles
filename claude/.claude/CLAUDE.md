@@ -1,3 +1,11 @@
+# Keep the codebase small
+
+Aim to shrink the codebase, not grow it.
+- Before writing new code, look for existing package, library, or in-repo utility that already does it. Prefer that over hand-rolled code.
+- Fix root cause of current errors. No hacky workarounds, shims, suppressions, or special-case patches.
+- Delete dead or redundant code when touching an area.
+- Smallest diff that solves problem properly.
+
 # Context hygiene: delegate to subagents
 
 Keep the main context clean. Prefer subagents (Agent tool) for work whose output is large but whose conclusion is small.
@@ -16,3 +24,4 @@ Keep the main context clean. Prefer subagents (Agent tool) for work whose output
 ## Briefing agents
 - Give the agent full context: it has none of this conversation.
 - Say what to return: a summary under ~200 words with `file:line` references, not raw dumps.
+
