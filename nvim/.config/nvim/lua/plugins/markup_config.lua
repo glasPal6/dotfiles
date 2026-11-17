@@ -28,17 +28,17 @@ return {
 	-- 	end,
 	-- },
 
-	-- {
-	-- 	"MeanderingProgrammer/render-markdown.nvim",
-	-- 	event = "VeryLazy",
-	-- 	ft = { "markdown" },
-	-- 	opts = {
-	-- 		file_types = { "markdown" },
-	-- 		anti_conceal = {
-	-- 			enabled = false,
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		event = "VeryLazy",
+		ft = { "markdown" },
+		opts = {
+			file_types = { "markdown", "ipynb" },
+			anti_conceal = {
+				enabled = false,
+			},
+		},
+	},
 
 	-- {
 	-- 	"OXY2DEV/markview.nvim",
