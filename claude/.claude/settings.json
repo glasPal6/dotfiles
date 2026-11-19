@@ -180,5 +180,6 @@
   "theme": "auto",
   "editorMode": "normal",
   "autoCompactEnabled": true,
-  "idleCompaction": true
+  "idleCompaction": true,
+  "spinnerTipsEnabled": false
 }
