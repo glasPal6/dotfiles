@@ -28,6 +28,17 @@ return {
 
 					["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 				},
+				cmdline = {
+					keymap = {
+						preset = "inherit",
+						["<Tab>"] = { "select_next", "fallback" },
+						["<S-Tab>"] = { "select_prev", "fallback" },
+					},
+					completion = {
+						menu = { auto_show = true },
+						list = { selection = { preselect = false, auto_insert = true } },
+					},
+				},
 				appearance = {
 					nerd_font_variant = "mono",
 				},
