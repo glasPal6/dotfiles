@@ -1,4 +1,4 @@
--- All key bindings. Prefix is ctrl+space (as in tuios). The actions live in plugins/.
+-- All key bindings. Prefix is ctrl+space. The actions live in plugins/.
 -- Rex's built-in shortcuts are not listed here: the app keeps them in its own settings (client.shortcuts.edit).
 
 -- Ghostty
@@ -11,7 +11,7 @@ rex.bind("alt+n", "pane.split.auto")
 rex.bind("alt+t", "client.tab.new")
 rex.bind("alt+f", "pane.new_floating") -- scratchpad terminal; alt+cmd+m hides/shows it
 
--- Tabs (tuios workspaces): alt+ctrl+left/right
+-- Tabs: alt+ctrl+left/right
 rex.bind("alt+ctrl+left", "client.tab.previous")
 rex.bind("alt+ctrl+right", "client.tab.next")
 

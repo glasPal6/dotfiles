@@ -83,16 +83,6 @@ alias lg='ls | grep'
 alias np='nvim .'
 alias nn='nvim'
 
-# Workspaces nvim / claude / term in the current dir, like the zellij dev layout
-dev() {
-    if [[ -z "$TUIOS_SESSION" ]]; then
-        echo "dev: run this inside tuios" >&2
-        return 1
-    fi
-    tuios-dev-layout "$TUIOS_SESSION" "$PWD"
-    nvim .
-}
-
 alias pio-init_proj='f() {pio project init --ide vim --board $1 ; pio run -t compiledb};f'
 
 # PATH
@@ -139,19 +129,3 @@ eval "$(starship init zsh)"
 eval "$(try init ~/Documents/Experiments)"
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
-
-# TuiOS: attach to (or create) the Base session in top-level Ghostty shells.
-# The daemon creates sessions in its own cwd, so create Base with --cwd ~
-if [[ -o interactive && -t 0 && -t 1 && -z "$TUIOS_SESSION" && -z "$SSH_CONNECTION" && "$TERM_PROGRAM" == "ghostty" ]]; then
-    # Any tuios command (e.g. Claude's agent-hook in a project dir) can auto-start
-    # the daemon in its own cwd, so start it here from ~ first
-    pgrep -qf '[t]uios daemon' || (cd ~ && nohup tuios daemon >/dev/null 2>&1 &)
-    if tuios ls --json 2>/dev/null | jq -e 'any(.[]; .name == "Base")' >/dev/null 2>&1; then
-        tuios attach Base
-    else
-        tuios new Base --cwd ~
-    fi
-fi
-
-# TuiOS: relaunch TUIs/editors that were running before a session restore
-source "${${(%):-%x}:A:h}/.zsh/tuios-restore.zsh"

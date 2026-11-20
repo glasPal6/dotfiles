@@ -1,4 +1,4 @@
--- Pane focus: alt+shift+arrows (as in tuios), shared with neovim (smart-splits.nvim sees the key when nvim has focus).
+-- Pane focus: alt+shift+arrows shared with neovim (smart-splits.nvim sees the key when nvim has focus).
 -- The nvim side is nvim/.config/nvim/lua/plugins/smart_splits.lua.
 
 local function is_vim(ctx)

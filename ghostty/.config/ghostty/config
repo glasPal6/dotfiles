@@ -51,7 +51,7 @@ keybind = clear
 # keybind = ctrl+space>]=goto_split:next
 
 # Clipboard
-# tuios reads the clipboard over OSC 52 on paste; don't prompt for it
+# Allow terminal programs to read the clipboard over OSC 52 on paste without prompting
 clipboard-read = allow
 keybind = super+v=paste_from_clipboard
 keybind = super+c=copy_to_clipboard

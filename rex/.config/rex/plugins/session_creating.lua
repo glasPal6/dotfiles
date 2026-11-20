@@ -1,4 +1,4 @@
--- New session (ctrl+space>y), tuios style (scripts/.local/bin/tuios-new-session): fzf a folder under
+-- New session (ctrl+space>y): fzf a folder under
 -- ~/Documents, type a name, optionally add nvim, claude and term tabs.
 -- The pickers run in a floating shell, because a waiting action blocks Rex's key handling. The shell
 -- ends by calling create_session through `rex do`, which also needs Remote Control to switch to it.
