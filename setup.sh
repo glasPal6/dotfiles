@@ -18,14 +18,12 @@ DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Directories to stow (macOS-relevant configs)
 STOW_DIRS=(
-    ghostty
     starship
     zsh
     nvim
     pypoetry
     scripts
     bash
-    tuios
     rex
 )
 
@@ -39,7 +37,6 @@ STOW_NOFOLD_DIRS=(
 BREW_FORMULAE=(
     # Core tools (idempotent — skips if already installed)
     neovim
-    tuios
     starship
     fzf
     eza
@@ -59,7 +56,6 @@ BREW_FORMULAE=(
 
 # Homebrew casks
 BREW_CASKS=(
-    ghostty
     zen
     orbstack
     localsend
