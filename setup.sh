@@ -26,6 +26,7 @@ STOW_DIRS=(
     scripts
     bash
     tuios
+    rex
 )
 
 # Stowed without folding, so only tracked files are linked into dirs that

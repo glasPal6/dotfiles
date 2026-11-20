@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+# Close the programs (nvim, claude, ...) running in the panes of Rex sessions. Tabs and pane layout stay.
+# Lists the sessions that have programs running: tab marks a session to leave alone, enter cleans the rest.
+
+fzf_colors='bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8,fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC,marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8,selected-bg:#45475A,border:#6C7086,label:#CDD6F4'
+
+# One line per running program: session, pid, name. A program is a pane's foreground process when it is not a shell.
+programs=$(
+    rex ls --json | jq -r '.sessions[].label' | while read -r label; do
+        rex block ls -s "$label" --json | jq -r '.blocks[].block_id' | while read -r block; do
+            [[ $block == "$REX_BLOCK" ]] && continue # the pane this runs in
+            rex block call -s "$label" -b "$block" process 2>/dev/null | jq -r --arg s "$label" '
+                select(.foreground != null and (.foreground.argv0 // .foreground.name | test("^-?(.*/)?(zsh|bash|fish|sh)$") | not))
+                | [$s, .foreground.pid, (.foreground.argv0 // .foreground.name)] | @tsv'
+        done
+    done
+)
+[[ -z "$programs" ]] && { echo "No programs running."; exit 0; }
+
+# One row per session: name, program count and names
+rows=$(print -r -- "$programs" | awk -F'\t' '{ n[$1]++; p[$1] = p[$1] (p[$1] ? ", " : "") $3 }
+    END { for (s in n) printf "%s\t%d program%s\t%s\n", s, n[s], (n[s] > 1 ? "s" : ""), p[s] }' | sort)
+
+keep=$(print -r -- "$rows" | fzf --multi --color "$fzf_colors" --layout reverse --height ~50% --border rounded --prompt '❯ ' \
+    --delimiter '\t' --header 'tab: leave alone   enter: close programs in the rest   esc: cancel') || exit 0
+keep_sessions=("${(@f)$(print -r -- "$keep" | cut -f1)}")
+
+kill_pids=()
+while IFS=$'\t' read -r session pid _; do
+    (( ${keep_sessions[(Ie)$session]} )) || kill_pids+=($pid)
+done <<<"$programs"
+
+(( ${#kill_pids} )) || { echo "Nothing to close."; exit 0; }
+kill -TERM $kill_pids && echo "Closed ${#kill_pids} program(s)."

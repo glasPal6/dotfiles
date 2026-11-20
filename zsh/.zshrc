@@ -35,8 +35,6 @@ bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 bindkey '^H' backward-kill-word
 
-bindkey "\e[1;7D" backward-word
-bindkey "\e[1;7C" forward-word
 
 # macOS-style editing (Cmd keys are translated by ghostty)
 WORDCHARS=''                         # stop word ops at / . - _ like macOS

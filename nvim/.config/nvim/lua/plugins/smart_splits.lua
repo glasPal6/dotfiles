@@ -1,20 +1,16 @@
 return {
-
-	-- Navigation between nvim and wezterm (disabled: split nav is in remaps.lua)
-	-- {
-	-- 	"mrjones2014/smart-splits.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("smart-splits").setup()
-	-- 		vim.keymap.set("n", "<C-Left>", require("smart-splits").move_cursor_left)
-	-- 		vim.keymap.set("n", "<C-Down>", require("smart-splits").move_cursor_down)
-	-- 		vim.keymap.set("n", "<C-Up>", require("smart-splits").move_cursor_up)
-	-- 		vim.keymap.set("n", "<C-Right>", require("smart-splits").move_cursor_right)
-	--
-	-- 		vim.keymap.set("n", "<A-Left>", require("smart-splits").resize_left)
-	-- 		vim.keymap.set("n", "<A-Down>", require("smart-splits").resize_down)
-	-- 		vim.keymap.set("n", "<A-Up>", require("smart-splits").resize_up)
-	-- 		vim.keymap.set("n", "<A-Right>", require("smart-splits").resize_right)
-	-- 	end,
-	-- },
+	-- Navigation between nvim splits and Rex panes (alt+shift+arrows; the Rex side is in rex/.config/rex/keybindings.lua)
+	{
+		"mrjones2014/smart-splits.nvim",
+		version = "^3.0.0",
+		event = "VeryLazy",
+		dependencies = { "rawnly/smart-splits-backend-rex" },
+		opts = { mux = { backend = "smart-splits-backend-rex" } },
+		keys = {
+			{ "<M-S-Left>", function() require("smart-splits").move_cursor_left() end },
+			{ "<M-S-Down>", function() require("smart-splits").move_cursor_down() end },
+			{ "<M-S-Up>", function() require("smart-splits").move_cursor_up() end },
+			{ "<M-S-Right>", function() require("smart-splits").move_cursor_right() end },
+		},
+	},
 }
