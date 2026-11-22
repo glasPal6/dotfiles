@@ -3,18 +3,24 @@
 -- scrollback text is split on the starship prompt symbols (starship.toml [character]).
 -- A program that prints one of the symbols at the start of a line will split wrongly.
 
-local symbols = { "❯ ", "✗ " }
+local symbols = { "❯", "✗" }
 
 local function split_commands(text)
   local commands, current = {}, nil
   for line in (text .. "\n"):gmatch("(.-)\n") do
-    local cmd
+    local cmd, prompt
     for _, symbol in ipairs(symbols) do
+      -- trim=true strips the trailing space of the idle prompt, so accept symbol at end of line
       local _, stop = line:find(symbol, 1, true)
-      if stop then cmd = line:sub(stop + 1) break end
+      local after = stop and line:sub(stop + 1)
+      if stop and (after == "" or after:sub(1, 1) == " ") then
+        cmd = after:gsub("^ ", "")
+        prompt = line:sub(1, stop) .. " " -- dir + git info + symbol
+        break
+      end
     end
     if cmd then
-      current = { cmd = cmd, output = {} }
+      current = { cmd = cmd, prompt = prompt, output = {} }
       commands[#commands + 1] = current
     elseif current then
       current.output[#current.output + 1] = line
@@ -41,7 +47,7 @@ rex.action({
       local output = table.concat(c.output, "\n"):gsub("^%s+", ""):gsub("%s+$", "")
       if c.cmd ~= "" and output ~= "" then
         local id = tostring(#index + 1)
-        fzf.write(dir .. "/" .. id, output)
+        fzf.write(dir .. "/" .. id, c.prompt .. c.cmd .. "\n" .. output)
         index[#index + 1] = id .. "\t" .. c.cmd
       end
     end
