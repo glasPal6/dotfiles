@@ -3,6 +3,11 @@
 
 require("config.keybindings")
 
-for _, plugin in ipairs({ "smart_splits", "session_creating", "switch", "outputs" }) do
-  require("plugins." .. plugin)
-end
+-- Personal
+require("plugins.smart_splits")
+require("plugins.session_creating")
+require("plugins.switch")
+require("plugins.outputs")
+
+-- External
+require("plugins.resurrect").setup({})
