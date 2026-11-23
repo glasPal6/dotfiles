@@ -121,6 +121,9 @@ _zoxide_add_except_worktree() {
 
 precmd_functions+=(_zoxide_add_except_worktree)
 
+# Rexurrect
+source /opt/homebrew/share/rexurrect/rexurrect.plugin.zsh
+
 # Try
 export TRY_PATH=~/Documents/Experiments
 
