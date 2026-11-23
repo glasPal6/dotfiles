@@ -10,4 +10,3 @@ require("plugins.switch")
 require("plugins.outputs")
 
 -- External
-require("plugins.resurrect").setup({})
