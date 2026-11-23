@@ -22,10 +22,25 @@ return {
 		config = function()
 			require("jupynvim").setup({
 				log_level = "info",
-				image_renderer = "placeholder", -- anchored to text, follows scroll, needed for GIFs
+				image_renderer = "placeholder",
+				-- image_renderer = "kitty",
 				image_rows = 32,
 				image_cols = 96,
 			})
+
+			-- local ok, image = pcall(requre, "jupynvim.notebook.image")
+			-- if not ok or type(image.supported) ~= "function" then
+			-- 	vim.notify(
+			-- 		"jupynvim: image.supported() not found - patch in config needs updating",
+			-- 		vim.log.levels.WARN
+			-- 	)
+			-- end
+
+			local image = require("jupynvim.notebook.image")
+			local supported = image.supported
+			image.supported = function()
+				return supported() or (vim.env.TERM_PROGRAM or ""):lower():find("rex") ~= nil
+			end
 		end,
 	},
 }
